@@ -1,10 +1,10 @@
 {
-  "name": "gateway-ura",
+  "name": "gateway-communication",
   "version": "1.0.0",
-  "description": "Ura Gateway",
+  "description": "Gateway de comunicação",
   "main": "index.js",
-  "repository": "https://gitlab.com/phoenix-pagtel/gateway-ura.git",
-  "author": "Emanoel",
+  "repository": "https://gitlab.com/phoenix-pagtel/gateway-communication.git",
+  "author": "Emanoel e Jean",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
@@ -12,17 +12,14 @@
     "date-fns": "^2.23.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "express-xml-bodyparser": "^0.3.0",
     "helmet": "^4.6.0",
-    "xml-js": "^1.6.11",
-    "xml2js": "^0.4.23"
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/cors": "^2.8.12",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
-    "@types/express-xml-bodyparser": "^0.3.2",
     "@types/xml-js": "^1.0.0",
     "@types/xml2js": "^0.4.9",
     "eslint": "^7.32.0",
@@ -36,9 +33,10 @@
     "typescript": "^4.4.2"
   },
   "scripts": {
-    "build": "tsc",
     "prebuild": "rimraf dist",
-    "server:start": "node dist/main/server.js",
-    "server:dev": "tsnd --transpile-only --ignore-watch node_modules src/main/server.ts"
+    "build": "tsc",
+    "server:dev": "tsnd --transpile-only --ignore-watch node_modules src/main/server.ts",
+    "server:debug": "tsnd --inspect --transpile-only --poll --watch --clear --ignore-watch node_modules src/main/server.ts",
+    "server:start": "node dist/main/server.js"
   }
 }
