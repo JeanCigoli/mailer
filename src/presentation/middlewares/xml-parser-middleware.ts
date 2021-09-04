@@ -1,5 +1,5 @@
 import { XmlParser } from '../../domain/usecases/ura';
-import { serverError } from '../../utils/response';
+import { serverError } from '../../utils/response/response';
 import { HttpRequest } from '../protocols/http';
 import { Middleware } from '../protocols/middleware';
 

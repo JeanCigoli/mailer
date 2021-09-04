@@ -4,7 +4,15 @@ export const filterDataXml = (object: any) => {
   }
 
   const result = Object.entries(object).map(([key, value]) => {
-    const [_, newKey] = key.split(':');
+    const arrayKey = key.split(':');
+
+    // console.log({ key });
+    // console.log({ arrayKey });
+
+    if (arrayKey.length === 1) {
+      return [[key], value];
+    }
+    const [_, newKey] = arrayKey;
     return [newKey, value];
   });
 
@@ -32,6 +40,8 @@ export const reduceObject = (object: any): any => {
 };
 
 export const recursiveFilter = (object: any) => {
+  // console.log({ object });
+
   const [result] = Object.entries(object).map(([key, value]) => {
     if (typeof value === 'object') {
       return reduceObject(value);

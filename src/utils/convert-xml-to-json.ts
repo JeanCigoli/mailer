@@ -30,6 +30,7 @@ export const convertXmlToJson = (xml: string) => {
     cdataKey: 'value',
     ignoreDeclaration: true,
     alwaysChildren: false,
+    ignoreAttributes: true,
   });
 
   const json = JSON.parse(jsonString);
