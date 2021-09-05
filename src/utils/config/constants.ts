@@ -6,3 +6,7 @@ export const SERVER = {
   BASE_URI_WHATS: process.env.BASE_URI_WHATS || '',
   PORT: process.env.PORT || 3333,
 };
+
+export const URLS = {
+  PHOENIX_BASE_URL: process.env.PHOENIX_BASE_URL,
+};
