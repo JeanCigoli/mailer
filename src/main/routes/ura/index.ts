@@ -8,17 +8,21 @@ export default (routes: Router) => {
     // console.log('CONTROLLER', req.body);
 
     const objTest = {
-      name: 'Emanoel',
-      colors: [
-        {
-          name: 'RED',
-          value: 1,
-        },
-        {
-          name: 'BLACK',
-          value: 10,
-        },
-      ],
+      voice: {
+        total: 1000,
+        available: 1000,
+        used: 0,
+      },
+      sms: {
+        total: 0,
+        available: 0,
+        used: 0,
+      },
+      data: {
+        total: 750,
+        available: 750,
+        used: 0,
+      },
     };
 
     res.send(makeResponseXml(objTest));

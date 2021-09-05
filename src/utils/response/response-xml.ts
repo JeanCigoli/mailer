@@ -29,13 +29,13 @@ export const reduceXml = (array: any[]): string => {
   const xmlResponse = array.reduce((acumulator, current) => {
     // console.log({ current });
     if (typeof current === 'object') {
-      acumulator = acumulator + reduceXml(current);
+      acumulator = acumulator + '\n' + reduceXml(current);
       // console.log({ acumulator });
 
       return acumulator;
     }
 
-    return (acumulator = acumulator + current);
+    return (acumulator = acumulator + '\n' + current);
   });
 
   return xmlResponse;
