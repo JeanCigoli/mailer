@@ -1,13 +1,12 @@
-import { NextFunction, Request, Response } from 'express';
-import { HttpRequest } from '../../presentation/protocols/http';
-import { Middleware } from '../../presentation/protocols/middleware';
+import { Request, Response } from 'express';
+import { Controller, HttpRequest } from '../../presentation/protocols';
 import {
   formateCamelCaseKeysForSnakeCase,
   formateSnakeCaseKeysForCamelCase,
 } from '../../utils/object';
 
-export function adaptMiddleware(middleware: Middleware) {
-  return async (req: Request, res: Response, next: NextFunction) => {
+export function adaptRoute(controller: Controller) {
+  return async (req: Request, res: Response) => {
     const httpRequest: HttpRequest = {
       body: formateSnakeCaseKeysForCamelCase(req.body),
       params: formateSnakeCaseKeysForCamelCase(req.params),
@@ -15,11 +14,7 @@ export function adaptMiddleware(middleware: Middleware) {
       headers: req.headers,
     };
 
-    const httpResponse = await middleware.handle(httpRequest, () => {
-      return next();
-    });
-
-    if (!httpResponse) return;
+    const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.headers) {
       res.set(httpResponse.headers);
