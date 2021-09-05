@@ -14,5 +14,7 @@ export namespace ListAccountByMsisdnRepository {
     name: string;
     email: string;
     mvno: string;
+    accountId: number;
+    externalId: string;
   }>;
 }

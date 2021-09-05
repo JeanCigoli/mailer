@@ -1,5 +1,4 @@
-import { GetCards } from '../../../../../data/protocols/core/http/get-cards';
-import { HttpClient } from '../../../../../data/protocols/core/http/web-service-rest-adapter';
+import { GetCards, HttpClient } from '../../../../../data/protocols/core/http';
 
 export class GetUserCards implements GetCards {
   constructor(private readonly httpClient: HttpClient) {}

@@ -1,5 +1,7 @@
-import { DeleteCard } from '../../../../../data/protocols/core/http/delete-card';
-import { HttpClient } from '../../../../../data/protocols/core/http/web-service-rest-adapter';
+import {
+  DeleteCard,
+  HttpClient,
+} from '../../../../../data/protocols/core/http';
 
 export class DeleteUserCard implements DeleteCard {
   constructor(private readonly httpClient: HttpClient) {}

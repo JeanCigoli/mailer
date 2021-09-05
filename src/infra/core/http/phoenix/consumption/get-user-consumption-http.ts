@@ -1,5 +1,7 @@
-import { GetUserConsumption } from '../../../../../data/protocols/core/http/get-user-consumption';
-import { HttpClient } from '../../../../../data/protocols/core/http/web-service-rest-adapter';
+import {
+  GetUserConsumption,
+  HttpClient,
+} from '../../../../../data/protocols/core/http';
 
 export class GetUserConsumptionHttp implements GetUserConsumption {
   constructor(private readonly httpClient: HttpClient) {}
