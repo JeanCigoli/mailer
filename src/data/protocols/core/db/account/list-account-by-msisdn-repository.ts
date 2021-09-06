@@ -9,5 +9,12 @@ export namespace ListAccountByMsisdnRepository {
     msisdn: string;
   };
 
-  export type Result = Promise<Account>;
+  export type Result = Promise<{
+    msisdn: string;
+    name: string;
+    email: string;
+    mvno: string;
+    accountId: number;
+    externalId: string;
+  }>;
 }

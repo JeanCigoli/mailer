@@ -7,5 +7,8 @@ export namespace Authentication {
     msisdn: string;
   };
 
-  export type Result = Promise<{}>;
+  export type Result = Promise<{
+    status: boolean;
+    data: any;
+  }>;
 }

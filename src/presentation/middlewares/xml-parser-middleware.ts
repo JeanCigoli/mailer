@@ -16,8 +16,6 @@ export class XmlParserMiddleware implements Middleware {
 
       return next();
     } catch (error: any) {
-      console.log({ error });
-
       switch (error.message) {
         default:
           return serverError(error);
