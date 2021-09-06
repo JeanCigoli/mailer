@@ -1,8 +1,5 @@
 import { XmlParser } from '../../../../domain/usecases/ura';
-import {
-  filterDataXml,
-  recursiveFilter,
-} from '../../../../utils/filter-data-xml';
+import { recursiveFilter } from '../../../../utils/filter-data-xml';
 import { ConvertXmlToJson } from '../../../protocols/ura/utils';
 
 export class DbXmlParser implements XmlParser {
