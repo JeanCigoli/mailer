@@ -7,16 +7,14 @@ export const formatUraSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 1 },
     handle: (req: Request, res: Response) => {
-      console.log(req.body);
-      console.log(req.step);
-
-      return res.send(makeResponseXml({ ...req.step, ...req.body }));
+      const body = {
+        message: req.body.messages,
+      };
+      return res.send(makeResponseXml({ ...body }));
     },
   },
   {
     handle: (req: Request, res: Response) => {
-      console.log('Estou na rota default');
-
       return res.json({ message: 'retorno default' });
     },
   },

@@ -8,11 +8,19 @@ export const reduceArray = (array: Array<any> | any): any => {
   return result;
 };
 
+export const transformArray = (value: string[]) => {
+  return `${value.length}-${value.map((data) => data).join(';')}`;
+};
+
 export const transformJsonInXml = (object: object | any): Array<any> => {
   const types = ['string', 'object', 'bigint', 'boolean', 'number'];
   const arrayXmlObjects = Object.entries(object).map(([key, value]) => {
     if (!types.includes(typeof value))
       return `<${key}>${reduceArray(value)}</${key}>`;
+
+    if (Array.isArray(value)) {
+      return `<${key}>${transformArray(value)}</${key}>`;
+    }
 
     if (typeof value === 'object')
       return `<${key}>${reduceXml(transformJsonInXml(value))}</${key}>`;
@@ -20,22 +28,18 @@ export const transformJsonInXml = (object: object | any): Array<any> => {
     return `<${key}>${value}</${key}>`;
   });
 
-  // console.log({ arrayXmlObjects });
-
   return arrayXmlObjects;
 };
 
 export const reduceXml = (array: any[]): string => {
-  const xmlResponse = array.reduce((acumulator, current) => {
-    // console.log({ current });
+  const xmlResponse = array.reduce((accumulator, current) => {
     if (typeof current === 'object') {
-      acumulator = acumulator + '\n' + reduceXml(current);
-      // console.log({ acumulator });
+      accumulator = accumulator + '\n' + reduceXml(current);
 
-      return acumulator;
+      return accumulator;
     }
 
-    return (acumulator = acumulator + '\n' + current);
+    return (accumulator = accumulator + '\n' + current);
   });
 
   return xmlResponse;

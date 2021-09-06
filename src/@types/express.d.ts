@@ -22,7 +22,7 @@ type StepSource = {
 
 declare module Express {
   export interface Request {
-    step: StepSource;
+    step?: StepSource;
     dialogue?: Dialogue;
   }
 }

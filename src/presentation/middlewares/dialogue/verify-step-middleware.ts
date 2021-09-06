@@ -1,6 +1,6 @@
-import { VerifyStep } from '../../domain/usecases/dialogue';
-import { serverError } from '../../utils/response/response';
-import { HttpRequest, Middleware } from '../protocols';
+import { VerifyStep } from '../../../domain/usecases/dialogue';
+import { serverError } from '../../../utils/response/response';
+import { HttpRequest, Middleware } from '../../protocols';
 
 export class VerifyStepMiddleware implements Middleware {
   constructor(private readonly verifyStep: VerifyStep) {}

@@ -7,7 +7,7 @@ export interface CreateDialogueRepository {
 }
 
 export namespace CreateDialogueRepository {
-  export type Params = Omit<Dialogue, 'dialogueId'>;
+  export type Params = Omit<Dialogue, 'dialogueId' | 'createdAt' | 'updatedAt'>;
 
   export type Result = Promise<Dialogue>;
 }

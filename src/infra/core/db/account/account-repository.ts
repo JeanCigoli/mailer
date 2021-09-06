@@ -1,11 +1,12 @@
 import { ListAccountByMsisdnRepository } from '../../../../data/protocols/core/db';
+import { formateSnakeCaseKeysForCamelCase } from '../../../../utils/object';
 import { dbPhoenix } from '../helpers';
 
 export class AccountRepository implements ListAccountByMsisdnRepository {
-  findByMsisdn(
+  async findByMsisdn(
     params: ListAccountByMsisdnRepository.Params,
   ): ListAccountByMsisdnRepository.Result {
-    return dbPhoenix('[client].[tb_account] as [account]')
+    const result = await dbPhoenix('[client].[tb_account] as [account]')
       .innerJoin(
         '[client].[tb_client] as [client]',
         '[account].client_id',
@@ -24,8 +25,10 @@ export class AccountRepository implements ListAccountByMsisdnRepository {
         '[client].email',
         '[mvno].[name] as mvno',
       )
-      .whereNull('deleted_at')
-      .andWhere('msisdn', params.msisdn)
+      .whereNull('[account].deleted_at')
+      .andWhere('[account].msisdn', params.msisdn)
       .first();
+
+    return formateSnakeCaseKeysForCamelCase(result);
   }
 }
