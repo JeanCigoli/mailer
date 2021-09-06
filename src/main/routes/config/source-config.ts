@@ -1,4 +1,8 @@
-import { stepCoreUraSwitchConfig } from '.';
+import {
+  stepCoreUraSwitchConfig,
+  stepCoreSmsSwitchConfig,
+  stepCoreWhatsAppSwitchConfig,
+} from '.';
 import { Source } from '../../../utils/enum/source';
 import {
   adapterOptions,
@@ -14,11 +18,11 @@ export const sourceSwitchConfig: adapterOptions = [
   {
     target: { step: 'sourceId' },
     expected: { sourceId: Source.WHATSAPP },
-    handle: adaptSwitchMiddleware(stepCoreUraSwitchConfig),
+    handle: adaptSwitchMiddleware(stepCoreWhatsAppSwitchConfig),
   },
   {
     target: { step: 'sourceId' },
     expected: { sourceId: Source.SMS },
-    handle: adaptSwitchMiddleware(stepCoreUraSwitchConfig),
+    handle: adaptSwitchMiddleware(stepCoreSmsSwitchConfig),
   },
 ];
