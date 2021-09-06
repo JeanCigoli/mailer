@@ -1,8 +1,8 @@
-export interface GetUserConsumption {
-  get(clientToken: string): GetUserConsumption.Result;
+export interface ListConsumption {
+  handle(clientToken: string): ListConsumption.Result;
 }
 
-export namespace GetUserConsumption {
+export namespace ListConsumption {
   type Data = {
     total: string;
     available: string;
@@ -16,7 +16,6 @@ export namespace GetUserConsumption {
   };
 
   export type Result = Promise<{
-    status: boolean;
-    payload?: Payload;
+    consumption: Payload;
   }>;
 }
