@@ -5,10 +5,8 @@ export interface HttpRequest {
   body?: any;
   query?: any;
   params?: any;
-  step: {
-    stepSource: StepSource;
-    dialogue?: Dialogue;
-  };
+  step?: StepSource;
+  dialogue?: Dialogue;
 }
 
 export interface HttpResponse {

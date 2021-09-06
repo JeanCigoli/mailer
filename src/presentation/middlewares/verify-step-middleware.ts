@@ -9,7 +9,8 @@ export class VerifyStepMiddleware implements Middleware {
     try {
       const result = await this.verifyStep.step(httpRequest.body);
 
-      httpRequest.step = result;
+      httpRequest.step = result.stepSource;
+      httpRequest.dialogue = result.dialogue;
 
       return next();
     } catch (error: any) {

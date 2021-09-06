@@ -6,7 +6,7 @@ import {
   formateSnakeCaseKeysForCamelCase,
 } from '../../utils/object';
 
-export function adaptMiddleware(middleware: Middleware) {
+export function adaptMiddlewareStep(middleware: Middleware) {
   return async (req: Request, res: Response, next: NextFunction) => {
     const httpRequest: HttpRequest = {
       body: formateSnakeCaseKeysForCamelCase(req.body),
@@ -16,7 +16,8 @@ export function adaptMiddleware(middleware: Middleware) {
     };
 
     const httpResponse = await middleware.handle(httpRequest, () => {
-      req.body = httpRequest.body;
+      req.step = httpRequest.step;
+      req.dialogue = httpRequest.dialogue;
 
       return next();
     });
