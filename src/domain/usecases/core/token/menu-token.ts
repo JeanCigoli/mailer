@@ -8,6 +8,7 @@ export namespace MenuToken {
     message: string;
     sourceId: number;
     stepSource: StepSource;
+    dialogue: Dialogue;
   };
 
   export type Result = Promise<{
