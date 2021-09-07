@@ -1,6 +1,8 @@
 import { DbVerifyStep } from '../../../../data/usecases/dialogue';
-import { DialogueSmsRepository } from '../../../../infra/core/db';
-import { StepSourceRepository } from '../../../../infra/core/db/step/step-source-repository';
+import {
+  DialogueSmsRepository,
+  StepSourceRepository,
+} from '../../../../infra/core/db/mssql';
 import { VerifyStepMiddleware } from '../../../../presentation/middlewares';
 
 export const makeVerifyStepSms = () => {

@@ -3,6 +3,7 @@ import { Step } from '../../../../utils/enum/step';
 import {
   CreateDialogueRepository,
   ListAccountByMsisdnRepository,
+  ListAuthCodeRepository,
   ListStepWithSourceRepository,
 } from '../../../protocols/core/db';
 
@@ -11,6 +12,7 @@ export class DbAuthentication implements Authentication {
     private readonly listAccountByMsisdnRepository: ListAccountByMsisdnRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
     private readonly createDialogueRepository: CreateDialogueRepository,
+    private readonly listAuthCodeRepository: ListAuthCodeRepository,
   ) {}
 
   async auth(params: Authentication.Params): Authentication.Result {
@@ -38,6 +40,37 @@ export class DbAuthentication implements Authentication {
       requestDate: new Date(),
       responseDate: new Date(),
     });
+
+    const code = await this.listAuthCodeRepository.findByAccount({
+      accountId: account.accountId,
+    });
+
+    if (code) {
+      const step = await this.listStepWithSourceRepository.findStepAndSource({
+        sourceId: params.sourceId,
+        step: Step.TOKEN_MENU,
+      });
+
+      await this.createDialogueRepository.create({
+        accountId: account.accountId,
+        stepSourceId: step.stepSourceId,
+        requestDate: new Date(),
+        requestText: step.message,
+        expected: JSON.stringify({
+          1: 'VIEW_TOKEN',
+          2: 'MAIN_MENU',
+        }),
+        session: JSON.stringify({
+          ...account,
+        }),
+      });
+
+      return {
+        status: true,
+        messages: [params.stepSource.message, step.message],
+        data: account,
+      };
+    }
 
     const step = await this.listStepWithSourceRepository.findStepAndSource({
       sourceId: params.sourceId,

@@ -1,5 +1,5 @@
-import { ListAccountByMsisdnRepository } from '../../../../data/protocols/core/db';
-import { formateSnakeCaseKeysForCamelCase } from '../../../../utils/object';
+import { ListAccountByMsisdnRepository } from '../../../../../data/protocols/core/db';
+import { formateSnakeCaseKeysForCamelCase } from '../../../../../utils/object';
 import { dbPhoenix } from '../helpers';
 
 export class AccountRepository implements ListAccountByMsisdnRepository {

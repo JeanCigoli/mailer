@@ -1,4 +1,4 @@
-import { DATABASE } from '../../../../utils/config/constants';
+import { DATABASE } from '../../../../../utils/config/constants';
 
 const phoenixConfig = {
   client: DATABASE.DB_DIALECT,

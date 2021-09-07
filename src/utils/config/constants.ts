@@ -28,3 +28,12 @@ export const RABBITMQ = {
   USER: process.env.RABBIT_USER || '',
   PASSWORD: process.env.RABBIT_PASSWORD || '',
 };
+
+export const MONGO = {
+  USER: process.env.MONGO_USER || '',
+  PASSWORD: process.env.MONGO_PASSWORD || '',
+  HOST: process.env.MONGO_HOST || '',
+  PORT: process.env.MONGO_PORT || '',
+  NAME: process.env.MONGO_NAME || '',
+  AUTH_SOURCE: process.env.MONGO_NAME || '',
+};

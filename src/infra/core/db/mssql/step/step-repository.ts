@@ -1,5 +1,5 @@
-import { ListStepWithSourceRepository } from '../../../../data/protocols/core/db';
-import { formateSnakeCaseKeysForCamelCase } from '../../../../utils/object';
+import { ListStepWithSourceRepository } from '../../../../../data/protocols/core/db';
+import { formateSnakeCaseKeysForCamelCase } from '../../../../../utils/object';
 import { dbPhoenix } from '../helpers';
 
 export class StepRepository implements ListStepWithSourceRepository {

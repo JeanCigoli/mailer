@@ -1,6 +1,8 @@
 import { DbVerifyStep } from '../../../../data/usecases/dialogue';
-import { DialogueUraRepository } from '../../../../infra/core/db';
-import { StepSourceRepository } from '../../../../infra/core/db/step/step-source-repository';
+import {
+  DialogueUraRepository,
+  StepSourceRepository,
+} from '../../../../infra/core/db/mssql';
 import { VerifyStepMiddleware } from '../../../../presentation/middlewares';
 
 export const makeVerifyStepUra = () => {

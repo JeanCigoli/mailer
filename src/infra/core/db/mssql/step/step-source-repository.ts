@@ -1,8 +1,8 @@
 import {
   listStepSourceByIdRepository,
   ListStepSourceByStepRepository,
-} from '../../../../data/protocols/core/db';
-import { formateSnakeCaseKeysForCamelCase } from '../../../../utils/object';
+} from '../../../../../data/protocols/core/db';
+import { formateSnakeCaseKeysForCamelCase } from '../../../../../utils/object';
 import { dbPhoenix } from '../helpers';
 
 export class StepSourceRepository

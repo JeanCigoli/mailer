@@ -2,12 +2,12 @@ import {
   CreateDialogueRepository,
   ListDialogueByMsisdnRepository,
   UpdateDialogueRepository,
-} from '../../../../data/protocols/core/db';
-import { Dialogue } from '../../../../domain/models';
+} from '../../../../../data/protocols/core/db';
+import { Dialogue } from '../../../../../domain/models';
 import {
   formateCamelCaseKeysForSnakeCase,
   formateSnakeCaseKeysForCamelCase,
-} from '../../../../utils/object';
+} from '../../../../../utils/object';
 import { dbPhoenix } from '../helpers';
 
 export class DialogueSmsRepository

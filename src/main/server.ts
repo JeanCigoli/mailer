@@ -1,11 +1,23 @@
 import { RabbitMqServer } from '../infra/amqp/helper';
-import { dbPhoenix } from '../infra/core/db/helpers';
-import { RABBITMQ, SERVER } from '../utils/config/constants';
+import { MongoHelper } from '../infra/core/db/mongo/helpers';
+import { dbPhoenix } from '../infra/core/db/mssql/helpers';
+import { RABBITMQ, SERVER, MONGO } from '../utils/config/constants';
 import errorLogger from '../utils/logger';
 import { server } from './application';
 
 (async () => {
   try {
+    await MongoHelper.setCredentials({
+      authSource: MONGO.AUTH_SOURCE,
+      host: MONGO.HOST,
+      name: MONGO.NAME,
+      password: MONGO.PASSWORD,
+      port: +MONGO.PORT,
+      user: MONGO.USER,
+    });
+
+    await MongoHelper.connect();
+
     const rabbitMqServer = new RabbitMqServer();
     const rabbitMq = rabbitMqServer.getInstance();
     rabbitMq.setCredentials({

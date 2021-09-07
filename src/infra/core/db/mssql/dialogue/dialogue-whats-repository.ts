@@ -2,15 +2,15 @@ import {
   CreateDialogueRepository,
   ListDialogueByMsisdnRepository,
   UpdateDialogueRepository,
-} from '../../../../data/protocols/core/db';
-import { Dialogue } from '../../../../domain/models';
+} from '../../../../../data/protocols/core/db';
+import { Dialogue } from '../../../../../domain/models';
 import {
   formateCamelCaseKeysForSnakeCase,
   formateSnakeCaseKeysForCamelCase,
-} from '../../../../utils/object';
+} from '../../../../../utils/object';
 import { dbPhoenix } from '../helpers';
 
-export class DialogueUraRepository
+export class DialogueWhatsAppRepository
   implements
     CreateDialogueRepository,
     UpdateDialogueRepository,
@@ -19,7 +19,7 @@ export class DialogueUraRepository
   async create(
     params: CreateDialogueRepository.Params,
   ): CreateDialogueRepository.Result {
-    const [result] = await dbPhoenix('[ura].[tb_dialogue]')
+    const [result] = await dbPhoenix('[whatsapp].[tb_dialogue]')
       .insert(formateCamelCaseKeysForSnakeCase(params))
       .returning('*');
 
@@ -30,7 +30,7 @@ export class DialogueUraRepository
     params: Partial<Dialogue>,
     id: number,
   ): UpdateDialogueRepository.Result {
-    const [result] = await dbPhoenix('[ura].[tb_dialogue]')
+    const [result] = await dbPhoenix('[whatsapp].[tb_dialogue]')
       .update(formateCamelCaseKeysForSnakeCase(params))
       .where('dialogue_id', id)
       .returning('*');
@@ -43,7 +43,7 @@ export class DialogueUraRepository
   ): ListDialogueByMsisdnRepository.Result {
     const result = await dbPhoenix('[client].[tb_account] as [account]')
       .innerJoin(
-        '[ura].[tb_dialogue] as [dialogue]',
+        '[whatsapp].[tb_dialogue] as [dialogue]',
         '[account].[account_id]',
         '[dialogue].[account_id]',
       )
