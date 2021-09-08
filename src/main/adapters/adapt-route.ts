@@ -14,11 +14,22 @@ export function adaptRoute(controller: Controller) {
       headers: req.headers,
     };
 
+    console.log('ADAPT ROUTE');
+
     const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.headers) {
       res.set(httpResponse.headers);
+
+      if (
+        Object.values(httpResponse.headers).find(
+          (value) => value === 'application/xml',
+        )
+      )
+        return res.status(httpResponse.statusCode).send(httpResponse.body);
     }
+
+    return res.status(httpResponse.statusCode).send(httpResponse.body);
 
     return res
       .status(httpResponse.statusCode)

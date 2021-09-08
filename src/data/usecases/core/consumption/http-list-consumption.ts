@@ -1,33 +1,15 @@
-import { DefaultBody } from '../../../../domain/models';
-import { ListConsumption } from '../../../../domain/usecases/core';
-import {
-  CreateDialogueRepository,
-  ListStepWithSourceRepository,
-  UpdateDialogueRepository,
-} from '../../../protocols/core/db';
+import { ListConsumption } from '../../../../domain/usecases/core/consumption/list-consumption';
+import { GetUserConsumption } from '../../../protocols/core/http/get-user-consumption';
 
 export class HttpListConsumption implements ListConsumption {
-  constructor(
-    private readonly updateDialogueRepository: UpdateDialogueRepository,
-    private readonly createDialogueRepository: CreateDialogueRepository,
-    private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
-  ) {}
+  constructor(private readonly getUserConsumption: GetUserConsumption) {}
 
-  async list(params: DefaultBody): ListConsumption.Result {
-    const { dialogueId, ...props } = params.dialogue;
+  async handle(clientToken: string): ListConsumption.Result {
+    const result = await this.getUserConsumption.get(clientToken);
 
-    await this.updateDialogueRepository.update(
-      {
-        responseDate: new Date(),
-        responseText: params.message,
-        updatedAt: new Date(),
-      },
-      dialogueId,
-    );
+    if (!result.status || !result.payload)
+      throw new Error('ERROR_GET_CONSUMPTION');
 
-    return {
-      messages: [],
-      status: true,
-    };
+    return { consumption: result.payload };
   }
 }

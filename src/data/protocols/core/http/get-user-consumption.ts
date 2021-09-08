@@ -1,5 +1,5 @@
 export interface GetUserConsumption {
-  get(params: GetUserConsumption.Params): GetUserConsumption.Result;
+  get(clientToken: string): GetUserConsumption.Result;
 }
 
 export namespace GetUserConsumption {
@@ -15,13 +15,8 @@ export namespace GetUserConsumption {
     data: Data;
   };
 
-  export type Params = {
-    clientToken: string;
-  };
-
   export type Result = Promise<{
-    message: string;
-    payload: Payload;
-    error: any[];
+    status: boolean;
+    payload?: Payload;
   }>;
 }

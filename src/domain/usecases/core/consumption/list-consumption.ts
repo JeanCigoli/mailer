@@ -1,11 +1,21 @@
-import { DefaultBody, DefaultResult } from '../../../models';
-
 export interface ListConsumption {
-  list(params: ListConsumption.Params): ListConsumption.Result;
+  handle(clientToken: string): ListConsumption.Result;
 }
 
 export namespace ListConsumption {
-  export type Params = DefaultBody;
+  type Data = {
+    total: string;
+    available: string;
+    used: string;
+  };
 
-  export type Result = Promise<DefaultResult>;
+  type Payload = {
+    voice: Data;
+    sms: Data;
+    data: Data;
+  };
+
+  export type Result = Promise<{
+    consumption: Payload;
+  }>;
 }

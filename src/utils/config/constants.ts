@@ -9,7 +9,10 @@ export const SERVER = {
 };
 
 export const URLS = {
-  PHOENIX_BASE_URL: process.env.PHOENIX_BASE_URL,
+  PHOENIX_RECHARGE: process.env.PHOENIX_RECHARGE || '',
+  PHOENIX_ACCOUNT_MANAGER: process.env.PHOENIX_ACCOUNT_MANAGER || '',
+  PHOENIX_AUTHENTICATOR: process.env.PHOENIX_AUTHENTICATOR || '',
+  PHOENIX_SMS: process.env.PHOENIX_SMS || '',
 };
 
 export const DATABASE = {
