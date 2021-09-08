@@ -1,10 +1,10 @@
 import { DefaultBody } from '../../../models';
 
-export interface MenuToken {
-  check(params: MenuToken.Params): MenuToken.Result;
+export interface VerifyMainMenu {
+  check(params: VerifyMainMenu.Params): VerifyMainMenu.Result;
 }
 
-export namespace MenuToken {
+export namespace VerifyMainMenu {
   export type Params = DefaultBody;
 
   export type Result = Promise<{
