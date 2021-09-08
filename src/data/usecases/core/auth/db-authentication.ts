@@ -45,6 +45,9 @@ export class DbAuthentication implements Authentication {
       accountId: account.accountId,
     });
 
+    const token =
+      'eN3bb5bLvWoAq/epcAEFXQ7DlpD+ubooEYpCL/bulqEvrHcJjUCODvuteAzEFs7QHhqez78GwWsrPXD/JQFBEWEdWOf8duAzOtu+qITeZbWNUAk6MQ+E0PjoKmvUD4M9Yml2+8aUhyXOqrnvqNjO9yxn/C7KdK7dfJfvuMQLIFy0XoOG33z9Su2Bj9pdXRniYbWds7r41PNXk91qCZ4/xsHyz2Yh47NO6PoSu/GK++jXzW/V5aq2lSfzF1xbWVaBh/tOkWxDDCPUOjHXT8yYW21sCQrJcYWo/eBr/UZs94RxFBKeeBCFfULWzSG62WlwcC5eRJ9pIEpt2gqnhJG0s6n2kIV8r3lwMy4XlrHH/XiYowyJpW/mz/4idwTJDp0i8PsSuQ4pil9qD5n23ttMOLFljs0z9sjYK9fklObIvw8=';
+
     if (code) {
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
@@ -60,7 +63,10 @@ export class DbAuthentication implements Authentication {
           1: 'VIEW_TOKEN',
           2: 'MAIN_MENU',
         }),
-        session: JSON.stringify(account),
+        session: JSON.stringify({
+          ...account,
+          token,
+        }),
       });
 
       return {
@@ -86,7 +92,10 @@ export class DbAuthentication implements Authentication {
         3: 'CARDS_MENU',
         9: 'TRANSFER_OPERATOR',
       }),
-      session: JSON.stringify(account),
+      session: JSON.stringify({
+        ...account,
+        token,
+      }),
     });
 
     return {
