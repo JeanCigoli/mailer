@@ -1,4 +1,6 @@
+import { subMinutes } from 'date-fns';
 import { VerifyStep } from '../../../domain/usecases/dialogue';
+import { Step } from '../../../utils/enum/step';
 import {
   ListDialogueByMsisdnRepository,
   listStepSourceByIdRepository,
@@ -13,8 +15,13 @@ export class DbVerifyStep implements VerifyStep {
   ) {}
 
   async step(params: VerifyStep.Params): VerifyStep.Result {
+    const dateFinal = new Date().toISOString();
+    const dateInit = subMinutes(new Date(), 15).toISOString();
+
     const dialogue = await this.listDialogueByMsisdnRepository.findByMsisdn({
       msisdn: params.msisdn,
+      dateInit,
+      dateFinal,
     });
 
     if (!dialogue) {
@@ -31,6 +38,17 @@ export class DbVerifyStep implements VerifyStep {
     const stepSource = await this.listStepSourceByIdRepository.findById({
       id: dialogue.stepSourceId,
     });
+
+    if (stepSource.stepId === Step.END) {
+      const stepSource = await this.listStepSourceByStepRepository.findByStep({
+        sourceId: params.sourceId,
+        stepId: 1,
+      });
+
+      return {
+        stepSource,
+      };
+    }
 
     return {
       dialogue: {

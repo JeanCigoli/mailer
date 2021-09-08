@@ -21,6 +21,8 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
     handle: (req: Request, res: Response, next: NextFunction) => {
       console.log('Estou na rota default');
 
+      console.log(req.step);
+
       return next();
     },
   },

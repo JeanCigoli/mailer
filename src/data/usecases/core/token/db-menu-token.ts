@@ -133,7 +133,10 @@ export class DbMenuToken implements MenuToken {
     return {
       messages: [step.message, finishStep.message],
       status: true,
-      data: {},
+      data: {
+        ...props.session,
+        authCode: authCode.authCode,
+      },
     };
   }
 }
