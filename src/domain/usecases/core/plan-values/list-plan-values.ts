@@ -13,4 +13,6 @@ export namespace ListPlanValues {
   export type Result = Promise<{
     planValues: Array<Plan>;
   }>;
+
+  export type Facade = (params: ListPlanValues.Params) => ListPlanValues.Result;
 }

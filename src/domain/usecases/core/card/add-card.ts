@@ -14,8 +14,8 @@ export namespace AddCard {
   };
 
   export type Result = Promise<{
-    payload: {
-      paymentId: string;
-    };
+    paymentId?: string;
   }>;
+
+  export type Facade = (params: AddCard.Params) => AddCard.Result;
 }

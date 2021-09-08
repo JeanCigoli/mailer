@@ -16,4 +16,8 @@ export namespace ExecuteRechargeByCreditCard {
   export type Result = Promise<{
     status: number;
   }>;
+
+  export type Facade = (
+    params: ExecuteRechargeByCreditCard.Params,
+  ) => ExecuteRechargeByCreditCard.Result;
 }

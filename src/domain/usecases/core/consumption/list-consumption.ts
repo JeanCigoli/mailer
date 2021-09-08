@@ -18,4 +18,6 @@ export namespace ListConsumption {
   export type Result = Promise<{
     consumption: Payload;
   }>;
+
+  export type Facade = (clientToken: string) => ListConsumption.Result;
 }
