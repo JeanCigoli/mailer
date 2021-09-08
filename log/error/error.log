@@ -1,0 +1,12 @@
+------------------------------------------------
+Date: 2021-09-08 08:41:03
+Error: MongoParseError: Incomplete key value pair for option at MongoParseError: Incomplete key value pair for option
+    at parseQueryString (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\core\uri_parser.js:431:13)
+    at parseConnectionString (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\core\uri_parser.js:589:21)
+    at connect (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\operations\connect.js:281:3)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\mongo_client.js:259:5
+    at maybePromise (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\utils.js:692:3)
+    at MongoClient.connect (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\mongo_client.js:255:10)
+    at Function.MongoClient.connect (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\mongo_client.js:400:22)
+    at Object.connect (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\infra\core\db\mongo\helpers\config.ts:21:37)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\server.ts:19:23

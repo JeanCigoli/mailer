@@ -33,7 +33,15 @@ export class DbVerifyStep implements VerifyStep {
     });
 
     return {
-      dialogue,
+      dialogue: {
+        ...dialogue,
+        session: dialogue.session
+          ? JSON.parse(dialogue.session)
+          : dialogue.session,
+        expected: dialogue.expected
+          ? JSON.parse(dialogue.expected)
+          : dialogue.expected,
+      },
       stepSource,
     };
   }

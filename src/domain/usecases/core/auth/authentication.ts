@@ -5,10 +5,14 @@ export interface Authentication {
 export namespace Authentication {
   export type Params = {
     msisdn: string;
+    message: string;
+    sourceId: number;
+    stepSource: StepSource;
   };
 
   export type Result = Promise<{
     status: boolean;
-    data: any;
+    messages: string[];
+    data?: any;
   }>;
 }

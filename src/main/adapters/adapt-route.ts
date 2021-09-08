@@ -14,13 +14,13 @@ export function adaptRoute(controller: Controller) {
       headers: req.headers,
     };
 
+    console.log('ADAPT ROUTE');
+
     const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.headers) {
       res.set(httpResponse.headers);
-    }
 
-    if (typeof httpResponse.headers === 'object') {
       if (
         Object.values(httpResponse.headers).find(
           (value) => value === 'application/xml',
@@ -28,6 +28,8 @@ export function adaptRoute(controller: Controller) {
       )
         return res.status(httpResponse.statusCode).send(httpResponse.body);
     }
+
+    return res.status(httpResponse.statusCode).send(httpResponse.body);
 
     return res
       .status(httpResponse.statusCode)
