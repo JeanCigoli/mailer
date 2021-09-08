@@ -4,9 +4,9 @@ import { Job } from '../protocols/listener-job';
 export class SendSmsJob implements Job {
   constructor(private readonly sendSmsCallback: SendSmsCallback) {}
 
-  async handle(message: string): Promise<void> {
+  async handle(json: Record<any, any>): Promise<void> {
     try {
-      const json = JSON.parse(message);
+      // const json = JSON.parse(message.toString());
 
       await this.sendSmsCallback.handle({
         message: json.message,

@@ -1,30 +1,23 @@
 import { Router } from 'express';
 import { makeResponseXml } from '../../../utils/response/response-xml';
+import { adaptMiddlewareStep } from '../../adapters/adapt-middleware-step';
 import { adaptMiddlewareXml } from '../../adapters/adapt-middleware-xml';
+import { adaptSwitchMiddleware } from '../../adapters/adapt-switch-middleware';
+import { makeVerifyStepUra } from '../../factories/middlewares/core/make-verify-step-ura';
 import { makeXmlParser } from '../../factories/middlewares/ura';
+import {
+  formatUraSwitchConfig,
+  stepCoreSwitchConfig,
+  stepMiddlewareSwitchConfig,
+} from '../config';
 
 export default (routes: Router) => {
-  routes.post('/', adaptMiddlewareXml(makeXmlParser()), (req, res) => {
-    // console.log('CONTROLLER', req.body);
-
-    const objTest = {
-      voice: {
-        total: 1000,
-        available: 1000,
-        used: 0,
-      },
-      sms: {
-        total: 0,
-        available: 0,
-        used: 0,
-      },
-      data: {
-        total: 750,
-        available: 750,
-        used: 0,
-      },
-    };
-
-    res.send(makeResponseXml(objTest));
-  });
+  routes.post(
+    '/',
+    adaptMiddlewareXml(makeXmlParser()),
+    adaptMiddlewareStep(makeVerifyStepUra()),
+    adaptSwitchMiddleware(stepMiddlewareSwitchConfig),
+    adaptSwitchMiddleware(stepCoreSwitchConfig),
+    adaptSwitchMiddleware(formatUraSwitchConfig),
+  );
 };

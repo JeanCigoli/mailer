@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { makeResponseXml } from '../../../utils/response/response-xml';
+import { adaptRoute } from '../../adapters/adapt-route';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
+import { makeRechargePlanValuesControllerUra } from '../../factories/ura/plan-values/make-plan-values-controller-ura';
 
 export const formatUraSwitchConfig: adapterOptions = [
   {
@@ -12,6 +14,16 @@ export const formatUraSwitchConfig: adapterOptions = [
 
       return res.send(makeResponseXml({ ...req.step, ...req.body }));
     },
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 13 },
+    handle: adaptRoute(makeRechargePlanValuesControllerUra()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 16 },
+    handle: adaptRoute(),
   },
   {
     handle: (req: Request, res: Response) => {

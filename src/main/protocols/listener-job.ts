@@ -1,3 +1,3 @@
 export interface Job {
-  handle(message: string): Promise<void>;
+  handle(message: object): Promise<void>;
 }

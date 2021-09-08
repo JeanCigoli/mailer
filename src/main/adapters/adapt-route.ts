@@ -20,6 +20,15 @@ export function adaptRoute(controller: Controller) {
       res.set(httpResponse.headers);
     }
 
+    if (typeof httpResponse.headers === 'object') {
+      if (
+        Object.values(httpResponse.headers).find(
+          (value) => value === 'application/xml',
+        )
+      )
+        return res.status(httpResponse.statusCode).send(httpResponse.body);
+    }
+
     return res
       .status(httpResponse.statusCode)
       .json(formateCamelCaseKeysForSnakeCase(httpResponse.body));
