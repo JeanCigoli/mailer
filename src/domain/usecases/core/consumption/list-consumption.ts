@@ -20,7 +20,8 @@ export namespace ListConsumption {
   }>;
 
   export type Params = {
-    msisdn: string;
+    identifier: string;
+    dateInitials: string;
     token: string;
   };
 

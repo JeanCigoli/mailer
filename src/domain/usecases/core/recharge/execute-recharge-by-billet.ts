@@ -21,4 +21,8 @@ export namespace ExecuteRechargeByBillet {
   export type Result = Promise<{
     billet: Billet;
   }>;
+
+  export type Facade = (
+    params: ExecuteRechargeByBillet.Params,
+  ) => ExecuteRechargeByBillet.Result;
 }

@@ -9,7 +9,7 @@ export class HttpListConsumption implements ListConsumption {
     const date = format(subMonths(new Date(), 30), 'yyyy-MM-dd');
 
     const result = await this.getUserConsumption.get({
-      identifier: params.msisdn,
+      identifier: params.identifier,
       token: params.token,
       dateInitials: date,
     });

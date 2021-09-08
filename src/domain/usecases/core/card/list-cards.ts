@@ -8,4 +8,6 @@ export namespace ListCards {
   export type Result = Promise<{
     cards: Array<Card>;
   }>;
+
+  export type Facade = (clientToken: string) => ListCards.Result;
 }

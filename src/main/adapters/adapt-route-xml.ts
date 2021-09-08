@@ -1,11 +1,8 @@
 import { Request, Response } from 'express';
 import { Controller, HttpRequest } from '../../presentation/protocols';
-import {
-  formateCamelCaseKeysForSnakeCase,
-  formateSnakeCaseKeysForCamelCase,
-} from '../../utils/object';
+import { formateSnakeCaseKeysForCamelCase } from '../../utils/object';
 
-export function adaptRoute(controller: Controller) {
+export function adaptRouteXml(controller: Controller) {
   return async (req: Request, res: Response) => {
     const httpRequest: HttpRequest = {
       body: formateSnakeCaseKeysForCamelCase(req.body),
@@ -14,25 +11,12 @@ export function adaptRoute(controller: Controller) {
       headers: req.headers,
     };
 
-    // console.log('ADAPT ROUTE');
-
     const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.headers) {
       res.set(httpResponse.headers);
-
-      if (
-        Object.values(httpResponse.headers).find(
-          (value) => value === 'application/xml',
-        )
-      )
-        return res.status(httpResponse.statusCode).send(httpResponse.body);
     }
 
     return res.status(httpResponse.statusCode).send(httpResponse.body);
-
-    return res
-      .status(httpResponse.statusCode)
-      .json(formateCamelCaseKeysForSnakeCase(httpResponse.body));
   };
 }

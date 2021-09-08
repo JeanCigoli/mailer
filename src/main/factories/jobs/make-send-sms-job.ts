@@ -1,11 +1,11 @@
 import { HttpSendSmsCallback } from '../../../data/usecases/core/sms/http-send-sms-callback';
-import { phoenixClient } from '../../../infra/core/http/helpers/phoenix-account';
 import { SendSmsService } from '../../../infra/core/http/phoenix/sms/send-sms-service';
 import { RequestAdapter } from '../../../infra/core/http/web-service-rest-adapter';
+import { phoenixSms } from '../../../infra/core/http/helpers/phoenix-sms';
 import { SendSmsJob } from '../../jobs/send-sms-job';
 
 export const makeSendSmsJob = () => {
-  const httpClient = new RequestAdapter(phoenixClient);
+  const httpClient = new RequestAdapter(phoenixSms);
   const sendSmsService = new SendSmsService(httpClient);
 
   const httpSendSmsCallback = new HttpSendSmsCallback(sendSmsService);
