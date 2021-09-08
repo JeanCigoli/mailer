@@ -1,4 +1,6 @@
+import { subMinutes } from 'date-fns';
 import { VerifyStep } from '../../../domain/usecases/dialogue';
+import { Step } from '../../../utils/enum/step';
 import {
   ListDialogueByMsisdnRepository,
   listStepSourceByIdRepository,
@@ -31,6 +33,17 @@ export class DbVerifyStep implements VerifyStep {
     const stepSource = await this.listStepSourceByIdRepository.findById({
       id: dialogue.stepSourceId,
     });
+
+    if (stepSource.stepId === Step.END) {
+      const stepSource = await this.listStepSourceByStepRepository.findByStep({
+        sourceId: params.sourceId,
+        stepId: 1,
+      });
+
+      return {
+        stepSource,
+      };
+    }
 
     return {
       dialogue: {

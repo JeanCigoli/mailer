@@ -21,6 +21,7 @@ export class AccountRepository implements ListAccountByMsisdnRepository {
         '[account].account_id',
         '[account].external_id',
         '[account].msisdn',
+        '[account].[dt_grace] as dateGrace',
         '[client].[name]',
         '[client].email',
         '[mvno].[name] as mvno',

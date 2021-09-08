@@ -49,6 +49,10 @@ export class DialogueSmsRepository
       )
       .select('[dialogue].*')
       .where('[account].[msisdn]', params.msisdn)
+      .andWhereBetween('[dialogue].[created_at]', [
+        dbPhoenix.raw('DATEADD(MINUTE, -20, GETDATE())'),
+        dbPhoenix.raw('GETDATE()'),
+      ])
       .orderBy('[dialogue].[created_at]', 'desc')
       .first();
 

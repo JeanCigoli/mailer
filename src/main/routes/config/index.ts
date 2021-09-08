@@ -5,3 +5,4 @@ export * from './step-core-whatsapp-config';
 export * from './source-config';
 
 export * from './format-ura-config';
+export * from './format-whatsapp-config';

@@ -18,8 +18,7 @@ import { server } from './application';
 
     await MongoHelper.connect();
 
-    const rabbitMqServer = new RabbitMqServer();
-    const rabbitMq = rabbitMqServer.getInstance();
+    const rabbitMq = RabbitMqServer.getInstance();
     rabbitMq.setCredentials({
       host: RABBITMQ.HOST,
       password: RABBITMQ.PASSWORD,

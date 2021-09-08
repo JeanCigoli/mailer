@@ -1,5 +1,5 @@
 export interface GetUserConsumption {
-  get(clientToken: string): GetUserConsumption.Result;
+  get(params: GetUserConsumption.Params): GetUserConsumption.Result;
 }
 
 export namespace GetUserConsumption {
@@ -13,6 +13,12 @@ export namespace GetUserConsumption {
     voice: Data;
     sms: Data;
     data: Data;
+  };
+
+  export type Params = {
+    identifier: string;
+    dateInitials: string;
+    token: string;
   };
 
   export type Result = Promise<{

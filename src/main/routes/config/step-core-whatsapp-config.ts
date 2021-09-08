@@ -3,6 +3,7 @@ import { adaptMiddleware } from '../../adapters/adapt-middleware';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
   makeAuthenticationWhats,
+  makeMainMenuWhats,
   makeMenuTokenWhats,
 } from '../../factories/middlewares/core';
 
@@ -18,8 +19,15 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
     handle: adaptMiddleware(makeMenuTokenWhats()),
   },
   {
+    target: { step: 'stepId' },
+    expected: { stepId: 4 },
+    handle: adaptMiddleware(makeMainMenuWhats()),
+  },
+  {
     handle: (req: Request, res: Response, next: NextFunction) => {
       console.log('Estou na rota default');
+
+      console.log(req.step);
 
       return next();
     },

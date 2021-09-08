@@ -1,13 +1,13 @@
-import { MenuToken } from '../../../domain/usecases/core';
+import { VerifyMainMenu } from '../../../domain/usecases/core';
 import { serverError } from '../../../utils/response/response';
 import { HttpRequest, Middleware } from '../../protocols';
 
-export class MenuTokenMiddleware implements Middleware {
-  constructor(private readonly menuToken: MenuToken) {}
+export class MainMenuMiddleware implements Middleware {
+  constructor(private readonly verifyMainMenu: VerifyMainMenu) {}
 
   async handle(httpRequest: HttpRequest, next: Function): Middleware.Result {
     try {
-      const result = await this.menuToken.check({
+      const result = await this.verifyMainMenu.check({
         ...httpRequest.body,
         stepSource: httpRequest.step,
         dialogue: httpRequest.dialogue,
@@ -20,6 +20,7 @@ export class MenuTokenMiddleware implements Middleware {
 
       return next();
     } catch (error: any) {
+      console.log(error);
       switch (error.message) {
         default:
           return serverError(error);

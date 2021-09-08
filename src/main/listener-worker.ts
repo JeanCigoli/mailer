@@ -1,4 +1,4 @@
-import { RabbitMqServer } from '../infra/core/amqp/helpers';
+import { RabbitMqServer } from '../infra/amqp/helper';
 import setupWorker from './config/listener-worker';
 import { RABBITMQ } from '../utils/config/constants';
 

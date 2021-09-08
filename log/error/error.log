@@ -10,3 +10,23 @@ Error: MongoParseError: Incomplete key value pair for option at MongoParseError:
     at Function.MongoClient.connect (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\mongo_client.js:400:22)
     at Object.connect (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\infra\core\db\mongo\helpers\config.ts:21:37)
     at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\server.ts:19:23
+------------------------------------------------
+Date: 2021-09-08 12:09:12
+Error: TypeError: rabbitMqServer.getInstance is not a function at TypeError: rabbitMqServer.getInstance is not a function
+    at C:\Users\jean.almeida\Projects\api-comunication\src\main\server.ts:22:37
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+------------------------------------------------
+Date: 2021-09-08 12:10:03
+Error: TypeError: rabbitMqServer.getInstance is not a function at TypeError: rabbitMqServer.getInstance is not a function
+    at C:\Users\jean.almeida\Projects\api-comunication\src\main\server.ts:22:37
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+------------------------------------------------
+Date: 2021-09-08 12:10:57
+Error: TypeError: rabbitMqServer.getInstance is not a function at TypeError: rabbitMqServer.getInstance is not a function
+    at C:\Users\jean.almeida\Projects\api-comunication\src\main\server.ts:22:37
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+------------------------------------------------
+Date: 2021-09-08 12:11:18
+Error: TypeError: rabbitMqServer.getInstance is not a function at TypeError: rabbitMqServer.getInstance is not a function
+    at C:\Users\jean.almeida\Projects\api-comunication\src\main\server.ts:22:37
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
