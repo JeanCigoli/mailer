@@ -1,6 +1,4 @@
-import { ListPlanValues } from '../../../../domain/usecases/core/plan-values/list-plan-values';
 import { PlanValuesXmlResponse } from '../../../../domain/usecases/ura/response/plan-values-xml';
-import { makeSendSmsJob } from '../../../../main/factories/jobs/make-send-sms-job';
 import { contentTypeXml } from '../../../../utils/content-type-xml';
 import { makeResponseXml } from '../../../../utils/response/response-xml';
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols';

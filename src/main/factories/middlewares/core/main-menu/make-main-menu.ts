@@ -7,10 +7,10 @@ import {
 } from '../../../../../infra/core/db/mssql';
 import { MainMenuMiddleware } from '../../../../../presentation/middlewares/main-menu/main-menu-middleware';
 import {
-  listConsumptionStepFacadeSms,
-  listConsumptionStepFacadeUra,
-  listConsumptionStepFacadeWhatsApp,
-} from '../../../../facades';
+  makeListConsumptionStepFacadeSms,
+  makeListConsumptionStepFacadeUra,
+  makeListConsumptionStepFacadeWhatsApp,
+} from '../../../../facades/core';
 
 export const makeMainMenuWhats = () => {
   const dialogueWhatsAppRepository = new DialogueWhatsAppRepository();
@@ -20,7 +20,7 @@ export const makeMainMenuWhats = () => {
     dialogueWhatsAppRepository,
     dialogueWhatsAppRepository,
     stepRepository,
-    listConsumptionStepFacadeWhatsApp,
+    makeListConsumptionStepFacadeWhatsApp,
   );
 
   return new MainMenuMiddleware(dbVerifyMainMenu);
@@ -34,7 +34,7 @@ export const makeMainMenuSms = () => {
     dialogueSmsRepository,
     dialogueSmsRepository,
     stepRepository,
-    listConsumptionStepFacadeSms,
+    makeListConsumptionStepFacadeSms,
   );
 
   return new MainMenuMiddleware(dbVerifyMainMenu);
@@ -48,7 +48,7 @@ export const makeMainMenuUra = () => {
     dialogueUraRepository,
     dialogueUraRepository,
     stepRepository,
-    listConsumptionStepFacadeUra,
+    makeListConsumptionStepFacadeUra,
   );
 
   return new MainMenuMiddleware(dbVerifyMainMenu);

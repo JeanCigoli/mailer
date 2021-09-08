@@ -21,10 +21,11 @@ export class AccountRepository implements ListAccountByMsisdnRepository {
         '[account].account_id',
         '[account].external_id',
         '[account].msisdn',
-        '[account].[dt_grace] as dateGrace',
+        '[account].[dt_grace] as date_grace',
         '[client].[name]',
         '[client].email',
         '[mvno].[name] as mvno',
+        '[mvno].[mvno_id]',
       )
       .whereNull('[account].deleted_at')
       .andWhere('[account].msisdn', params.msisdn)

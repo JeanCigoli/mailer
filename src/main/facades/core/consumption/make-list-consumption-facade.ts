@@ -4,7 +4,7 @@ import { phoenixAccount } from '../../../../infra/core/http/helpers/phoenix-acco
 import { GetUserConsumptionService } from '../../../../infra/core/http/phoenix/consumption/get-user-consumption-service';
 import { RequestAdapter } from '../../../../infra/core/http/web-service-rest-adapter';
 
-export const makeListConsumption: ListConsumption.Facade = (
+export const makeListConsumptionFacade: ListConsumption.Facade = (
   params: ListConsumption.Params,
 ): ListConsumption.Result => {
   const httpClient = new RequestAdapter(phoenixAccount);

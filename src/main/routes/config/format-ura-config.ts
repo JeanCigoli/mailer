@@ -17,12 +17,12 @@ export const formatUraSwitchConfig: adapterOptions = [
   {
     target: { step: 'stepId' },
     expected: { stepId: 2 },
-    handle: adaptRouteXml(makeTokenControllerUra()),
+    handle: adaptRouteXml(makeSuccessControllerUra()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 3 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
+    handle: adaptRouteXml(makeTokenControllerUra()),
   },
   {
     target: { step: 'stepId' },

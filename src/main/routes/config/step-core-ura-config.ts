@@ -4,6 +4,7 @@ import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
   makeAuthenticationUra,
   makeMainMenuUra,
+  makeMenuRechargeUra,
   makeMenuTokenUra,
 } from '../../factories/middlewares/core';
 
@@ -22,6 +23,11 @@ export const stepCoreUraSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 4 },
     handle: adaptMiddleware(makeMainMenuUra()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 8 },
+    handle: adaptMiddleware(makeMenuRechargeUra()),
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {
