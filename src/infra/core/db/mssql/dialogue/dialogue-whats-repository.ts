@@ -50,8 +50,8 @@ export class DialogueWhatsAppRepository
       .select('[dialogue].*')
       .where('[account].[msisdn]', params.msisdn)
       .andWhereBetween('[dialogue].[created_at]', [
-        params.dateInit,
-        params.dateFinal,
+        dbPhoenix.raw('DATEADD(MINUTE, -20, GETDATE())'),
+        dbPhoenix.raw('GETDATE()'),
       ])
       .orderBy('[dialogue].[created_at]', 'desc')
       .first();

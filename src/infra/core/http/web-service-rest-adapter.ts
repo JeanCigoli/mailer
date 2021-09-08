@@ -17,7 +17,7 @@ export class RequestAdapter implements HttpClient {
         ...data,
       });
     } catch (error: any) {
-      console.log(error.response);
+      console.log(error);
       axiosResponse = error.response;
     }
 

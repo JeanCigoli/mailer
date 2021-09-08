@@ -1,5 +1,8 @@
 import { DefaultBody } from '../../../../domain/models';
-import { VerifyMainMenu } from '../../../../domain/usecases/core';
+import {
+  ListConsumptionStep,
+  VerifyMainMenu,
+} from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
 import { notFoundMessage } from '../../../../utils/message/default';
 import {
@@ -13,6 +16,7 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
     private readonly updateDialogueRepository: UpdateDialogueRepository,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
+    private readonly listConsumptionStep: ListConsumptionStep.Facade,
   ) {}
 
   async check(params: DefaultBody): VerifyMainMenu.Result {
@@ -129,10 +133,16 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
       };
     }
 
-    return {
-      messages: [],
-      status: true,
-      data: {},
-    };
+    const step = await this.listStepWithSourceRepository.findStepAndSource({
+      sourceId: params.sourceId,
+      step: selectStep,
+    });
+
+    const result = await this.listConsumptionStep({
+      ...params,
+      stepSource: step,
+    });
+
+    return result;
   }
 }

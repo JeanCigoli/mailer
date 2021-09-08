@@ -43,3 +43,9 @@ export const transactionId = () =>
 export const capitalize = (s: string) => {
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
+
+export const makeObjectToParamsRequest = (props: any) => {
+  return Object.entries(props)
+    .map(([key, value]) => `${key}=${value}`)
+    .join('&');
+};

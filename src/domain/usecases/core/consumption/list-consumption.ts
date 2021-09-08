@@ -1,5 +1,5 @@
 export interface ListConsumption {
-  handle(clientToken: string): ListConsumption.Result;
+  handle(params: ListConsumption.Params): ListConsumption.Result;
 }
 
 export namespace ListConsumption {
@@ -18,4 +18,13 @@ export namespace ListConsumption {
   export type Result = Promise<{
     consumption: Payload;
   }>;
+
+  export type Params = {
+    msisdn: string;
+    token: string;
+  };
+
+  export type Facade = (
+    params: ListConsumption.Params,
+  ) => ListConsumption.Result;
 }

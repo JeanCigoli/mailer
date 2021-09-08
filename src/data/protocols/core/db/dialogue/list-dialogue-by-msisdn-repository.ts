@@ -9,8 +9,6 @@ export interface ListDialogueByMsisdnRepository {
 export namespace ListDialogueByMsisdnRepository {
   export type Params = {
     msisdn: string;
-    dateInit: string;
-    dateFinal: string;
   };
 
   export type Result = Promise<Dialogue | null>;

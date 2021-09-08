@@ -60,9 +60,7 @@ export class DbAuthentication implements Authentication {
           1: 'VIEW_TOKEN',
           2: 'MAIN_MENU',
         }),
-        session: JSON.stringify({
-          ...account,
-        }),
+        session: JSON.stringify(account),
       });
 
       return {

@@ -15,13 +15,8 @@ export class DbVerifyStep implements VerifyStep {
   ) {}
 
   async step(params: VerifyStep.Params): VerifyStep.Result {
-    const dateFinal = new Date().toISOString();
-    const dateInit = subMinutes(new Date(), 15).toISOString();
-
     const dialogue = await this.listDialogueByMsisdnRepository.findByMsisdn({
       msisdn: params.msisdn,
-      dateInit,
-      dateFinal,
     });
 
     if (!dialogue) {
