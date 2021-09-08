@@ -16,18 +16,8 @@ export const formatUraSwitchConfig: adapterOptions = [
   },
   {
     target: { step: 'stepId' },
-    expected: { stepId: 2 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
     expected: { stepId: 3 },
     handle: adaptRouteXml(makeTokenControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 4 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
   },
   {
     target: { step: 'stepId' },
@@ -36,38 +26,8 @@ export const formatUraSwitchConfig: adapterOptions = [
   },
   {
     target: { step: 'stepId' },
-    expected: { stepId: 6 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 7 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 8 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 9 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
     expected: { stepId: 10 },
     handle: adaptRouteXml(makeErrorControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 11 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 12 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
   },
   {
     target: { step: 'stepId' },
@@ -76,23 +36,8 @@ export const formatUraSwitchConfig: adapterOptions = [
   },
   {
     target: { step: 'stepId' },
-    expected: { stepId: 14 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 15 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
     expected: { stepId: 16 },
     handle: adaptRouteXml(makeListCardsControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 17 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
   },
   {
     target: { step: 'stepId' },
@@ -101,48 +46,8 @@ export const formatUraSwitchConfig: adapterOptions = [
   },
   {
     target: { step: 'stepId' },
-    expected: { stepId: 19 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 20 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 21 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 22 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 23 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
     expected: { stepId: 24 },
     handle: adaptRouteXml(makeErrorControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 25 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 26 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 27 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
   },
   {
     target: { step: 'stepId' },
@@ -151,22 +56,10 @@ export const formatUraSwitchConfig: adapterOptions = [
   },
   {
     target: { step: 'stepId' },
-    expected: { stepId: 29 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
     expected: { stepId: 30 },
     handle: adaptRouteXml(makeErrorControllerUra()),
   },
   {
-    target: { step: 'stepId' },
-    expected: { stepId: 31 },
-    handle: adaptRouteXml(makeSuccessControllerUra()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 32 },
     handle: adaptRouteXml(makeSuccessControllerUra()),
   },
 ];
