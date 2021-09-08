@@ -43,6 +43,7 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
 
       return {
         messages: [notFoundMessage(params.sourceId), params.stepSource.message],
+        step: params.stepSource,
         status: false,
         data: {},
       };
@@ -91,6 +92,7 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
       return {
         messages: [step.message],
         status: true,
+        step,
         data: {},
       };
     }
@@ -128,6 +130,7 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
 
       return {
         messages: [step.message],
+        step,
         status: true,
         data: {},
       };

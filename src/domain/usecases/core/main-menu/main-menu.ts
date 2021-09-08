@@ -1,4 +1,4 @@
-import { DefaultBody } from '../../../models';
+import { DefaultBody, DefaultResult } from '../../../models';
 
 export interface VerifyMainMenu {
   check(params: VerifyMainMenu.Params): VerifyMainMenu.Result;
@@ -7,9 +7,5 @@ export interface VerifyMainMenu {
 export namespace VerifyMainMenu {
   export type Params = DefaultBody;
 
-  export type Result = Promise<{
-    status: boolean;
-    messages: string[];
-    data?: any;
-  }>;
+  export type Result = Promise<DefaultResult>;
 }

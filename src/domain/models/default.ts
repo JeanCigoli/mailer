@@ -9,5 +9,6 @@ export type DefaultBody = {
 export type DefaultResult = {
   status: boolean;
   messages: string[];
+  step: StepSource;
   data?: any;
 };

@@ -1,4 +1,4 @@
-import { DefaultBody } from '../../../models';
+import { DefaultBody, DefaultResult } from '../../../models';
 
 export interface MenuToken {
   check(params: MenuToken.Params): MenuToken.Result;
@@ -7,9 +7,5 @@ export interface MenuToken {
 export namespace MenuToken {
   export type Params = DefaultBody;
 
-  export type Result = Promise<{
-    status: boolean;
-    messages: string[];
-    data?: any;
-  }>;
+  export type Result = Promise<DefaultResult>;
 }

@@ -12,10 +12,13 @@ export class AuthenticationMiddleware implements Middleware {
         stepSource: httpRequest.step,
       });
 
+      const { step, ...props } = result;
+
       httpRequest.body = {
+        ...props,
         ...httpRequest.body,
-        ...result,
       };
+      httpRequest.step = step;
 
       return next();
     } catch (error: any) {

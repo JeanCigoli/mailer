@@ -24,6 +24,13 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
     handle: adaptMiddleware(makeMainMenuWhats()),
   },
   {
+    target: { step: 'stepId' },
+    expected: { stepId: 8 },
+    handle: (req: Request, res: Response, next: NextFunction) => {
+      return next();
+    },
+  },
+  {
     handle: (req: Request, res: Response, next: NextFunction) => {
       console.log('Estou na rota default');
 

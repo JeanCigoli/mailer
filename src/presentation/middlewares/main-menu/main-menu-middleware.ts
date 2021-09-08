@@ -13,10 +13,13 @@ export class MainMenuMiddleware implements Middleware {
         dialogue: httpRequest.dialogue,
       });
 
+      const { step, ...props } = result;
+
       httpRequest.body = {
+        ...props,
         ...httpRequest.body,
-        ...result,
       };
+      httpRequest.step = step;
 
       return next();
     } catch (error: any) {

@@ -28,6 +28,7 @@ export class DbAuthentication implements Authentication {
 
       return {
         messages: [step.message],
+        step,
         status: false,
       };
     }
@@ -72,6 +73,7 @@ export class DbAuthentication implements Authentication {
       return {
         status: true,
         messages: [params.stepSource.message, step.message],
+        step,
         data: account,
       };
     }
@@ -101,6 +103,7 @@ export class DbAuthentication implements Authentication {
     return {
       status: true,
       messages: [params.stepSource.message, step.message],
+      step,
       data: account,
     };
   }

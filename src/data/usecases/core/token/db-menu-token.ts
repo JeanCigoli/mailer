@@ -41,6 +41,7 @@ export class DbMenuToken implements MenuToken {
       return {
         messages: [notFoundMessage(params.sourceId), params.stepSource.message],
         status: false,
+        step: params.stepSource,
         data: {},
       };
     }
@@ -79,6 +80,7 @@ export class DbMenuToken implements MenuToken {
       return {
         messages: [step.message],
         status: true,
+        step,
         data: {},
       };
     }
@@ -134,6 +136,7 @@ export class DbMenuToken implements MenuToken {
     return {
       messages: [step.message, finishStep.message],
       status: true,
+      step,
       data: {
         ...props.session,
         authCode: authCode.authCode,

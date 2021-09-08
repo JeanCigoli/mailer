@@ -1,3 +1,5 @@
+import { DefaultResult } from '../../../models';
+
 export interface Authentication {
   auth(params: Authentication.Params): Authentication.Result;
 }
@@ -10,9 +12,5 @@ export namespace Authentication {
     stepSource: StepSource;
   };
 
-  export type Result = Promise<{
-    status: boolean;
-    messages: string[];
-    data?: any;
-  }>;
+  export type Result = Promise<DefaultResult>;
 }

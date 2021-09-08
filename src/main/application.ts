@@ -13,6 +13,5 @@ server.use(express.urlencoded({ extended: true }));
 setupRoutes(server, 'whats');
 setupRoutes(server, 'ura');
 setupRoutes(server, 'sms');
-setupRoutes(server, 'public');
 
 export { server };

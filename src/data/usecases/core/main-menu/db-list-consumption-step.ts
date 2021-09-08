@@ -35,6 +35,11 @@ export class DbListConsumptionStep implements ListConsumptionStep {
       token: props.session.token,
     });
 
+    const step = await this.listStepWithSourceRepository.findStepAndSource({
+      sourceId: params.sourceId,
+      step: Step.VIEW_CONSUMPTION,
+    });
+
     const finishStep =
       await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
@@ -55,6 +60,7 @@ export class DbListConsumptionStep implements ListConsumptionStep {
     return {
       messages: [params.stepSource.message, finishStep.message],
       status: true,
+      step,
       data: {
         ...props.session,
         ...consumption,

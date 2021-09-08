@@ -3,10 +3,7 @@ import { readdirSync } from 'fs';
 import path from 'path';
 import { SERVER } from '../../utils/config/constants';
 
-export default (
-  app: Express,
-  channel: 'ura' | 'sms' | 'whats' | 'public',
-): void => {
+export default (app: Express, channel: 'ura' | 'sms' | 'whats'): void => {
   const router = Router();
 
   switch (channel) {

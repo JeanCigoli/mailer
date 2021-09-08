@@ -19,6 +19,7 @@ export function adaptMiddleware(middleware: Middleware) {
 
     const httpResponse = await middleware.handle(httpRequest, () => {
       req.body = httpRequest.body;
+      req.step = httpRequest.step;
 
       return next();
     });
