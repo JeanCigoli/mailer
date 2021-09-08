@@ -17,5 +17,6 @@ export namespace ListAccountByMsisdnRepository {
     accountId: number;
     externalId: string;
     dateGrace: string;
+    mvnoId: number;
   }>;
 }

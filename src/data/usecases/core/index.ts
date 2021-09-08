@@ -4,3 +4,5 @@ export * from './token/db-menu-token';
 export * from './consumption/http-list-consumption';
 export * from './main-menu/db-verify-main-menu';
 export * from './consumption/http-list-consumption';
+
+export * from './recharge/db-menu-recharge';
