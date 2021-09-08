@@ -6,3 +6,4 @@ export * from './main-menu/db-verify-main-menu';
 export * from './consumption/http-list-consumption';
 
 export * from './recharge/db-menu-recharge';
+export * from './recharge/db-information-number';

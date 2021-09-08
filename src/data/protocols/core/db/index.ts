@@ -1,4 +1,5 @@
 export * from './account/list-account-by-msisdn-repository';
+export * from './account/list-account-by-msisdn-and-mvno-repository';
 
 export * from './dialogue/create-dialogue-repository';
 export * from './dialogue/update-dialogue-repository';
