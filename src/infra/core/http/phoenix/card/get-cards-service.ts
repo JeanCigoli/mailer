@@ -20,8 +20,6 @@ export class GetCardsService implements GetUserCards {
       };
     }
 
-    console.log(result.body);
-
     return {
       status: true,
       payload: formateSnakeCaseKeysForCamelCase(result.body.payload),

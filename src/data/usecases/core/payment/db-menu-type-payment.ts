@@ -95,7 +95,9 @@ export class DbMenuTypePayment implements MenuTypePayment {
       };
     }
 
-    const { cards } = await this.listCards(props.session.token);
+    const result = await this.listCards(props.session.token);
+
+    const cards = result.cards.slice(0, 2);
 
     const expect = {
       0: 'PAYMENT_TYPE_MENU',
@@ -126,6 +128,7 @@ export class DbMenuTypePayment implements MenuTypePayment {
       }),
       session: JSON.stringify({
         ...props.session,
+        cards,
       }),
     });
 

@@ -2,6 +2,7 @@ import { DefaultBody } from '../../../../domain/models';
 import { ConfirmListValues } from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
 import { notFoundMessage } from '../../../../utils/message/default';
+import { Plan } from '../../../../utils/types/plan-values/plan-values-type';
 import {
   CreateDialogueRepository,
   ListStepWithSourceRepository,
@@ -64,7 +65,10 @@ export class DbConfirmListValues implements ConfirmListValues {
           1: 'RECHARGE_PLAN',
           2: 'ADDON_PLAN',
         }),
-        session: JSON.stringify(props.session),
+        session: JSON.stringify({
+          ...props.session,
+          values: null,
+        }),
       });
 
       return {
@@ -79,6 +83,10 @@ export class DbConfirmListValues implements ConfirmListValues {
       step: Step.PAYMENT_TYPE_MENU,
     });
 
+    const [plan] = props.session.values.filter(
+      (value: Plan) => value.id === nameStep,
+    );
+
     await this.createDialogueRepository.create({
       accountId: params.dialogue.session.accountId,
       stepSourceId: step.stepSourceId,
@@ -91,6 +99,7 @@ export class DbConfirmListValues implements ConfirmListValues {
       session: JSON.stringify({
         ...props.session,
         planId: nameStep,
+        values: plan,
       }),
     });
 
@@ -101,6 +110,7 @@ export class DbConfirmListValues implements ConfirmListValues {
       data: {
         ...props.session,
         planId: nameStep,
+        values: plan,
       },
     };
   }

@@ -80,12 +80,12 @@ export class DbListValues implements ListValues {
     const typePlan =
       nameStep === 'RECHARGE_PLAN' ? 'RECARGA' : 'PACOTE ADICIONAL';
 
-    const values = await this.listPlanValues({
+    const { planValues: values } = await this.listPlanValues({
       clientToken: props.session.token,
       type: typePlan,
     });
 
-    const expected = values.planValues.reduce(
+    const expected = values.reduce(
       (acc, current, index) => ({
         ...acc,
         [index + 1]: current.id,
@@ -110,6 +110,7 @@ export class DbListValues implements ListValues {
       session: JSON.stringify({
         ...props.session,
         type: nameStep,
+        values,
       }),
     });
 
