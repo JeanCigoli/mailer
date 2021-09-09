@@ -15,7 +15,6 @@ export const makeListConsumptionStepFacadeWhatsApp: ListConsumptionStep.Facade =
 
     const dbListConsumptionStep = new DbListConsumptionStep(
       dialogueWhatsAppRepository,
-      dialogueWhatsAppRepository,
       stepRepository,
       makeListConsumptionFacade,
     );
@@ -31,7 +30,6 @@ export const makeListConsumptionStepFacadeSms: ListConsumptionStep.Facade = (
 
   const dbListConsumptionStep = new DbListConsumptionStep(
     dialogueSmsRepository,
-    dialogueSmsRepository,
     stepRepository,
     makeListConsumptionFacade,
   );
@@ -46,7 +44,6 @@ export const makeListConsumptionStepFacadeUra: ListConsumptionStep.Facade = (
   const stepRepository = new StepRepository();
 
   const dbListConsumptionStep = new DbListConsumptionStep(
-    dialogueUraRepository,
     dialogueUraRepository,
     stepRepository,
     makeListConsumptionFacade,

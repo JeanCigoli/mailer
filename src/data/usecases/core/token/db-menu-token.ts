@@ -20,16 +20,16 @@ export class DbMenuToken implements MenuToken {
     const expecteis = params.dialogue.expected;
     const { dialogueId, ...props } = params.dialogue;
 
-    if (!expecteis[params.message]) {
-      await this.updateDialogueRepository.update(
-        {
-          responseDate: new Date(),
-          responseText: params.message,
-          updatedAt: new Date(),
-        },
-        dialogueId,
-      );
+    await this.updateDialogueRepository.update(
+      {
+        responseDate: new Date(),
+        responseText: params.message,
+        updatedAt: new Date(),
+      },
+      dialogueId,
+    );
 
+    if (!expecteis[params.message]) {
       const { createdAt, updatedAt, ...rest } = props;
 
       await this.createDialogueRepository.create({
@@ -53,15 +53,6 @@ export class DbMenuToken implements MenuToken {
         sourceId: params.sourceId,
         step: selectStep,
       });
-
-      await this.updateDialogueRepository.update(
-        {
-          responseDate: new Date(),
-          responseText: params.message,
-          updatedAt: new Date(),
-        },
-        dialogueId,
-      );
 
       await this.createDialogueRepository.create({
         accountId: params.dialogue.session.accountId,
@@ -89,15 +80,6 @@ export class DbMenuToken implements MenuToken {
       sourceId: params.sourceId,
       step: selectStep,
     });
-
-    await this.updateDialogueRepository.update(
-      {
-        responseDate: new Date(),
-        responseText: params.message,
-        updatedAt: new Date(),
-      },
-      dialogueId,
-    );
 
     const authCode = await this.listAuthCodeRepository.findByAccount({
       accountId: props.session.accountId,

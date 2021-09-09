@@ -7,3 +7,4 @@ export * from './consumption/http-list-consumption';
 
 export * from './recharge/db-menu-recharge';
 export * from './recharge/db-information-number';
+export * from './recharge/db-resend-information-number';

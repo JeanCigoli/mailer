@@ -1,5 +1,5 @@
 import { DefaultBody } from '../../../../domain/models';
-import { MenuRecharge } from '../../../../domain/usecases/core';
+import { ResendInformationNumber } from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
 import { notFoundMessage } from '../../../../utils/message/default';
 import {
@@ -8,14 +8,14 @@ import {
   UpdateDialogueRepository,
 } from '../../../protocols/core/db';
 
-export class DbRechargeMenu implements MenuRecharge {
+export class DbResendInformationNumber implements ResendInformationNumber {
   constructor(
     private readonly updateDialogueRepository: UpdateDialogueRepository,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
   ) {}
 
-  async check(params: DefaultBody): MenuRecharge.Result {
+  async check(params: DefaultBody): ResendInformationNumber.Result {
     const expecteis = params.dialogue.expected;
     const { dialogueId, ...props } = params.dialogue;
 
@@ -49,16 +49,10 @@ export class DbRechargeMenu implements MenuRecharge {
     const nameStep = expecteis[params.message];
 
     const expected: any = {
-      MAIN_MENU: JSON.stringify({
-        1: 'RECHARGE_MENU',
-        2: 'VIEW_CONSUMPTION',
-        3: 'CARDS_MENU',
-        9: 'TRANSFER_OPERATOR',
-      }),
-      TYPE_RECHARGE_MENU: JSON.stringify({
-        0: 'RECHARGE_MENU',
-        1: 'RECHARGE_PLAN',
-        2: 'ADDON_PLAN',
+      RECHARGE_MENU: JSON.stringify({
+        0: 'MAIN_MENU',
+        1: 'TYPE_RECHARGE_MENU',
+        2: 'ENTER_ANOTHER_NUMBER',
       }),
       ENTER_ANOTHER_NUMBER: null,
     };
@@ -79,8 +73,8 @@ export class DbRechargeMenu implements MenuRecharge {
 
     return {
       messages: [step.message],
-      status: true,
       step,
+      status: false,
       data: props.session,
     };
   }

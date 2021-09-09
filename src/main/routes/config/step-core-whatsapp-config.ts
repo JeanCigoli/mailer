@@ -7,6 +7,7 @@ import {
   makeMainMenuWhats,
   makeMenuRechargeWhats,
   makeMenuTokenWhats,
+  makeResendInformationNumberWhats,
 } from '../../factories/middlewares/core';
 
 export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
@@ -34,6 +35,11 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 9 },
     handle: adaptMiddleware(makeInformationNumberWhats()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 10 },
+    handle: adaptMiddleware(makeResendInformationNumberWhats()),
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {

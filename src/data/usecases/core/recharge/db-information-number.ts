@@ -32,6 +32,18 @@ export class DbInformationNumber implements InformationNumber {
 
     const validMsisdn = this.validAndFormatMsisdn(params.message);
 
+    const expected = {
+      error: JSON.stringify({
+        1: 'ENTER_ANOTHER_NUMBER',
+        0: 'RECHARGE_MENU',
+      }),
+      success: JSON.stringify({
+        1: 'TYPE_RECHARGE_MENU',
+        2: 'ENTER_ANOTHER_NUMBER',
+        0: 'RECHARGE_MENU',
+      }),
+    };
+
     if (!validMsisdn.status) {
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
@@ -43,6 +55,7 @@ export class DbInformationNumber implements InformationNumber {
         stepSourceId: step.stepSourceId,
         requestDate: new Date(),
         requestText: step.message,
+        expected: expected['error'],
         session: JSON.stringify(props.session),
       });
 
@@ -70,6 +83,7 @@ export class DbInformationNumber implements InformationNumber {
         stepSourceId: step.stepSourceId,
         requestDate: new Date(),
         requestText: step.message,
+        expected: expected['error'],
         session: JSON.stringify(props.session),
       });
 
@@ -90,11 +104,7 @@ export class DbInformationNumber implements InformationNumber {
       stepSourceId: step.stepSourceId,
       requestDate: new Date(),
       requestText: step.message,
-      expected: JSON.stringify({
-        1: 'TYPE_RECHARGE_MENU',
-        2: 'ENTER_ANOTHER_NUMBER',
-        0: 'RECHARGE_MENU',
-      }),
+      expected: expected['success'],
       session: JSON.stringify({
         ...props.session,
         msisdn: account.msisdn,
