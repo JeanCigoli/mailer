@@ -1,6 +1,8 @@
+import { isAfter } from 'date-fns';
 import {
   ValidCardNumber,
   ValidAndFormatMsisdn,
+  ValidCardValidity,
 } from '../data/protocols/core/utils';
 
 export const validAndFormatterMsisdn: ValidAndFormatMsisdn = (
@@ -40,4 +42,32 @@ export const validCardNumber: ValidCardNumber = (number: string) => {
   }
 
   return sum % 10 == 0;
+};
+
+export const validValidityCard: ValidCardValidity = (validity: string) => {
+  const isLengthValidity = (date: string) => {
+    const values = date.split('/');
+
+    if (values.length < 2) {
+      return [date.slice(0, 2), date.slice(2, 4)];
+    }
+
+    return values;
+  };
+
+  if (!/^([0-9]{2})\/([0-9]{2})$|^([0-9]{4})$/.test(validity)) {
+    return {
+      status: false,
+      validity: validity,
+    };
+  }
+
+  const [month, year] = isLengthValidity(validity);
+  const date = new Date(+`20${year}`, +month, 1);
+  const now = new Date();
+
+  return {
+    status: isAfter(date, now),
+    validity: `${month}${year}`,
+  };
 };
