@@ -10,7 +10,7 @@ export class GetPlanValuesService implements GetPlanValues {
       method: 'GET',
       url: 'v1/plans',
       headers: {
-        Authentication: clientToken,
+        Authorization: clientToken,
       },
     });
 

@@ -88,12 +88,10 @@ export class DbListValues implements ListValues {
     const expected = values.planValues.reduce(
       (acc, current, index) => ({
         ...acc,
-        [index]: current.id,
+        [index + 1]: current.id,
       }),
       {},
     );
-
-    console.log(expected);
 
     const step = await this.listStepWithSourceRepository.findStepAndSource({
       sourceId: params.sourceId,
@@ -105,7 +103,10 @@ export class DbListValues implements ListValues {
       stepSourceId: step.stepSourceId,
       requestDate: new Date(),
       requestText: step.message,
-      expected: JSON.stringify(expected),
+      expected: JSON.stringify({
+        ...expected,
+        0: 'TYPE_RECHARGE_MENU',
+      }),
       session: JSON.stringify({
         ...props.session,
         type: nameStep,
@@ -119,6 +120,7 @@ export class DbListValues implements ListValues {
       data: {
         ...props.session,
         type: nameStep,
+        values,
       },
     };
   }
