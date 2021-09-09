@@ -1,54 +1,31 @@
-import { MenuToken } from '../../../../domain/usecases/core';
+import { CheckExpected, MenuToken } from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
-import { notFoundMessage } from '../../../../utils/message/default';
 import {
   CreateDialogueRepository,
   ListAuthCodeRepository,
   ListStepWithSourceRepository,
-  UpdateDialogueRepository,
 } from '../../../protocols/core/db';
 
 export class DbMenuToken implements MenuToken {
   constructor(
     private readonly listAuthCodeRepository: ListAuthCodeRepository,
-    private readonly updateDialogueRepository: UpdateDialogueRepository,
+    private readonly checkExpected: CheckExpected.Facade,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
   ) {}
 
   async check(params: MenuToken.Params): MenuToken.Result {
-    const expecteis = params.dialogue.expected;
-    const { dialogueId, ...props } = params.dialogue;
+    const { expected, session } = params.dialogue;
+    const checkStep = await this.checkExpected(params);
 
-    await this.updateDialogueRepository.update(
-      {
-        responseDate: new Date(),
-        responseText: params.message,
-        updatedAt: new Date(),
-      },
-      dialogueId,
-    );
-
-    if (!expecteis[params.message]) {
-      const { createdAt, updatedAt, ...rest } = props;
-
-      await this.createDialogueRepository.create({
-        ...rest,
-        expected: JSON.stringify(props.expected),
-        session: JSON.stringify(props.session),
-      });
-
-      return {
-        messages: [notFoundMessage(params.sourceId), params.stepSource.message],
-        status: false,
-        step: params.stepSource,
-        data: {},
-      };
+    if (checkStep.isError || !checkStep.data) {
+      return checkStep.data;
     }
 
-    const selectStep = +Step[expecteis[params.message]];
+    const nameStep = expected[params.message];
+    const selectStep = +Step[nameStep];
 
-    if (expecteis[params.message] === 'MAIN_MENU') {
+    if (expected[params.message] === 'MAIN_MENU') {
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
         step: selectStep,
@@ -65,7 +42,7 @@ export class DbMenuToken implements MenuToken {
           3: 'CARDS_MENU',
           9: 'TRANSFER_OPERATOR',
         }),
-        session: JSON.stringify(props.session),
+        session: JSON.stringify(session),
       });
 
       return {
@@ -82,18 +59,18 @@ export class DbMenuToken implements MenuToken {
     });
 
     const authCode = await this.listAuthCodeRepository.findByAccount({
-      accountId: props.session.accountId,
+      accountId: session.accountId,
     });
 
     await this.createDialogueRepository.create({
-      accountId: props.session.accountId,
+      accountId: session.accountId,
       stepSourceId: step.stepSourceId,
       requestDate: new Date(),
       requestText: step.message,
       responseDate: new Date(),
       responseText: authCode.authCode,
       session: JSON.stringify({
-        ...props.session,
+        ...session,
         authCode: authCode.authCode,
       }),
     });
@@ -105,12 +82,12 @@ export class DbMenuToken implements MenuToken {
       });
 
     await this.createDialogueRepository.create({
-      accountId: props.session.accountId,
+      accountId: session.accountId,
       stepSourceId: finishStep.stepSourceId,
       requestDate: new Date(),
       requestText: finishStep.message,
       session: JSON.stringify({
-        ...props.session,
+        ...session,
         authCode: authCode.authCode,
       }),
     });
@@ -120,7 +97,7 @@ export class DbMenuToken implements MenuToken {
       status: true,
       step,
       data: {
-        ...props.session,
+        ...session,
         authCode: authCode.authCode,
       },
     };

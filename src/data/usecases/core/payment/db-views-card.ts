@@ -1,25 +1,20 @@
 import { DefaultBody } from '../../../../domain/models';
-import {
-  CheckExpected,
-  ConfirmListValues,
-} from '../../../../domain/usecases/core';
+import { CheckExpected, ViewsCards } from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
-import { notFoundMessage } from '../../../../utils/message/default';
-import { Plan } from '../../../../utils/types/plan-values/plan-values-type';
+import { Card } from '../../../../utils/types/card/card-type';
 import {
   CreateDialogueRepository,
   ListStepWithSourceRepository,
-  UpdateDialogueRepository,
 } from '../../../protocols/core/db';
 
-export class DbConfirmListValues implements ConfirmListValues {
+export class DbViewsCards implements ViewsCards {
   constructor(
     private readonly checkExpected: CheckExpected.Facade,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
   ) {}
 
-  async confirm(params: DefaultBody): ConfirmListValues.Result {
+  async check(params: DefaultBody): ViewsCards.Result {
     const { expected, session } = params.dialogue;
     const checkStep = await this.checkExpected(params);
 
@@ -30,7 +25,15 @@ export class DbConfirmListValues implements ConfirmListValues {
     const nameStep = expected[params.message];
     const selectStep = +Step[nameStep];
 
-    if (nameStep === 'TYPE_RECHARGE_MENU') {
+    if (['PAYMENT_TYPE_MENU', 'ADD_CARD'].includes(nameStep)) {
+      const expecteis: any = {
+        PAYMENT_TYPE_MENU: JSON.stringify({
+          1: 'VIEW_CARDS',
+          2: 'PAYMENT_BILLET',
+        }),
+        ADD_CARD: null,
+      };
+
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
         step: selectStep,
@@ -41,31 +44,25 @@ export class DbConfirmListValues implements ConfirmListValues {
         stepSourceId: step.stepSourceId,
         requestDate: new Date(),
         requestText: step.message,
-        expected: JSON.stringify({
-          0: 'RECHARGE_MENU',
-          1: 'RECHARGE_PLAN',
-          2: 'ADDON_PLAN',
-        }),
-        session: JSON.stringify({
-          ...session,
-          values: null,
-        }),
+        expected: expecteis[nameStep],
+        session: JSON.stringify(session),
       });
 
       return {
         messages: [step.message],
+        status: true,
         step,
-        status: false,
+        data: {},
       };
     }
 
     const step = await this.listStepWithSourceRepository.findStepAndSource({
       sourceId: params.sourceId,
-      step: Step.PAYMENT_TYPE_MENU,
+      step: Step.CONFIRM_PAYMENT,
     });
 
-    const [plan] = session.values.filter(
-      (value: Plan) => value.id === nameStep,
+    const [card] = session.cards.filter(
+      (value: Card) => value.paymentId === nameStep,
     );
 
     await this.createDialogueRepository.create({
@@ -74,13 +71,13 @@ export class DbConfirmListValues implements ConfirmListValues {
       requestDate: new Date(),
       requestText: step.message,
       expected: JSON.stringify({
-        1: 'VIEW_CARDS',
-        2: 'PAYMENT_BILLET',
+        1: 'ADD_CVV',
+        0: 'VIEW_CARDS',
       }),
       session: JSON.stringify({
         ...session,
-        planId: nameStep,
-        values: plan,
+        paymentId: nameStep,
+        cards: card,
       }),
     });
 
@@ -90,8 +87,8 @@ export class DbConfirmListValues implements ConfirmListValues {
       step,
       data: {
         ...session,
-        planId: nameStep,
-        values: plan,
+        paymentId: nameStep,
+        cards: card,
       },
     };
   }

@@ -1,5 +1,6 @@
 import { DefaultBody } from '../../../../domain/models';
 import {
+  CheckExpected,
   ListConsumptionStep,
   VerifyMainMenu,
 } from '../../../../domain/usecases/core';
@@ -13,44 +14,22 @@ import {
 
 export class DbVerifyMainMenu implements VerifyMainMenu {
   constructor(
-    private readonly updateDialogueRepository: UpdateDialogueRepository,
+    private readonly checkExpected: CheckExpected.Facade,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
     private readonly listConsumptionStep: ListConsumptionStep.Facade,
   ) {}
 
   async check(params: DefaultBody): VerifyMainMenu.Result {
-    const expecteis = params.dialogue.expected;
-    const { dialogueId, ...props } = params.dialogue;
+    const { expected, session } = params.dialogue;
+    const checkStep = await this.checkExpected(params);
 
-    await this.updateDialogueRepository.update(
-      {
-        responseDate: new Date(),
-        responseText: params.message,
-        updatedAt: new Date(),
-      },
-      dialogueId,
-    );
-
-    if (!expecteis[params.message]) {
-      const { createdAt, updatedAt, ...rest } = props;
-
-      await this.createDialogueRepository.create({
-        ...rest,
-        expected: JSON.stringify(props.expected),
-        session: JSON.stringify(props.session),
-      });
-
-      return {
-        messages: [notFoundMessage(params.sourceId), params.stepSource.message],
-        step: params.stepSource,
-        status: false,
-        data: {},
-      };
+    if (checkStep.isError || !checkStep.data) {
+      return checkStep.data;
     }
 
-    const selectStep = +Step[expecteis[params.message]];
-    const nameStep = expecteis[params.message];
+    const nameStep = expected[params.message];
+    const selectStep = +Step[nameStep];
 
     if (['RECHARGE_MENU', 'CARDS_MENU'].includes(nameStep)) {
       const expected: any = {
@@ -77,7 +56,7 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
         requestDate: new Date(),
         requestText: step.message,
         expected: expected[nameStep],
-        session: JSON.stringify(props.session),
+        session: JSON.stringify(session),
       });
 
       return {
@@ -88,7 +67,7 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
       };
     }
 
-    if (expecteis[params.message] === 'TRANSFER_OPERATOR') {
+    if (expected[params.message] === 'TRANSFER_OPERATOR') {
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
         step: selectStep,
@@ -101,12 +80,12 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
         });
 
       await this.createDialogueRepository.create({
-        accountId: props.session.accountId,
+        accountId: session.accountId,
         stepSourceId: finishStep.stepSourceId,
         requestDate: new Date(),
         requestText: finishStep.message,
         session: JSON.stringify({
-          ...props.session,
+          ...session,
         }),
       });
 

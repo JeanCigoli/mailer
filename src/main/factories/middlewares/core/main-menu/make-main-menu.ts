@@ -7,6 +7,9 @@ import {
 } from '../../../../../infra/core/db/mssql';
 import { MainMenuMiddleware } from '../../../../../presentation/middlewares/main-menu/main-menu-middleware';
 import {
+  makeCheckExpectedFacadeSms,
+  makeCheckExpectedFacadeUra,
+  makeCheckExpectedFacadeWhats,
   makeListConsumptionStepFacadeSms,
   makeListConsumptionStepFacadeUra,
   makeListConsumptionStepFacadeWhatsApp,
@@ -17,7 +20,7 @@ export const makeMainMenuWhats = () => {
   const stepRepository = new StepRepository();
 
   const dbVerifyMainMenu = new DbVerifyMainMenu(
-    dialogueWhatsAppRepository,
+    makeCheckExpectedFacadeWhats,
     dialogueWhatsAppRepository,
     stepRepository,
     makeListConsumptionStepFacadeWhatsApp,
@@ -31,7 +34,7 @@ export const makeMainMenuSms = () => {
   const stepRepository = new StepRepository();
 
   const dbVerifyMainMenu = new DbVerifyMainMenu(
-    dialogueSmsRepository,
+    makeCheckExpectedFacadeSms,
     dialogueSmsRepository,
     stepRepository,
     makeListConsumptionStepFacadeSms,
@@ -45,7 +48,7 @@ export const makeMainMenuUra = () => {
   const stepRepository = new StepRepository();
 
   const dbVerifyMainMenu = new DbVerifyMainMenu(
-    dialogueUraRepository,
+    makeCheckExpectedFacadeUra,
     dialogueUraRepository,
     stepRepository,
     makeListConsumptionStepFacadeUra,

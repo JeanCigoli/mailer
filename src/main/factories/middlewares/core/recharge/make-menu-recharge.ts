@@ -6,13 +6,18 @@ import {
   StepRepository,
 } from '../../../../../infra/core/db/mssql';
 import { MenuRechargeMiddleware } from '../../../../../presentation/middlewares';
+import {
+  makeCheckExpectedFacadeSms,
+  makeCheckExpectedFacadeUra,
+  makeCheckExpectedFacadeWhats,
+} from '../../../../facades/core';
 
 export const makeMenuRechargeWhats = () => {
   const dialogueWhatsAppRepository = new DialogueWhatsAppRepository();
   const stepRepository = new StepRepository();
 
   const dbRechargeMenu = new DbRechargeMenu(
-    dialogueWhatsAppRepository,
+    makeCheckExpectedFacadeWhats,
     dialogueWhatsAppRepository,
     stepRepository,
   );
@@ -25,7 +30,7 @@ export const makeMenuRechargeSms = () => {
   const stepRepository = new StepRepository();
 
   const dbRechargeMenu = new DbRechargeMenu(
-    dialogueSmsRepository,
+    makeCheckExpectedFacadeSms,
     dialogueSmsRepository,
     stepRepository,
   );
@@ -38,7 +43,7 @@ export const makeMenuRechargeUra = () => {
   const stepRepository = new StepRepository();
 
   const dbRechargeMenu = new DbRechargeMenu(
-    dialogueUraRepository,
+    makeCheckExpectedFacadeUra,
     dialogueUraRepository,
     stepRepository,
   );

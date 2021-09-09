@@ -1,54 +1,30 @@
 import { DefaultBody } from '../../../../domain/models';
-import { MenuRecharge } from '../../../../domain/usecases/core';
+import { CheckExpected, MenuRecharge } from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
-import { notFoundMessage } from '../../../../utils/message/default';
 import {
   CreateDialogueRepository,
   ListStepWithSourceRepository,
-  UpdateDialogueRepository,
 } from '../../../protocols/core/db';
 
 export class DbRechargeMenu implements MenuRecharge {
   constructor(
-    private readonly updateDialogueRepository: UpdateDialogueRepository,
+    private readonly checkExpected: CheckExpected.Facade,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
   ) {}
 
   async check(params: DefaultBody): MenuRecharge.Result {
-    const expecteis = params.dialogue.expected;
-    const { dialogueId, ...props } = params.dialogue;
+    const { expected, session } = params.dialogue;
+    const checkStep = await this.checkExpected(params);
 
-    await this.updateDialogueRepository.update(
-      {
-        responseDate: new Date(),
-        responseText: params.message,
-        updatedAt: new Date(),
-      },
-      dialogueId,
-    );
-
-    if (!expecteis[params.message]) {
-      const { createdAt, updatedAt, ...rest } = props;
-
-      await this.createDialogueRepository.create({
-        ...rest,
-        expected: JSON.stringify(props.expected),
-        session: JSON.stringify(props.session),
-      });
-
-      return {
-        messages: [notFoundMessage(params.sourceId), params.stepSource.message],
-        status: false,
-        step: params.stepSource,
-        data: {},
-      };
+    if (checkStep.isError || !checkStep.data) {
+      return checkStep.data;
     }
 
-    const selectStep = +Step[expecteis[params.message]];
-    const nameStep = expecteis[params.message];
+    const nameStep = expected[params.message];
+    const selectStep = +Step[nameStep];
 
-    const expected: any = {
+    const expecteis: any = {
       MAIN_MENU: JSON.stringify({
         1: 'RECHARGE_MENU',
         2: 'VIEW_CONSUMPTION',
@@ -73,9 +49,9 @@ export class DbRechargeMenu implements MenuRecharge {
       stepSourceId: step.stepSourceId,
       requestDate: new Date(),
       requestText: step.message,
-      expected: expected[nameStep],
+      expected: expecteis[nameStep],
       session: JSON.stringify({
-        ...props.session,
+        ...session,
         msisdn: params.msisdn,
       }),
     });
@@ -85,7 +61,7 @@ export class DbRechargeMenu implements MenuRecharge {
       status: true,
       step,
       data: {
-        ...props.session,
+        ...session,
         msisdn: params.msisdn,
       },
     };

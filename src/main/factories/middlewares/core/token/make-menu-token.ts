@@ -7,6 +7,11 @@ import {
   StepRepository,
 } from '../../../../../infra/core/db/mssql';
 import { MenuTokenMiddleware } from '../../../../../presentation/middlewares';
+import {
+  makeCheckExpectedFacadeSms,
+  makeCheckExpectedFacadeUra,
+  makeCheckExpectedFacadeWhats,
+} from '../../../../facades/core';
 
 export const makeMenuTokenUra = () => {
   const customerAuthCodeRepository = new CustomerAuthCodeRepository();
@@ -15,7 +20,7 @@ export const makeMenuTokenUra = () => {
 
   const dbMenuToken = new DbMenuToken(
     customerAuthCodeRepository,
-    dialogueUraRepository,
+    makeCheckExpectedFacadeWhats,
     dialogueUraRepository,
     stepRepository,
   );
@@ -30,7 +35,7 @@ export const makeMenuTokenSms = () => {
 
   const dbMenuToken = new DbMenuToken(
     customerAuthCodeRepository,
-    dialogueSmsRepository,
+    makeCheckExpectedFacadeSms,
     dialogueSmsRepository,
     stepRepository,
   );
@@ -45,7 +50,7 @@ export const makeMenuTokenWhats = () => {
 
   const dbMenuToken = new DbMenuToken(
     customerAuthCodeRepository,
-    dialogueWhatsAppRepository,
+    makeCheckExpectedFacadeUra,
     dialogueWhatsAppRepository,
     stepRepository,
   );

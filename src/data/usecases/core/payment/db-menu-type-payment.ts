@@ -1,9 +1,11 @@
 import { DefaultBody } from '../../../../domain/models';
-import { MenuTypePayment } from '../../../../domain/usecases/core';
+import {
+  CheckExpected,
+  MenuTypePayment,
+} from '../../../../domain/usecases/core';
 import { ListCards } from '../../../../domain/usecases/core/card/list-cards';
 import { ExecuteRechargeByBillet } from '../../../../domain/usecases/core/recharge/execute-recharge-by-billet';
 import { Step } from '../../../../utils/enum/step';
-import { notFoundMessage } from '../../../../utils/message/default';
 import {
   CreateDialogueRepository,
   ListStepWithSourceRepository,
@@ -12,7 +14,7 @@ import {
 
 export class DbMenuTypePayment implements MenuTypePayment {
   constructor(
-    private readonly updateDialogueRepository: UpdateDialogueRepository,
+    private readonly checkExpected: CheckExpected.Facade,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
     private readonly executeRechargeByBillet: ExecuteRechargeByBillet.Facade,
@@ -20,36 +22,14 @@ export class DbMenuTypePayment implements MenuTypePayment {
   ) {}
 
   async check(params: DefaultBody): MenuTypePayment.Result {
-    const expecteis = params.dialogue.expected;
-    const { dialogueId, ...props } = params.dialogue;
+    const { expected, session } = params.dialogue;
+    const checkStep = await this.checkExpected(params);
 
-    await this.updateDialogueRepository.update(
-      {
-        responseDate: new Date(),
-        responseText: params.message,
-        updatedAt: new Date(),
-      },
-      dialogueId,
-    );
-
-    if (!expecteis[params.message]) {
-      const { createdAt, updatedAt, ...rest } = props;
-
-      await this.createDialogueRepository.create({
-        ...rest,
-        expected: JSON.stringify(props.expected),
-        session: JSON.stringify(props.session),
-      });
-
-      return {
-        messages: [notFoundMessage(params.sourceId), params.stepSource.message],
-        status: false,
-        step: params.stepSource,
-        data: {},
-      };
+    if (checkStep.isError || !checkStep.data) {
+      return checkStep.data;
     }
 
-    const nameStep = expecteis[params.message];
+    const nameStep = expected[params.message];
     const selectStep = +Step[nameStep];
 
     if (nameStep === 'PAYMENT_BILLET') {
@@ -65,18 +45,18 @@ export class DbMenuTypePayment implements MenuTypePayment {
         });
 
       const recharge = await this.executeRechargeByBillet({
-        clientToken: props.session.token,
-        msisdn: props.session.msisdn,
-        planId: props.session.planId,
+        clientToken: session.token,
+        msisdn: session.msisdn,
+        planId: session.planId,
       });
 
       await this.createDialogueRepository.create({
-        accountId: props.session.accountId,
+        accountId: session.accountId,
         stepSourceId: finishStep.stepSourceId,
         requestDate: new Date(),
         requestText: step.message,
         session: JSON.stringify({
-          ...props.session,
+          ...session,
           ...recharge,
         }),
       });
@@ -89,13 +69,13 @@ export class DbMenuTypePayment implements MenuTypePayment {
         status: true,
         step,
         data: {
-          ...props.session,
+          ...session,
           ...recharge,
         },
       };
     }
 
-    const result = await this.listCards(props.session.token);
+    const result = await this.listCards(session.token);
 
     const cards = result.cards.slice(0, 2);
 
@@ -127,7 +107,7 @@ export class DbMenuTypePayment implements MenuTypePayment {
         ...expect,
       }),
       session: JSON.stringify({
-        ...props.session,
+        ...session,
         cards,
       }),
     });
@@ -137,7 +117,7 @@ export class DbMenuTypePayment implements MenuTypePayment {
       step,
       status: false,
       data: {
-        ...props.session,
+        ...session,
         cards,
       },
     };

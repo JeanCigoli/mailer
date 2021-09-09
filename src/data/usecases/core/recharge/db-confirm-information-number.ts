@@ -1,54 +1,33 @@
 import { DefaultBody } from '../../../../domain/models';
-import { ConfirmInformationNumber } from '../../../../domain/usecases/core';
+import {
+  CheckExpected,
+  ConfirmInformationNumber,
+} from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
-import { notFoundMessage } from '../../../../utils/message/default';
 import {
   CreateDialogueRepository,
   ListStepWithSourceRepository,
-  UpdateDialogueRepository,
 } from '../../../protocols/core/db';
 
 export class DbConfirmInformationNumber implements ConfirmInformationNumber {
   constructor(
-    private readonly updateDialogueRepository: UpdateDialogueRepository,
+    private readonly checkExpected: CheckExpected.Facade,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
   ) {}
 
   async check(params: DefaultBody): ConfirmInformationNumber.Result {
-    const expecteis = params.dialogue.expected;
-    const { dialogueId, ...props } = params.dialogue;
+    const { expected, session } = params.dialogue;
+    const checkStep = await this.checkExpected(params);
 
-    await this.updateDialogueRepository.update(
-      {
-        responseDate: new Date(),
-        responseText: params.message,
-        updatedAt: new Date(),
-      },
-      dialogueId,
-    );
-
-    if (!expecteis[params.message]) {
-      const { createdAt, updatedAt, ...rest } = props;
-
-      await this.createDialogueRepository.create({
-        ...rest,
-        expected: JSON.stringify(props.expected),
-        session: JSON.stringify(props.session),
-      });
-
-      return {
-        messages: [notFoundMessage(params.sourceId), params.stepSource.message],
-        status: false,
-        step: params.stepSource,
-        data: {},
-      };
+    if (checkStep.isError || !checkStep.data) {
+      return checkStep.data;
     }
 
-    const selectStep = +Step[expecteis[params.message]];
-    const nameStep = expecteis[params.message];
+    const nameStep = expected[params.message];
+    const selectStep = +Step[nameStep];
 
-    const expected: any = {
+    const menu: any = {
       RECHARGE_MENU: JSON.stringify({
         0: 'MAIN_MENU',
         1: 'TYPE_RECHARGE_MENU',
@@ -72,15 +51,15 @@ export class DbConfirmInformationNumber implements ConfirmInformationNumber {
       stepSourceId: step.stepSourceId,
       requestDate: new Date(),
       requestText: step.message,
-      expected: expected[nameStep],
-      session: JSON.stringify(props.session),
+      expected: menu[nameStep],
+      session: JSON.stringify(session),
     });
 
     return {
       messages: [step.message],
       step,
       status: false,
-      data: props.session,
+      data: session,
     };
   }
 }

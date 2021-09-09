@@ -6,6 +6,11 @@ import {
   StepRepository,
 } from '../../../../../infra/core/db/mssql';
 import { ListValuesMiddleware } from '../../../../../presentation/middlewares';
+import {
+  makeCheckExpectedFacadeSms,
+  makeCheckExpectedFacadeUra,
+  makeCheckExpectedFacadeWhats,
+} from '../../../../facades/core';
 import { makeListPlanValuesFacade } from '../../../../facades/core/plan-values/make-list-plan-values-facade';
 
 export const makeListValuesWhats = () => {
@@ -13,7 +18,7 @@ export const makeListValuesWhats = () => {
   const stepRepository = new StepRepository();
 
   const dbListValues = new DbListValues(
-    dialogueWhatsAppRepository,
+    makeCheckExpectedFacadeWhats,
     dialogueWhatsAppRepository,
     stepRepository,
     makeListPlanValuesFacade,
@@ -27,7 +32,7 @@ export const makeListValuesSms = () => {
   const stepRepository = new StepRepository();
 
   const dbListValues = new DbListValues(
-    dialogueSmsRepository,
+    makeCheckExpectedFacadeSms,
     dialogueSmsRepository,
     stepRepository,
     makeListPlanValuesFacade,
@@ -41,7 +46,7 @@ export const makeListValuesUra = () => {
   const stepRepository = new StepRepository();
 
   const dbListValues = new DbListValues(
-    dialogueUraRepository,
+    makeCheckExpectedFacadeUra,
     dialogueUraRepository,
     stepRepository,
     makeListPlanValuesFacade,

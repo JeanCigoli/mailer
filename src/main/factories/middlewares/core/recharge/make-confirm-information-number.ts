@@ -6,13 +6,18 @@ import {
   StepRepository,
 } from '../../../../../infra/core/db/mssql';
 import { ConfirmInformationNumberMiddleware } from '../../../../../presentation/middlewares';
+import {
+  makeCheckExpectedFacadeSms,
+  makeCheckExpectedFacadeUra,
+  makeCheckExpectedFacadeWhats,
+} from '../../../../facades/core';
 
 export const makeConfirmInformationNumberWhats = () => {
   const dialogueWhatsAppRepository = new DialogueWhatsAppRepository();
   const stepRepository = new StepRepository();
 
   const dbConfirmInformationNumber = new DbConfirmInformationNumber(
-    dialogueWhatsAppRepository,
+    makeCheckExpectedFacadeWhats,
     dialogueWhatsAppRepository,
     stepRepository,
   );
@@ -25,7 +30,7 @@ export const makeConfirmInformationNumberSms = () => {
   const stepRepository = new StepRepository();
 
   const dbConfirmInformationNumber = new DbConfirmInformationNumber(
-    dialogueSmsRepository,
+    makeCheckExpectedFacadeSms,
     dialogueSmsRepository,
     stepRepository,
   );
@@ -38,7 +43,7 @@ export const makeConfirmInformationNumberUra = () => {
   const stepRepository = new StepRepository();
 
   const dbConfirmInformationNumber = new DbConfirmInformationNumber(
-    dialogueUraRepository,
+    makeCheckExpectedFacadeUra,
     dialogueUraRepository,
     stepRepository,
   );

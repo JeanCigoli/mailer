@@ -6,6 +6,11 @@ import {
   StepRepository,
 } from '../../../../../infra/core/db/mssql';
 import { MenuTypePaymentMiddleware } from '../../../../../presentation/middlewares';
+import {
+  makeCheckExpectedFacadeSms,
+  makeCheckExpectedFacadeUra,
+  makeCheckExpectedFacadeWhats,
+} from '../../../../facades/core';
 import { makeListCardsFacade } from '../../../../facades/core/card/make-list-cards-facade';
 import { makeExecuteRechargeByBilletFacade } from '../../../../facades/core/recharge/make-execute-recharge-by-billet-facade';
 
@@ -14,7 +19,7 @@ export const makeMenuTypePaymentWhats = () => {
   const stepRepository = new StepRepository();
 
   const dbMenuTypePayment = new DbMenuTypePayment(
-    dialogueWhatsAppRepository,
+    makeCheckExpectedFacadeWhats,
     dialogueWhatsAppRepository,
     stepRepository,
     makeExecuteRechargeByBilletFacade,
@@ -29,7 +34,7 @@ export const makeMenuTypePaymentSms = () => {
   const stepRepository = new StepRepository();
 
   const dbMenuTypePayment = new DbMenuTypePayment(
-    dialogueSmsRepository,
+    makeCheckExpectedFacadeSms,
     dialogueSmsRepository,
     stepRepository,
     makeExecuteRechargeByBilletFacade,
@@ -44,7 +49,7 @@ export const makeMenuTypePaymentUra = () => {
   const stepRepository = new StepRepository();
 
   const dbMenuTypePayment = new DbMenuTypePayment(
-    dialogueUraRepository,
+    makeCheckExpectedFacadeUra,
     dialogueUraRepository,
     stepRepository,
     makeExecuteRechargeByBilletFacade,
