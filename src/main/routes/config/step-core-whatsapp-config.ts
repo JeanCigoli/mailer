@@ -7,6 +7,7 @@ import {
   makeAuthenticationWhats,
   makeConfirmInformationNumberWhats,
   makeConfirmListValuesWhats,
+  makeConfirmPaymentWhats,
   makeInformationNumberWhats,
   makeListValuesWhats,
   makeMainMenuWhats,
@@ -82,6 +83,16 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 19 },
     handle: adaptMiddleware(makeAddValidityCardWhats()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 21 },
+    handle: adaptMiddleware(makeConfirmPaymentWhats()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 22 },
+    handle: adaptMiddleware(makeConfirmPaymentWhats()),
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {

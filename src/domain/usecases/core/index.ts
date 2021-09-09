@@ -18,5 +18,6 @@ export * from './payment/menu-type-payment';
 export * from './payment/views-cards';
 export * from './payment/add-number-card';
 export * from './payment/add-validity-card';
+export * from './payment/confirm-payment';
 
 export * from './expect/check-expected';

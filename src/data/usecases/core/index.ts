@@ -16,5 +16,6 @@ export * from './payment/db-menu-type-payment';
 export * from './payment/db-views-card';
 export * from './payment/db-add-number-card';
 export * from './payment/db-add-validity-card';
+export * from './payment/db-confirm-payment';
 
 export * from './expect/db-check-expect';
