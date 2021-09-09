@@ -60,7 +60,7 @@ export class DbRechargeMenu implements MenuRecharge {
         1: 'RECHARGE_PLAN',
         2: 'ADDON_PLAN',
       }),
-      ENTER_ANOTHER_NUMBER: {},
+      ENTER_ANOTHER_NUMBER: null,
     };
 
     const step = await this.listStepWithSourceRepository.findStepAndSource({
