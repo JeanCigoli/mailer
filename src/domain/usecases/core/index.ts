@@ -13,3 +13,5 @@ export * from './recharge/resend-information-number';
 export * from './recharge/confirm-information-number';
 export * from './recharge/list-values';
 export * from './recharge/confirm-list-values';
+
+export * from './payment/menu-type-payment';

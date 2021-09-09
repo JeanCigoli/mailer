@@ -10,9 +10,12 @@ export class HttpExecuteRechargeByBillet implements ExecuteRechargeByBillet {
     const result = await this.rechargeByBillet.execute(params);
 
     if (!result.status || !result.payload) {
-      throw new Error('ERROR_EXECUTE_RECHARGE');
+      return {
+        status: false,
+        billet: result?.payload,
+      };
     }
 
-    return { billet: result.payload.billet };
+    return { billet: result.payload.billet, status: true };
   }
 }

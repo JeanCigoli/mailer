@@ -11,3 +11,5 @@ export * from './recharge/db-resend-information-number';
 export * from './recharge/db-confirm-information-number';
 export * from './recharge/db-list-values';
 export * from './recharge/db-confirm-list-values';
+
+export * from './payment/db-menu-type-payment';

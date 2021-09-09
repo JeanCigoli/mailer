@@ -10,6 +10,7 @@ export namespace GetUserCards {
     lastDigits: string;
     validity: string;
     name: string;
+    audio: string;
     flag: string;
     type: string;
   };

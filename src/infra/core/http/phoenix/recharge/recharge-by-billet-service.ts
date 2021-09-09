@@ -16,13 +16,14 @@ export class RechargeByBilletService implements RechargeByBillet {
       url: 'v1/recharges/billets',
       body,
       headers: {
-        Authorizarion: params.clientToken,
+        authorization: params.clientToken,
       },
     });
 
     if (result.statusCode > 299) {
       return {
         status: false,
+        payload: formateCamelCaseKeysForSnakeCase(result.body),
       };
     }
 

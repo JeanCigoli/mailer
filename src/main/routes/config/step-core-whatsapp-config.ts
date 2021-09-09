@@ -10,6 +10,7 @@ import {
   makeMainMenuWhats,
   makeMenuRechargeWhats,
   makeMenuTokenWhats,
+  makeMenuTypePaymentWhats,
   makeResendInformationNumberWhats,
 } from '../../factories/middlewares/core';
 
@@ -58,6 +59,11 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 13 },
     handle: adaptMiddleware(makeConfirmListValuesWhats()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 14 },
+    handle: adaptMiddleware(makeMenuTypePaymentWhats()),
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {

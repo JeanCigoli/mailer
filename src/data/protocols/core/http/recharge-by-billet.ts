@@ -20,7 +20,7 @@ export namespace RechargeByBillet {
   export type Result = Promise<{
     status: boolean;
     payload?: {
-      billet: Billet;
+      billet: Billet | any;
     };
   }>;
 }

@@ -10,6 +10,7 @@ export namespace ExecuteRechargeByBillet {
     planId: string;
     clientToken: string;
   };
+
   type Billet = {
     digitableLine: string;
     expirationDate: Date;
@@ -19,7 +20,8 @@ export namespace ExecuteRechargeByBillet {
   };
 
   export type Result = Promise<{
-    billet: Billet;
+    status: boolean;
+    billet?: Billet | any;
   }>;
 
   export type Facade = (

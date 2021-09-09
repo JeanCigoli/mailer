@@ -62,6 +62,7 @@ export class AccountRepository
         '[account].msisdn',
         '[account].[dt_grace] as date_grace',
         '[client].[name]',
+        '[client].document',
         '[client].email',
         '[mvno].[name] as mvno',
         '[mvno].[mvno_id]',
