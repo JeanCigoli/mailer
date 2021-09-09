@@ -10,3 +10,4 @@ export * from './recharge/db-information-number';
 export * from './recharge/db-resend-information-number';
 export * from './recharge/db-confirm-information-number';
 export * from './recharge/db-list-values';
+export * from './recharge/db-confirm-list-values';

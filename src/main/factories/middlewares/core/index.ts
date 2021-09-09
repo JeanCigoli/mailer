@@ -6,3 +6,4 @@ export * from './recharge/make-information-number';
 export * from './recharge/make-resend-information-number';
 export * from './recharge/make-confirm-information-number';
 export * from './recharge/make-list-values';
+export * from './recharge/make-confirm-list-values';

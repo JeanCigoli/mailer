@@ -4,6 +4,7 @@ import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
   makeAuthenticationWhats,
   makeConfirmInformationNumberWhats,
+  makeConfirmListValuesWhats,
   makeInformationNumberWhats,
   makeListValuesWhats,
   makeMainMenuWhats,
@@ -52,6 +53,11 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 12 },
     handle: adaptMiddleware(makeListValuesWhats()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 13 },
+    handle: adaptMiddleware(makeConfirmListValuesWhats()),
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {

@@ -9,3 +9,4 @@ export * from './recharge/information-number-middleware';
 export * from './recharge/resend-information-number-middleware';
 export * from './recharge/confirm-information-number-middleware';
 export * from './recharge/list-values-middleware';
+export * from './recharge/confirm-list-values-middleware';
