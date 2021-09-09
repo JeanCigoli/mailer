@@ -77,7 +77,7 @@ export class DbAddValidityCard implements AddValidityCard {
       session: JSON.stringify({
         ...session,
         newCard: {
-          cardValidity: params.message,
+          ...session.newCard,
           type: 'C',
           validity: validValidity.validity,
         },

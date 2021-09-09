@@ -3,6 +3,7 @@ import {
   CheckExpected,
   ConfirmPayment,
 } from '../../../../domain/usecases/core';
+import { ListCards } from '../../../../domain/usecases/core/card/list-cards';
 import { Step } from '../../../../utils/enum/step';
 import { Card } from '../../../../utils/types/card/card-type';
 import {
@@ -15,6 +16,7 @@ export class DbConfirmPayment implements ConfirmPayment {
     private readonly checkExpected: CheckExpected.Facade,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
+    private readonly listCards: ListCards.Facade,
   ) {}
 
   async confirm(params: DefaultBody): ConfirmPayment.Result {
@@ -33,33 +35,53 @@ export class DbConfirmPayment implements ConfirmPayment {
       step: selectStep,
     });
 
-    const expect = {
-      0: 'PAYMENT_TYPE_MENU',
-      3: 'ADD_CARD',
-    };
+    if (nameStep === 'VIEW_CARDS') {
+      const result = await this.listCards(session.token);
 
-    const expectCard = session.cards.reduce(
-      (acc: any, curr: Card, index: number) => ({
-        ...acc,
-        [index + 1]: curr.paymentId,
-      }),
-      {},
-    );
+      const cards = result.cards.slice(0, 2);
 
-    const expeteis: any = {
-      ADD_CVV: null,
-      VIEW_CARDS: JSON.stringify({
-        ...expectCard,
-        ...expect,
-      }),
-    };
+      const expectCard = cards.reduce(
+        (acc: any, curr: Card, index: number) => ({
+          ...acc,
+          [index + 1]: curr.paymentId,
+        }),
+        {},
+      );
+
+      await this.createDialogueRepository.create({
+        accountId: params.dialogue.session.accountId,
+        stepSourceId: step.stepSourceId,
+        requestDate: new Date(),
+        requestText: step.message,
+        expected: JSON.stringify({
+          ...expectCard,
+          0: 'PAYMENT_TYPE_MENU',
+          3: 'ADD_CARD',
+        }),
+        session: JSON.stringify({
+          ...session,
+          paymentId: null,
+          cards,
+        }),
+      });
+
+      return {
+        messages: [step.message],
+        step,
+        status: false,
+        data: {
+          ...session,
+          cards,
+        },
+      };
+    }
 
     await this.createDialogueRepository.create({
       accountId: params.dialogue.session.accountId,
       stepSourceId: step.stepSourceId,
       requestDate: new Date(),
       requestText: step.message,
-      expected: expeteis[nameStep],
+      expected: null,
       session: JSON.stringify({
         ...session,
       }),

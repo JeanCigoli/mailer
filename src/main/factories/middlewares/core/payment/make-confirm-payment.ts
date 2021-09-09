@@ -11,6 +11,7 @@ import {
   makeCheckExpectedFacadeUra,
   makeCheckExpectedFacadeWhats,
 } from '../../../../facades/core';
+import { makeListCardsFacade } from '../../../../facades/core/card/make-list-cards-facade';
 
 export const makeConfirmPaymentWhats = () => {
   const dialogueWhatsAppRepository = new DialogueWhatsAppRepository();
@@ -20,6 +21,7 @@ export const makeConfirmPaymentWhats = () => {
     makeCheckExpectedFacadeWhats,
     dialogueWhatsAppRepository,
     stepRepository,
+    makeListCardsFacade,
   );
 
   return new ConfirmPaymentMiddleware(dbConfirmPayment);
@@ -33,6 +35,7 @@ export const makeConfirmPaymentSms = () => {
     makeCheckExpectedFacadeSms,
     dialogueSmsRepository,
     stepRepository,
+    makeListCardsFacade,
   );
 
   return new ConfirmPaymentMiddleware(dbConfirmPayment);
@@ -46,6 +49,7 @@ export const makeConfirmPaymentUra = () => {
     makeCheckExpectedFacadeUra,
     dialogueUraRepository,
     stepRepository,
+    makeListCardsFacade,
   );
 
   return new ConfirmPaymentMiddleware(dbConfirmPayment);
