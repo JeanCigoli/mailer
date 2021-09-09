@@ -1,9 +1,11 @@
 import { Authentication } from '../../../../domain/usecases/core';
+import { GetToken } from '../../../../domain/usecases/core/token/get-token';
 import { Step } from '../../../../utils/enum/step';
 import {
   CreateDialogueRepository,
   ListAccountByMsisdnRepository,
   ListAuthCodeRepository,
+  ListSourceMvnoRepository,
   ListStepWithSourceRepository,
 } from '../../../protocols/core/db';
 
@@ -13,6 +15,8 @@ export class DbAuthentication implements Authentication {
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listAuthCodeRepository: ListAuthCodeRepository,
+    private readonly listSourceMvnoRepository: ListSourceMvnoRepository,
+    private readonly listToken: GetToken.Facade,
   ) {}
 
   async auth(params: Authentication.Params): Authentication.Result {
@@ -46,8 +50,15 @@ export class DbAuthentication implements Authentication {
       accountId: account.accountId,
     });
 
-    const token =
-      'eN3bb5bLvWoAq/epcAEFXQ7DlpD+ubooEYpCL/bulqEvrHcJjUCODvuteAzEFs7QHhqez78GwWsrPXD/JQFBEWEdWOf8duAzOtu+qITeZbWNUAk6MQ+E0PjoKmvUD4M9Yml2+8aUhyXOqrnvqNjO9yxn/C7KdK7dfJfvuMQLIFy0XoOG33z9Su2Bj9pdXRniYbWds7r41PNXk91qCZ4/xsHyz2Yh47NO6PoSu/GK++jXzW/V5aq2lSfzF1xbWVaBh/tOkWxDDCPUOjHXT8yYW21sCQrJcYWo/eBr/UZs94RxFBKeeBCFfULWzSG62WlwcC5eRJ9pIEpt2gqnhJG0s6n2kIV8r3lwMy4XlrHH/XiYowyJpW/mz/4idwTJDp0i8PsSuQ4pil9qD5n23ttMOLFljs0z9sjYK9fklObIvw8=';
+    const mvno = await this.listSourceMvnoRepository.findBySource({
+      mvnoId: account.mvnoId,
+      sourceId: params.sourceId,
+    });
+
+    const { token } = await this.listToken({
+      msisdn: account.msisdn,
+      authentication: mvno.authentication,
+    });
 
     if (code) {
       const step = await this.listStepWithSourceRepository.findStepAndSource({

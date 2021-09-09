@@ -7,7 +7,7 @@ export class GetClientTokenService implements GetClientToken {
   async get(params: GetClientToken.Params): GetClientToken.Result {
     const result = await this.httpClient.request({
       method: 'POST',
-      url: `/auth/internal/msisdn/${params.msisdn}`,
+      url: `v1/auth/internal/msisdn/${params.msisdn}`,
       headers: {
         Authentication: params.authentication,
       },
