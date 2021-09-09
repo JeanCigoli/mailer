@@ -8,7 +8,7 @@ export class DeleteCardService implements DeleteUserCard {
   async delete(params: DeleteUserCard.Params): DeleteUserCard.Result {
     const result = await this.httpClient.request({
       method: 'DELETE',
-      url: `/cards/${params.paymentId}`,
+      url: `v1/cards/${params.paymentId}`,
       headers: {
         Authentication: params.clientToken,
       },

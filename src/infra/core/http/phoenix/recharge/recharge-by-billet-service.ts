@@ -13,7 +13,7 @@ export class RechargeByBilletService implements RechargeByBillet {
 
     const result = await this.httpClient.request({
       method: 'POST',
-      url: '/recharges/billets',
+      url: 'v1/recharges/billets',
       body,
       headers: {
         Authorizarion: params.clientToken,

@@ -19,7 +19,7 @@ export class RechargeByCreditCardService implements RechargeByCreditCard {
 
     const result = await this.httpClient.request({
       method: 'POST',
-      url: `/recharges/cards/${params.paymentId}`,
+      url: `v1/recharges/cards/${params.paymentId}`,
       body,
       headers: {
         Authentication: params.clientToken,

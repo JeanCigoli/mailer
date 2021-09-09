@@ -8,7 +8,7 @@ export class GetPlanValuesService implements GetPlanValues {
   async getAllValues(clientToken: string): GetPlanValues.Result {
     const result = await this.httpClient.request({
       method: 'GET',
-      url: '/plans',
+      url: 'v1/plans',
       headers: {
         Authentication: clientToken,
       },

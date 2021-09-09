@@ -8,7 +8,7 @@ export class GetCardsService implements GetUserCards {
   async get(clientToken: string): GetUserCards.Result {
     const result = await this.httpClient.request({
       method: 'GET',
-      url: '/cards',
+      url: 'v1/cards',
       headers: {
         Authorization: clientToken,
       },

@@ -20,7 +20,7 @@ export class AddCardService implements AddUserCard {
 
     const result = await this.httpClient.request({
       method: 'POST',
-      url: '/cards',
+      url: 'v1/cards',
       body: formateCamelCaseKeysForSnakeCase(body),
       headers: {
         authentication: params.clientToken,
