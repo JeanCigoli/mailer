@@ -13,3 +13,4 @@ export * from './recharge/confirm-list-values-middleware';
 
 export * from './payment/menu-type-payment-middleware';
 export * from './payment/views-cards-middleware';
+export * from './payment/add-number-card-middleware';

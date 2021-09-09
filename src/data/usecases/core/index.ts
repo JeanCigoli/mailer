@@ -14,5 +14,6 @@ export * from './recharge/db-confirm-list-values';
 
 export * from './payment/db-menu-type-payment';
 export * from './payment/db-views-card';
+export * from './payment/db-add-number-card';
 
 export * from './expect/db-check-expect';
