@@ -1,5 +1,5 @@
 import { DefaultBody } from '../../../../domain/models';
-import { MenuRecharge } from '../../../../domain/usecases/core';
+import { ConfirmInformationNumber } from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
 import { notFoundMessage } from '../../../../utils/message/default';
 import {
@@ -8,14 +8,14 @@ import {
   UpdateDialogueRepository,
 } from '../../../protocols/core/db';
 
-export class DbRechargeMenu implements MenuRecharge {
+export class DbConfirmInformationNumber implements ConfirmInformationNumber {
   constructor(
     private readonly updateDialogueRepository: UpdateDialogueRepository,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
   ) {}
 
-  async check(params: DefaultBody): MenuRecharge.Result {
+  async check(params: DefaultBody): ConfirmInformationNumber.Result {
     const expecteis = params.dialogue.expected;
     const { dialogueId, ...props } = params.dialogue;
 
@@ -49,11 +49,10 @@ export class DbRechargeMenu implements MenuRecharge {
     const nameStep = expecteis[params.message];
 
     const expected: any = {
-      MAIN_MENU: JSON.stringify({
-        1: 'RECHARGE_MENU',
-        2: 'VIEW_CONSUMPTION',
-        3: 'CARDS_MENU',
-        9: 'TRANSFER_OPERATOR',
+      RECHARGE_MENU: JSON.stringify({
+        0: 'MAIN_MENU',
+        1: 'TYPE_RECHARGE_MENU',
+        2: 'ENTER_ANOTHER_NUMBER',
       }),
       TYPE_RECHARGE_MENU: JSON.stringify({
         0: 'RECHARGE_MENU',
@@ -74,20 +73,14 @@ export class DbRechargeMenu implements MenuRecharge {
       requestDate: new Date(),
       requestText: step.message,
       expected: expected[nameStep],
-      session: JSON.stringify({
-        ...props.session,
-        msisdn: params.msisdn,
-      }),
+      session: JSON.stringify(props.session),
     });
 
     return {
       messages: [step.message],
-      status: true,
       step,
-      data: {
-        ...props.session,
-        msisdn: params.msisdn,
-      },
+      status: false,
+      data: props.session,
     };
   }
 }
