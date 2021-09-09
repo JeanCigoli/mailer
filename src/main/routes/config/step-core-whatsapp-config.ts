@@ -13,6 +13,7 @@ import {
   makeMenuTypePaymentWhats,
   makeResendInformationNumberWhats,
 } from '../../factories/middlewares/core';
+import { makeViewsCardsWhats } from '../../factories/middlewares/core/payment/make-views-cards';
 
 export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
   {
@@ -64,6 +65,11 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 14 },
     handle: adaptMiddleware(makeMenuTypePaymentWhats()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 16 },
+    handle: adaptMiddleware(makeViewsCardsWhats()),
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {
