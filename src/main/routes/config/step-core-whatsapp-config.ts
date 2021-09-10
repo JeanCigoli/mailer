@@ -3,6 +3,7 @@ import { adaptMiddleware } from '../../adapters/adapt-middleware';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
   makeAddNumberCardWhats,
+  makeAddSecurityCodeWhats,
   makeAddValidityCardWhats,
   makeAuthenticationWhats,
   makeConfirmInformationNumberWhats,
@@ -92,7 +93,7 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
   {
     target: { step: 'stepId' },
     expected: { stepId: 22 },
-    handle: adaptMiddleware(makeConfirmPaymentWhats()),
+    handle: adaptMiddleware(makeAddSecurityCodeWhats()),
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {

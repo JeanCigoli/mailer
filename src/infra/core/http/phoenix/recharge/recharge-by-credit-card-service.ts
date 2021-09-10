@@ -22,13 +22,16 @@ export class RechargeByCreditCardService implements RechargeByCreditCard {
       url: `v1/recharges/cards/${params.paymentId}`,
       body,
       headers: {
-        Authentication: params.clientToken,
+        Authorization: params.clientToken,
       },
     });
 
     if (result.statusCode > 299) {
       return {
         status: false,
+        payload: {
+          message: result.body.message,
+        },
       };
     }
 

@@ -14,7 +14,8 @@ export namespace RechargeByCreditCard {
   export type Result = Promise<{
     status: boolean;
     payload?: {
-      rechageId: string;
+      rechargeId?: string;
+      message?: string;
     };
   }>;
 }

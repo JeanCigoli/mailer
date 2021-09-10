@@ -11,8 +11,13 @@ export class HttpExecuteRechargeByCreditRecharge
   ): ExecuteRechargeByCreditCard.Result {
     const result = await this.rechargeWithCreditCard.execute(params);
 
-    if (!result.status) throw new Error('ERROR_EXECUTE_RECHARGE');
+    if (!result.status) {
+      return {
+        status: result.status,
+        message: result?.payload?.message,
+      };
+    }
 
-    return { status: 1 };
+    return { status: result.status, rechargeId: result?.payload?.rechargeId };
   }
 }

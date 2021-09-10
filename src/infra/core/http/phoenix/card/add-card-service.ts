@@ -30,6 +30,9 @@ export class AddCardService implements AddUserCard {
     if (result.statusCode > 299) {
       return {
         status: false,
+        payload: {
+          message: result.body.message,
+        },
       };
     }
 

@@ -16,7 +16,8 @@ export namespace AddUserCard {
   export type Result = Promise<{
     status: boolean;
     payload?: {
-      paymentId: string;
+      paymentId?: string;
+      message?: string;
     };
   }>;
 }

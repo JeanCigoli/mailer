@@ -11,3 +11,4 @@ export * from './payment/make-menu-type-payment';
 export * from './payment/make-add-number-card';
 export * from './payment/make-add-validity-card';
 export * from './payment/make-confirm-payment';
+export * from './payment/make-add-security-code';

@@ -14,7 +14,9 @@ export namespace ExecuteRechargeByCreditCard {
   };
 
   export type Result = Promise<{
-    status: number;
+    status: boolean;
+    rechargeId?: string;
+    message?: string;
   }>;
 
   export type Facade = (

@@ -16,6 +16,7 @@ export namespace AddCard {
   export type Result = Promise<{
     status: boolean;
     paymentId?: string;
+    message?: string;
   }>;
 
   export type Facade = (params: AddCard.Params) => AddCard.Result;

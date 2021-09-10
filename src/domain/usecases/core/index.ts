@@ -22,5 +22,7 @@ export * from './payment/confirm-payment';
 export * from './payment/add-security-code';
 
 export * from './step/add-card-step';
+export * from './step/add-card-and-recharge-step';
+export * from './step/send-recharge-step';
 
 export * from './expect/check-expected';

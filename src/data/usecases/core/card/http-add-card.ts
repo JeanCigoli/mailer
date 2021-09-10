@@ -10,7 +10,7 @@ export class HttpAddCard implements AddCard {
     if (!result.status || !result.payload) {
       return {
         status: result.status,
-        paymentId: '',
+        message: result.payload?.message,
       };
     }
 

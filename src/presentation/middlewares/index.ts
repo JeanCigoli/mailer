@@ -16,3 +16,4 @@ export * from './payment/views-cards-middleware';
 export * from './payment/add-number-card-middleware';
 export * from './payment/add-validity-card-middleware';
 export * from './payment/confirm-payment-middleware';
+export * from './payment/add-security-code-middleware';
