@@ -1,11 +1,26 @@
-export const replaceKeyToValue = (
-  text: string,
-  values: object | any,
-): string => {
+const filterObject = (params: object | any, key: string): string | null => {
+  if (!params[key] && typeof params === 'object') {
+    const value: any = Object.values(params).find((current) => current);
+
+    return filterObject(value, key);
+  }
+
+  return params[key];
+};
+
+const replaceKeyToValue = (text: string, values: object | any): string => {
   const textArray = text.split(' ').map((value) => {
-    if (value.startsWith('{{') && value.endsWith('}}')) {
-      const key = value.replace('{{', '').replace('}}', '');
-      console.log({ key });
+    if (value.startsWith('{{')) {
+      const key = value.replace('{{', '').replace('}}', '').replace(/\W|_/, '');
+
+      if (!values[key]) {
+        const xpto: any = Object.values(values).find((current) =>
+          filterObject(current, key),
+        );
+
+        return filterObject(xpto, key);
+      }
+
       return values[key];
     }
 
@@ -13,8 +28,6 @@ export const replaceKeyToValue = (
   });
 
   const newText = textArray.join(' ');
-
-  // console.log(newText);
 
   return newText;
 };

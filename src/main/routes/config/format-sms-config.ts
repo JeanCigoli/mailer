@@ -9,4 +9,9 @@ export const formatSmsSwitchConfig: adapterOptions = [
       });
     },
   },
+  // {
+  //   target: { step : 'stepId' },
+  //   expected: { stepId: 1 },
+  //   handle: ,
+  // },
 ];
