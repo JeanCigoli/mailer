@@ -4,6 +4,8 @@ export * from './auth/authentication-middleware';
 
 export * from './token/menu-token-middleware';
 
+export * from './card/cards-menu-middleware';
+
 export * from './recharge/menu-recharge-middleware';
 export * from './recharge/information-number-middleware';
 export * from './recharge/resend-information-number-middleware';

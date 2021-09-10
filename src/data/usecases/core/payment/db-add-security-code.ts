@@ -27,7 +27,7 @@ export class DbAddSecurityCode implements AddSecurityCode {
       dialogueId,
     );
 
-    if (!session.paymentId && session.planId) {
+    if (!session.paymentId && session.newCard && session.planId) {
       const result = await this.addCardAndRechargeStep(params);
 
       return result;

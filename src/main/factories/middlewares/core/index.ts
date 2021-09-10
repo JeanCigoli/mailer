@@ -4,6 +4,8 @@ export * from './token/make-menu-token';
 
 export * from './main-menu/make-main-menu';
 
+export * from './card/make-cards-menu';
+
 export * from './recharge/make-menu-recharge';
 export * from './recharge/make-information-number';
 export * from './recharge/make-resend-information-number';

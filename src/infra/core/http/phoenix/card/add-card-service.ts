@@ -38,7 +38,7 @@ export class AddCardService implements AddUserCard {
 
     return {
       status: true,
-      payload: formateSnakeCaseKeysForCamelCase(result.body),
+      payload: formateSnakeCaseKeysForCamelCase(result.body.payload),
     };
   }
 }
