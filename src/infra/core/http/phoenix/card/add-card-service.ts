@@ -9,21 +9,21 @@ export class AddCardService implements AddUserCard {
   constructor(private readonly httpClient: HttpClient) {}
 
   async add(params: AddUserCard.Params): AddUserCard.Result {
-    const body = {
+    const body = formateCamelCaseKeysForSnakeCase({
       name: params.name,
       document: params.document,
       validity: params.validity,
       cardNumber: params.cardNumber,
       cvv: params.cvv,
       type: params.type,
-    };
+    });
 
     const result = await this.httpClient.request({
       method: 'POST',
       url: 'v1/cards',
-      body: formateCamelCaseKeysForSnakeCase(body),
+      body,
       headers: {
-        authentication: params.clientToken,
+        authorization: params.clientToken,
       },
     });
 
@@ -35,8 +35,7 @@ export class AddCardService implements AddUserCard {
 
     return {
       status: true,
-      paymentId: formateSnakeCaseKeysForCamelCase(result.body.payload)
-        .paymentId,
+      payload: formateSnakeCaseKeysForCamelCase(result.body),
     };
   }
 }

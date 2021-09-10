@@ -19,5 +19,8 @@ export * from './payment/views-cards';
 export * from './payment/add-number-card';
 export * from './payment/add-validity-card';
 export * from './payment/confirm-payment';
+export * from './payment/add-security-code';
+
+export * from './step/add-card-step';
 
 export * from './expect/check-expected';

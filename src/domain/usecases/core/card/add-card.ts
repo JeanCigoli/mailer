@@ -14,6 +14,7 @@ export namespace AddCard {
   };
 
   export type Result = Promise<{
+    status: boolean;
     paymentId?: string;
   }>;
 

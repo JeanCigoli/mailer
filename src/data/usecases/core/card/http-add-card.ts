@@ -8,9 +8,12 @@ export class HttpAddCard implements AddCard {
     const result = await this.addUserCard.add(params);
 
     if (!result.status || !result.payload) {
-      throw new Error('ERROR_ADD_CARD');
+      return {
+        status: result.status,
+        paymentId: '',
+      };
     }
 
-    return { payload: result.payload };
+    return { status: result.status, paymentId: result?.payload?.paymentId };
   }
 }
