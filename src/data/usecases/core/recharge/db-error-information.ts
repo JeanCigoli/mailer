@@ -47,6 +47,7 @@ export class DbErrorRechargeInformation implements ErrorRechargeInformation {
 
     delete session.cards;
     delete session.newCard;
+    delete session.card;
 
     await this.createDialogueRepository.create({
       accountId: params.dialogue.session.accountId,
