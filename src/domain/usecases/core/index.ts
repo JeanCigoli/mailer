@@ -29,5 +29,6 @@ export * from './step/send-recharge-step';
 
 export * from './card/menu-cards';
 export * from './card/delete-card-step';
+export * from './card/delete-card-success';
 
 export * from './expect/check-expected';

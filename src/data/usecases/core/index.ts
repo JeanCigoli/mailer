@@ -9,6 +9,7 @@ export * from './main-menu/db-verify-main-menu';
 
 export * from './card/db-menu-cards';
 export * from './card/db-delete-card-step';
+export * from './card/db-delete-card-success';
 
 export * from './recharge/db-menu-recharge';
 export * from './recharge/db-information-number';
