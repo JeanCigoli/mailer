@@ -11,6 +11,7 @@ export * from './card/db-menu-cards';
 export * from './card/db-delete-card-step';
 export * from './card/db-delete-card-success';
 export * from './card/db-delete-card-error';
+export * from './card/db-confirm-add-card';
 
 export * from './recharge/db-menu-recharge';
 export * from './recharge/db-information-number';

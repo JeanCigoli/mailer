@@ -1,4 +1,4 @@
-import { Plan } from '../../../../utils/types/plan-values/plan-values-type';
+import { Plan } from '../../../models';
 
 export interface ListPlanValues {
   handle(params: ListPlanValues.Params): ListPlanValues.Result;

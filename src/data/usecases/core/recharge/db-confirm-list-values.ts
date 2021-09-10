@@ -4,12 +4,10 @@ import {
   ConfirmListValues,
 } from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
-import { notFoundMessage } from '../../../../utils/message/default';
-import { Plan } from '../../../../utils/types/plan-values/plan-values-type';
+import { Plan } from '../../../../domain/models';
 import {
   CreateDialogueRepository,
   ListStepWithSourceRepository,
-  UpdateDialogueRepository,
 } from '../../../protocols/core/db';
 
 export class DbConfirmListValues implements ConfirmListValues {

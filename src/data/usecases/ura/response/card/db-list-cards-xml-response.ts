@@ -1,6 +1,6 @@
 import { ListCardsXml } from '../../../../../domain/usecases/ura/response/list-card-xml';
 import { makeResponseXml } from '../../../../../utils/response/response-xml';
-import { Card } from '../../../../../utils/types/card/card-type';
+import { Card } from '../../../../../domain/models';
 
 export class DbListCardsXmlResponse implements ListCardsXml {
   format(body: any): string {

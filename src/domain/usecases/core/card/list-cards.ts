@@ -1,4 +1,4 @@
-import { Card } from '../../../../utils/types/card/card-type';
+import { Card } from '../../../models';
 
 export interface ListCards {
   handle(clientToken: string): ListCards.Result;

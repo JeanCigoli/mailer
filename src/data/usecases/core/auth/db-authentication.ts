@@ -29,6 +29,7 @@ export class DbAuthentication implements Authentication {
         sourceId: params.sourceId,
         step: Step.START_ERROR,
       });
+      1;
 
       return {
         messages: [step.message],

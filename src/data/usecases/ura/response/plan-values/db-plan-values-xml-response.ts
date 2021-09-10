@@ -1,6 +1,6 @@
 import { PlanValuesXmlResponse } from '../../../../../domain/usecases/ura/response/plan-values-xml';
 import { makeResponseXml } from '../../../../../utils/response/response-xml';
-import { Plan } from '../../../../../utils/types/plan-values/plan-values-type';
+import { Plan } from '../../../../../domain/models';
 
 export class DbPlanValuesXmlResponse implements PlanValuesXmlResponse {
   format(body: any): string {

@@ -1,25 +1,22 @@
 import { DefaultBody } from '../../../../domain/models';
 import {
   CheckExpected,
-  ConfirmPayment,
+  ConfirmAddCard,
 } from '../../../../domain/usecases/core';
-import { ListCards } from '../../../../domain/usecases/core/card/list-cards';
 import { Step } from '../../../../utils/enum/step';
-import { Card } from '../../../../domain/models';
 import {
   CreateDialogueRepository,
   ListStepWithSourceRepository,
 } from '../../../protocols/core/db';
 
-export class DbConfirmPayment implements ConfirmPayment {
+export class DbConfirmAddCard implements ConfirmAddCard {
   constructor(
     private readonly checkExpected: CheckExpected.Facade,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
-    private readonly listCards: ListCards.Facade,
   ) {}
 
-  async confirm(params: DefaultBody): ConfirmPayment.Result {
+  async confirm(params: DefaultBody): ConfirmAddCard.Result {
     const { expected, session } = params.dialogue;
     const checkStep = await this.checkExpected(params);
 
@@ -35,45 +32,17 @@ export class DbConfirmPayment implements ConfirmPayment {
       step: selectStep,
     });
 
-    if (nameStep === 'VIEW_CARDS') {
-      const result = await this.listCards(session.token);
+    const expecteis: any = {
+      CARDS_MENU: JSON.stringify({
+        0: 'MAIN_MENU',
+        1: 'ADD_CARD',
+        2: 'VIEW_CARDS_DELETE',
+      }),
+      ADD_CVV: null,
+    };
 
-      const cards = result.cards.slice(0, 2);
-
-      const expectCard = cards.reduce(
-        (acc: any, curr: Card, index: number) => ({
-          ...acc,
-          [index + 1]: curr.paymentId,
-        }),
-        {},
-      );
-
-      await this.createDialogueRepository.create({
-        accountId: params.dialogue.session.accountId,
-        stepSourceId: step.stepSourceId,
-        requestDate: new Date(),
-        requestText: step.message,
-        expected: JSON.stringify({
-          ...expectCard,
-          0: 'PAYMENT_TYPE_MENU',
-          3: 'ADD_CARD',
-        }),
-        session: JSON.stringify({
-          ...session,
-          paymentId: null,
-          cards,
-        }),
-      });
-
-      return {
-        messages: [step.message],
-        step,
-        status: false,
-        data: {
-          ...session,
-          cards,
-        },
-      };
+    if (nameStep === 'CARDS_MENU') {
+      delete session.newCard;
     }
 
     await this.createDialogueRepository.create({
@@ -81,7 +50,7 @@ export class DbConfirmPayment implements ConfirmPayment {
       stepSourceId: step.stepSourceId,
       requestDate: new Date(),
       requestText: step.message,
-      expected: null,
+      expected: expecteis[nameStep],
       session: JSON.stringify({
         ...session,
       }),

@@ -1,7 +1,7 @@
 import { DefaultBody } from '../../../../domain/models';
 import { CheckExpected, ViewsCards } from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
-import { Card } from '../../../../utils/types/card/card-type';
+import { Card } from '../../../../domain/models';
 import {
   CreateDialogueRepository,
   ListStepWithSourceRepository,

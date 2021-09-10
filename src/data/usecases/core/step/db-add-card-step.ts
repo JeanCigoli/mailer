@@ -32,7 +32,9 @@ export class DbAddCardStep implements AddCardStep {
         messages: [params.stepSource.message],
         status: false,
         step: params.stepSource,
-        data: {},
+        data: {
+          ...session,
+        },
       };
     }
 
@@ -63,7 +65,10 @@ export class DbAddCardStep implements AddCardStep {
       messages: [step.message, finishStep.message],
       status: true,
       step,
-      data: {},
+      data: {
+        ...session,
+        ...card,
+      },
     };
   }
 }

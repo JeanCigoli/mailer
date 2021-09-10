@@ -31,5 +31,6 @@ export * from './card/menu-cards';
 export * from './card/delete-card-step';
 export * from './card/delete-card-success';
 export * from './card/delete-card-error';
+export * from './card/confirm-add-card';
 
 export * from './expect/check-expected';

@@ -1,4 +1,4 @@
-import { Plan } from '../../../../utils/types/plan-values/plan-values-type';
+import { Plan } from '../../../../domain/models';
 
 export interface GetPlanValues {
   getAllValues(clientToken: string): GetPlanValues.Result;

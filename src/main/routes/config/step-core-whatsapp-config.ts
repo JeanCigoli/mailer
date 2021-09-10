@@ -7,6 +7,7 @@ import {
   makeAddValidityCardWhats,
   makeAuthenticationWhats,
   makeCardsMenuWhats,
+  makeConfirmAddCardWhats,
   makeConfirmInformationNumberWhats,
   makeConfirmListValuesWhats,
   makeConfirmPaymentWhats,
@@ -112,6 +113,11 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
   },
   {
     target: { step: 'stepId' },
+    expected: { stepId: 26 },
+    handle: adaptMiddleware(makeConfirmAddCardWhats()),
+  },
+  {
+    target: { step: 'stepId' },
     expected: { stepId: 28 },
     handle: adaptMiddleware(makeDeleteCardStepWhats()),
   },
@@ -128,8 +134,6 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
   {
     handle: (req: Request, res: Response, next: NextFunction) => {
       console.log('Estou na rota default');
-
-      console.log(req.step);
 
       return next();
     },

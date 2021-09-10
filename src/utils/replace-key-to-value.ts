@@ -5,7 +5,6 @@ export const replaceKeyToValue = (
   const textArray = text.split(' ').map((value) => {
     if (value.startsWith('{{') && value.endsWith('}}')) {
       const key = value.replace('{{', '').replace('}}', '');
-      console.log({ key });
       return values[key];
     }
 
@@ -13,8 +12,6 @@ export const replaceKeyToValue = (
   });
 
   const newText = textArray.join(' ');
-
-  // console.log(newText);
 
   return newText;
 };

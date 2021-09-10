@@ -8,6 +8,7 @@ export * from './card/make-cards-menu';
 export * from './card/make-delete-cards';
 export * from './card/make-delete-card-success';
 export * from './card/make-delete-card-error';
+export * from './card/make-confirm-add-card';
 
 export * from './recharge/make-menu-recharge';
 export * from './recharge/make-information-number';
