@@ -14,11 +14,11 @@ const replaceKeyToValue = (text: string, values: object | any): string => {
       const key = value.replace('{{', '').replace('}}', '').replace(/\W|_/, '');
 
       if (!values[key]) {
-        const xpto: any = Object.values(values).find((current) =>
+        const objValues: any = Object.values(values).find((current) =>
           filterObject(current, key),
         );
 
-        return filterObject(xpto, key);
+        return filterObject(objValues, key);
       }
 
       return values[key];
