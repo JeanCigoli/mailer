@@ -52,7 +52,7 @@ export class DbViewsCards implements ViewsCards {
         messages: [step.message],
         status: true,
         step,
-        data: {},
+        data: { ...session },
       };
     }
 

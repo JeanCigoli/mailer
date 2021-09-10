@@ -62,7 +62,9 @@ export class DbDeleteCardSuccess implements DeleteCardSuccess {
       messages: [step.message],
       status: true,
       step,
-      data: {},
+      data: {
+        ...session,
+      },
     };
   }
 }

@@ -47,6 +47,9 @@ export class DbAddNumberCard implements AddNumberCard {
         messages: [step.message, params.stepSource.message],
         step,
         status: false,
+        data: {
+          ...props.session,
+        },
       };
     }
 

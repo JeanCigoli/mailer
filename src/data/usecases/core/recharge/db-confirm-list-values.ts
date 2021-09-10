@@ -54,6 +54,9 @@ export class DbConfirmListValues implements ConfirmListValues {
         messages: [step.message],
         step,
         status: false,
+        data: {
+          ...session,
+        },
       };
     }
 

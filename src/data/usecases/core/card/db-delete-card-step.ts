@@ -52,7 +52,9 @@ export class DbDeleteCardStep implements DeleteCardStep {
         messages: [step.message],
         status: true,
         step,
-        data: {},
+        data: {
+          ...session,
+        },
       };
     }
 

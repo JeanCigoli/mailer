@@ -1,13 +1,13 @@
-import { SendMessagesDefault } from '../../../domain/usecases/whatsapp';
+import { SendConsumption } from '../../../domain/usecases/whatsapp';
 import { ok, serverError } from '../../../utils/response/response';
 import { Controller, HttpRequest, HttpResponse } from '../../protocols';
 
-export class SendMessagesDefaultController implements Controller {
-  constructor(private readonly sendMessagesDefault: SendMessagesDefault) {}
+export class SendConsumptionController implements Controller {
+  constructor(private readonly sendConsumption: SendConsumption) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      await this.sendMessagesDefault.send({
+      await this.sendConsumption.send({
         ...httpRequest.body,
         ...httpRequest.step,
       });

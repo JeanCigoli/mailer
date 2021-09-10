@@ -1,11 +1,15 @@
 import { ButtonWhats } from '../../../../domain/models';
 import { SendMessagesDefault } from '../../../../domain/usecases/whatsapp';
 import { replaceKeyToValue } from '../../../../utils/replace-key-to-value';
+import { ListCredentialByServiceAndMvno } from '../../../protocols/core/db';
+import { TransformCredentials } from '../../../protocols/core/utils';
 import { SendMessageWhatsApp } from '../../../protocols/whatsapp/http';
 
 export class HttpSendMessagesDefault implements SendMessagesDefault {
   constructor(
     private readonly sendMessageWhatsApp: SendMessageWhatsApp,
+    private readonly listCredentialByServiceAndMvno: ListCredentialByServiceAndMvno,
+    private readonly transformCredentials: TransformCredentials,
     private readonly arrayButtons: number[],
   ) {}
 
@@ -16,6 +20,13 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
         destination: '5511996059255',
       },
     ];
+
+    const base64 = await this.listCredentialByServiceAndMvno.findByService({
+      mvnoId: params.data.mvnoId,
+      service: 'WHATSAPP',
+    });
+
+    const credentials = this.transformCredentials(base64.credentials);
 
     if (!this.arrayButtons.length) {
       for await (const message of params.messages) {
@@ -28,10 +39,7 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
 
         await this.sendMessageWhatsApp.send({
           body,
-          credentials: {
-            token: 'XlSA_NExmghDrxgkfVojrx3BM6GccGPf5XhoDUDg',
-            username: 'arqia@pagtel.com.br',
-          },
+          credentials,
         });
       }
 
@@ -71,10 +79,7 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
 
     await this.sendMessageWhatsApp.send({
       body,
-      credentials: {
-        token: 'XlSA_NExmghDrxgkfVojrx3BM6GccGPf5XhoDUDg',
-        username: 'arqia@pagtel.com.br',
-      },
+      credentials,
     });
 
     return;

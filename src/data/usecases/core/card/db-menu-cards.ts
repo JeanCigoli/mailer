@@ -55,7 +55,7 @@ export class DbMenuCards implements MenuCards {
         messages: [step.message],
         status: true,
         step,
-        data: {},
+        data: { ...session },
       };
     }
 

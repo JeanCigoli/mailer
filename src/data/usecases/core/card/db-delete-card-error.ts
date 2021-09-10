@@ -52,7 +52,9 @@ export class DbDeleteCardError implements DeleteCardError {
       messages: [step.message],
       status: true,
       step,
-      data: {},
+      data: {
+        ...session,
+      },
     };
   }
 }
