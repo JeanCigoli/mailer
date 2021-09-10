@@ -10,6 +10,7 @@ import {
   makeConfirmInformationNumberWhats,
   makeConfirmListValuesWhats,
   makeConfirmPaymentWhats,
+  makeDeleteCardErrorWhats,
   makeDeleteCardStepWhats,
   makeDeleteCardSuccessWhats,
   makeErrorRechargeInformationWhats,
@@ -122,7 +123,7 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
   {
     target: { step: 'stepId' },
     expected: { stepId: 30 },
-    handle: adaptMiddleware(makeDeleteCardSuccessWhats()),
+    handle: adaptMiddleware(makeDeleteCardErrorWhats()),
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {

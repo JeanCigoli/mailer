@@ -7,6 +7,7 @@ export * from './token/menu-token-middleware';
 export * from './card/cards-menu-middleware';
 export * from './card/delete-card-step-middleware';
 export * from './card/delete-card-success-middleware';
+export * from './card/delete-card-error-middleware';
 
 export * from './recharge/menu-recharge-middleware';
 export * from './recharge/information-number-middleware';
