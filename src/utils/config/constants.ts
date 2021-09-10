@@ -13,6 +13,7 @@ export const URLS = {
   PHOENIX_ACCOUNT_MANAGER: process.env.PHOENIX_ACCOUNT_MANAGER || '',
   PHOENIX_AUTHENTICATOR: process.env.PHOENIX_AUTHENTICATOR || '',
   PHOENIX_SMS: process.env.PHOENIX_SMS || '',
+  WAVY_API: process.env.WAVY_API || '',
 };
 
 export const DATABASE = {

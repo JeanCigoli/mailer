@@ -2,6 +2,10 @@ export const replaceKeyToValue = (
   text: string,
   values: object | any,
 ): string => {
+  if (!text) {
+    return '';
+  }
+
   const textArray = text.split(' ').map((value) => {
     if (value.startsWith('{{') && value.endsWith('}}')) {
       const key = value.replace('{{', '').replace('}}', '');

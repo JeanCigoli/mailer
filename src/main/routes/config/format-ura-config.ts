@@ -1,12 +1,14 @@
 import { adaptRouteXml } from '../../adapters/adapt-route-xml';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
-import { makeListCardsControllerUra } from '../../factories/ura/card/make-list-cards-controller-ura';
-import { makeConsumptionControllerUra } from '../../factories/ura/consumption/make-consumption-controller-ura';
-import { makeErrorControllerUra } from '../../factories/ura/default/make-error-controller-ura';
-import { makeSuccessControllerUra } from '../../factories/ura/default/make-success-controller-ura';
-import { makeIndexController } from '../../factories/ura/index/make-index-controller';
-import { makeRechargePlanValuesControllerUra } from '../../factories/ura/plan-values/make-plan-values-controller-ura';
-import { makeTokenControllerUra } from '../../factories/ura/token/make-token-controller-ura';
+import {
+  makeListCardsControllerUra,
+  makeConsumptionControllerUra,
+  makeErrorControllerUra,
+  makeSuccessControllerUra,
+  makeIndexController,
+  makeRechargePlanValuesControllerUra,
+  makeTokenControllerUra,
+} from '../../factories/controller/ura';
 
 export const formatUraSwitchConfig: adapterOptions = [
   {
