@@ -4,7 +4,7 @@ import errorLogger from '../../../../utils/logger';
 import { makeResponseXml } from '../../../../utils/response/response-xml';
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
-export class ConsumptionController implements Controller {
+export class ConsumptionControllerUra implements Controller {
   constructor(private readonly consumptionXml: ConsumptionXml) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {

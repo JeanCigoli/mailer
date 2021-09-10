@@ -2,14 +2,14 @@ import { DbConsumptionXmlResponse } from '../../../../data/usecases/ura/response
 import { phoenixAccount } from '../../../../infra/core/http/helpers/phoenix-account';
 import { SendSmsService } from '../../../../infra/core/http/phoenix/sms/send-sms-service';
 import { RequestAdapter } from '../../../../infra/core/http/web-service-rest-adapter';
-import { ConsumptionController } from '../../../../presentation/controllers/ura/consumption/consumption-controller';
+import { ConsumptionControllerUra } from '../../../../presentation/controllers/ura/consumption/consumption-controller-ura';
 
-export const makeConsumptionController = () => {
+export const makeConsumptionControllerUra = () => {
   const httpClient = new RequestAdapter(phoenixAccount);
 
   const sendSms = new SendSmsService(httpClient);
 
   const dbConsumptionXml = new DbConsumptionXmlResponse(sendSms);
 
-  return new ConsumptionController(dbConsumptionXml);
+  return new ConsumptionControllerUra(dbConsumptionXml);
 };

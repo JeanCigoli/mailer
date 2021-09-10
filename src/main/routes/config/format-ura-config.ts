@@ -1,7 +1,7 @@
 import { adaptRouteXml } from '../../adapters/adapt-route-xml';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import { makeListCardsControllerUra } from '../../factories/ura/card/make-list-cards-controller-ura';
-import { makeConsumptionController } from '../../factories/ura/consumption/make-consumption-controller';
+import { makeConsumptionControllerUra } from '../../factories/ura/consumption/make-consumption-controller-ura';
 import { makeErrorControllerUra } from '../../factories/ura/default/make-error-controller-ura';
 import { makeSuccessControllerUra } from '../../factories/ura/default/make-success-controller-ura';
 import { makeIndexController } from '../../factories/ura/index/make-index-controller';
@@ -22,7 +22,7 @@ export const formatUraSwitchConfig: adapterOptions = [
   {
     target: { step: 'stepId' },
     expected: { stepId: 5 },
-    handle: adaptRouteXml(makeConsumptionController()),
+    handle: adaptRouteXml(makeConsumptionControllerUra()),
   },
   {
     target: { step: 'stepId' },
