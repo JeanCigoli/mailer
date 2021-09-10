@@ -10,5 +10,6 @@ export namespace DeleteUserCard {
 
   export type Result = Promise<{
     status: boolean;
+    message: string;
   }>;
 }

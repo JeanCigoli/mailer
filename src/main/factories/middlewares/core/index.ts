@@ -5,6 +5,7 @@ export * from './token/make-menu-token';
 export * from './main-menu/make-main-menu';
 
 export * from './card/make-cards-menu';
+export * from './card/make-delete-cards';
 
 export * from './recharge/make-menu-recharge';
 export * from './recharge/make-information-number';

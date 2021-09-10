@@ -1,6 +1,5 @@
 import { DeleteUserCard } from '../../../../../data/protocols/core/http/delete-user-card';
 import { HttpClient } from '../../../../../data/protocols/core/http/web-service-rest-adapter';
-import { formateSnakeCaseKeysForCamelCase } from '../../../../../utils/object';
 
 export class DeleteCardService implements DeleteUserCard {
   constructor(private readonly httpClient: HttpClient) {}
@@ -10,16 +9,17 @@ export class DeleteCardService implements DeleteUserCard {
       method: 'DELETE',
       url: `v1/cards/${params.paymentId}`,
       headers: {
-        Authentication: params.clientToken,
+        authorization: params.clientToken,
       },
     });
 
     if (result.statusCode > 299) {
       return {
         status: false,
+        message: result.body.message,
       };
     }
 
-    return { status: true };
+    return { status: true, message: result.body.message };
   }
 }

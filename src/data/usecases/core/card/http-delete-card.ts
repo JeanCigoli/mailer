@@ -8,7 +8,7 @@ export class HttpDeleteCard implements DeleteCard {
     const result = await this.deleteUserCard.delete(params);
 
     if (!result.status) {
-      throw new Error('ERROR_DELETE_CARD');
+      return result;
     }
 
     return result;

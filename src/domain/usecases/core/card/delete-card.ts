@@ -10,6 +10,7 @@ export namespace DeleteCard {
 
   export type Result = Promise<{
     status: boolean;
+    message: string;
   }>;
 
   export type Facade = (params: DeleteCard.Params) => DeleteCard.Result;
