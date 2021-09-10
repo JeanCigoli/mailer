@@ -7,6 +7,8 @@ export class SendMessagesDefaultController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
+      console.log(httpRequest);
+
       await this.sendMessagesDefault.send({
         ...httpRequest.body,
         ...httpRequest.step,

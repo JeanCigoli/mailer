@@ -12,24 +12,16 @@ export function adaptRoute(controller: Controller) {
       params: formateSnakeCaseKeysForCamelCase(req.params),
       query: formateSnakeCaseKeysForCamelCase(req.query),
       headers: req.headers,
+      step: req.step,
+      dialogue: req.dialogue,
     };
 
-    // console.log('ADAPT ROUTE');
-
+    console.log(req.step);
     const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.headers) {
       res.set(httpResponse.headers);
-
-      if (
-        Object.values(httpResponse.headers).find(
-          (value) => value === 'application/xml',
-        )
-      )
-        return res.status(httpResponse.statusCode).send(httpResponse.body);
     }
-
-    return res.status(httpResponse.statusCode).send(httpResponse.body);
 
     return res
       .status(httpResponse.statusCode)

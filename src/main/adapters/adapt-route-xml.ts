@@ -9,6 +9,8 @@ export function adaptRouteXml(controller: Controller) {
       params: formateSnakeCaseKeysForCamelCase(req.params),
       query: formateSnakeCaseKeysForCamelCase(req.query),
       headers: req.headers,
+      step: req.step,
+      dialogue: req.dialogue,
     };
 
     const httpResponse = await controller.handle(httpRequest);

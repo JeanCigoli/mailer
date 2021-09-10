@@ -18,4 +18,9 @@ export const formatWhatsAppSwitchConfig: adapterOptions = [
     expected: { stepId: 4 },
     handle: adaptRoute(makeSendMessageDefault([1, 2, 3])),
   },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 8 },
+    handle: adaptRoute(makeSendMessageDefault([1, 2, 0])),
+  },
 ];

@@ -49,7 +49,7 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
         interactive: {
           messageInteractiveType: 'REPLY_BUTTON',
           header: {
-            text: !!secondMessage ? firstFormat : 'Escolha uma opção abaixo',
+            text: !!secondMessage ? firstFormat : 'Selecione uma opção',
           },
           body: {
             text: !!secondMessage ? secondFormat : firstFormat,
