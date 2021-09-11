@@ -1,6 +1,6 @@
-import { SendConsumption } from '../../../domain/usecases/whatsapp';
-import { ok, serverError } from '../../../utils/response/response';
-import { Controller, HttpRequest, HttpResponse } from '../../protocols';
+import { SendConsumption } from '../../../../domain/usecases/whatsapp';
+import { ok, serverError } from '../../../../utils/response/response';
+import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
 export class SendConsumptionController implements Controller {
   constructor(private readonly sendConsumption: SendConsumption) {}

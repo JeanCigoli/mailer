@@ -66,7 +66,7 @@ export class DbMenuTypePayment implements MenuTypePayment {
           !recharge.status ? recharge.billet.message : step.message,
           finishStep.message,
         ],
-        status: true,
+        status: recharge.status,
         step,
         data: {
           ...session,

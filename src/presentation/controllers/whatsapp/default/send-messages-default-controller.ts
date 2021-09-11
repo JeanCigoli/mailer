@@ -1,6 +1,6 @@
-import { SendMessagesDefault } from '../../../domain/usecases/whatsapp';
-import { ok, serverError } from '../../../utils/response/response';
-import { Controller, HttpRequest, HttpResponse } from '../../protocols';
+import { SendMessagesDefault } from '../../../../domain/usecases/whatsapp';
+import { ok, serverError } from '../../../../utils/response/response';
+import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
 export class SendMessagesDefaultController implements Controller {
   constructor(private readonly sendMessagesDefault: SendMessagesDefault) {}

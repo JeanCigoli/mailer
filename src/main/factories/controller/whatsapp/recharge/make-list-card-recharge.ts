@@ -1,25 +1,23 @@
-import { HttpSendMessagesDefault } from '../../../../../data/usecases/whatsapp';
+import { HttpSendListCardRecharge } from '../../../../../data/usecases/whatsapp';
 import { SourceMvnoRepository } from '../../../../../infra/core/db/mssql';
 import { wavyMessage } from '../../../../../infra/core/http/helpers/wavy-message';
 import { SendMessageHttp } from '../../../../../infra/core/http/phoenix/whatsapp/send-message-http';
 import { RequestAdapter } from '../../../../../infra/core/http/web-service-rest-adapter';
-import { SendMessagesDefaultController } from '../../../../../presentation/controllers/whatsapp';
+import { SendListCardRechargeController } from '../../../../../presentation/controllers/whatsapp';
 import { transformCredentials } from '../../../../../utils/base64';
-import { verifyMessages } from '../../../../../utils/verify-message-whatsapp';
 
-export const makeSendMessageDefault = () => {
+export const makeSendListCardRecharge = () => {
   const requestAdapter = new RequestAdapter(wavyMessage);
 
   const sendMessageHttp = new SendMessageHttp(requestAdapter);
 
   const sourceMvnoRepository = new SourceMvnoRepository();
 
-  const httpSendMessagesDefault = new HttpSendMessagesDefault(
+  const httpSendListCardRecharge = new HttpSendListCardRecharge(
     sendMessageHttp,
     sourceMvnoRepository,
     transformCredentials,
-    verifyMessages,
   );
 
-  return new SendMessagesDefaultController(httpSendMessagesDefault);
+  return new SendListCardRechargeController(httpSendListCardRecharge);
 };

@@ -1,9 +1,9 @@
 import { format } from 'date-fns';
-import { SendConsumption } from '../../../../domain/usecases/whatsapp';
-import { replaceKeyToValue } from '../../../../utils/replace-key-to-value';
-import { ListCredentialByServiceAndMvno } from '../../../protocols/core/db';
-import { TransformCredentials } from '../../../protocols/core/utils';
-import { SendMessageWhatsApp } from '../../../protocols/whatsapp/http';
+import { SendConsumption } from '../../../../../domain/usecases/whatsapp';
+import { replaceKeyToValue } from '../../../../../utils/replace-key-to-value';
+import { ListCredentialByServiceAndMvno } from '../../../../protocols/core/db';
+import { TransformCredentials } from '../../../../protocols/core/utils';
+import { SendMessageWhatsApp } from '../../../../protocols/whatsapp/http';
 
 export class HttpSendConsumption implements SendConsumption {
   constructor(

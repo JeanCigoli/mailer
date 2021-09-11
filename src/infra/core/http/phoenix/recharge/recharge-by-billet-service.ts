@@ -1,6 +1,9 @@
 import { RechargeByBillet } from '../../../../../data/protocols/core/http/recharge-by-billet';
 import { HttpClient } from '../../../../../data/protocols/core/http/web-service-rest-adapter';
-import { formateCamelCaseKeysForSnakeCase } from '../../../../../utils/object';
+import {
+  formateCamelCaseKeysForSnakeCase,
+  formateSnakeCaseKeysForCamelCase,
+} from '../../../../../utils/object';
 
 export class RechargeByBilletService implements RechargeByBillet {
   constructor(private readonly httpClient: HttpClient) {}
@@ -23,13 +26,13 @@ export class RechargeByBilletService implements RechargeByBillet {
     if (result.statusCode > 299) {
       return {
         status: false,
-        payload: formateCamelCaseKeysForSnakeCase(result.body),
+        payload: formateSnakeCaseKeysForCamelCase(result.body),
       };
     }
 
     return {
       status: true,
-      payload: formateCamelCaseKeysForSnakeCase(result.body.payload),
+      payload: formateSnakeCaseKeysForCamelCase(result.body.payload),
     };
   }
 }

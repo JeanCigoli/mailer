@@ -1,16 +1,17 @@
-import { ButtonWhats } from '../../../../domain/models';
-import { SendMessagesDefault } from '../../../../domain/usecases/whatsapp';
-import { replaceKeyToValue } from '../../../../utils/replace-key-to-value';
-import { ListCredentialByServiceAndMvno } from '../../../protocols/core/db';
-import { TransformCredentials } from '../../../protocols/core/utils';
-import { SendMessageWhatsApp } from '../../../protocols/whatsapp/http';
+import { ButtonWhats } from '../../../../../domain/models';
+import { SendMessagesDefault } from '../../../../../domain/usecases/whatsapp';
+import { replaceKeyToValue } from '../../../../../utils/replace-key-to-value';
+import { ListCredentialByServiceAndMvno } from '../../../../protocols/core/db';
+import { TransformCredentials } from '../../../../protocols/core/utils';
+import { SendMessageWhatsApp } from '../../../../protocols/whatsapp/http';
+import { VerifyMessages } from '../../../../protocols/whatsapp/utils';
 
 export class HttpSendMessagesDefault implements SendMessagesDefault {
   constructor(
     private readonly sendMessageWhatsApp: SendMessageWhatsApp,
     private readonly listCredentialByServiceAndMvno: ListCredentialByServiceAndMvno,
     private readonly transformCredentials: TransformCredentials,
-    private readonly arrayButtons: number[],
+    private readonly verifyMessages: VerifyMessages,
   ) {}
 
   async send(params: SendMessagesDefault.Params): SendMessagesDefault.Result {
@@ -28,7 +29,11 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
 
     const credentials = this.transformCredentials(base64.credentials);
 
-    if (!this.arrayButtons.length) {
+    const [firstMessage, secondMessage] = params.messages;
+
+    const verify = this.verifyMessages(firstMessage, secondMessage);
+
+    if (!verify.buttons.length) {
       for await (const message of params.messages) {
         const body = {
           destinations: destinations,
@@ -46,10 +51,8 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
       return;
     }
 
-    const [firstMessage, secondMessage] = params.messages;
-
-    const firstFormat = replaceKeyToValue(firstMessage, params.data);
-    const secondFormat = replaceKeyToValue(secondMessage, params.data);
+    const headerMessage = replaceKeyToValue(verify.headerMessage, params.data);
+    const bodyMessage = replaceKeyToValue(verify.bodyMessage, params.data);
 
     const body: ButtonWhats = {
       destinations: destinations,
@@ -57,16 +60,16 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
         interactive: {
           messageInteractiveType: 'REPLY_BUTTON',
           header: {
-            text: !!secondMessage ? firstFormat : 'Selecione uma opção',
+            text: headerMessage,
           },
           body: {
-            text: !!secondMessage ? secondFormat : firstFormat,
+            text: bodyMessage,
           },
           replyButtonAction: {
-            buttons: this.arrayButtons.map((value) => ({
+            buttons: verify.buttons.map(([key, value]) => ({
               reply: {
                 title: value,
-                payload: value,
+                payload: key,
               },
             })),
           },
