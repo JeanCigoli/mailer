@@ -13,6 +13,14 @@ const replaceKeyToValue = (message: string, values: any) => {
       return;
     }
 
+    if (value instanceof Date) {
+      message = message.replace(
+        new RegExp(`{{${key}}}`, 'g'),
+        value.toLocaleDateString(),
+      );
+      return;
+    }
+
     if (typeof value === 'object') {
       message = replaceKeyToValue(message, value);
       return;
