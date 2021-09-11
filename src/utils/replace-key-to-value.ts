@@ -1,11 +1,21 @@
-export const replaceKeyToValue = (message: string, values: any) => {
+const replaceKeyToValue = (message: string, values: any) => {
   if (!message) {
     return message;
   }
 
   Object.entries(values).map(([key, value]: [string, any]) => {
-    if (typeof value === 'object' && !Array.isArray(value)) {
+    if (Array.isArray(value)) {
+      value.map((data) => {
+        message = replaceKeyToValue(message, data);
+        return;
+      });
+
+      return;
+    }
+
+    if (typeof value === 'object') {
       message = replaceKeyToValue(message, value);
+      return;
     }
 
     message = message.replace(new RegExp(`{{${key}}}`, 'g'), value);
