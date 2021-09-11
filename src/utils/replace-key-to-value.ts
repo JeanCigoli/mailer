@@ -1,4 +1,4 @@
-const replaceKeyToValue = (message: string, values: any) => {
+export const replaceKeyToValue = (message: string, values: any) => {
   if (!message) {
     return message;
   }
