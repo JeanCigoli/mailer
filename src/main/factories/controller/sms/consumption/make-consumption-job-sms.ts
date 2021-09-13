@@ -2,12 +2,12 @@ import { HttpConsumptionSms } from '../../../../../data/usecases/sms/consumption
 import { phoenixSms } from '../../../../../infra/core/http/helpers/phoenix-sms';
 import { SendSmsService } from '../../../../../infra/core/http/phoenix/sms/send-sms-service';
 import { RequestAdapter } from '../../../../../infra/core/http/web-service-rest-adapter';
-import { ConsumptionControllerSms } from '../../../../../presentation/controllers/sms/consumption/consumption-controller-sms';
+import { ConsumptionJobSms } from '../../../../../presentation/controllers/sms/consumption/consumption-job-sms';
 
-export const makeConsumptionControllerSms = () => {
+export const makeConsumptionJobSms = () => {
   const httpClient = new RequestAdapter(phoenixSms);
   const sendSmsService = new SendSmsService(httpClient);
   const httpConsumptionSms = new HttpConsumptionSms(sendSmsService);
 
-  return new ConsumptionControllerSms(httpConsumptionSms);
+  return new ConsumptionJobSms(httpConsumptionSms);
 };

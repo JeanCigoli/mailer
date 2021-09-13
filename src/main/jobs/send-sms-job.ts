@@ -6,8 +6,6 @@ export class SendSmsJob implements Job {
 
   async handle(json: Record<any, any>): Promise<void> {
     try {
-      // const json = JSON.parse(message.toString());
-
       await this.sendSmsCallback.handle({
         message: json.message,
         msisdn: json.msisdn,
