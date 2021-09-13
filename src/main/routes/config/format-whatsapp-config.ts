@@ -1,3 +1,4 @@
+import { adaptListenerJob } from '../../adapters/adapt-listener-job';
 import { adaptRoute } from '../../adapters/adapt-route';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
@@ -36,6 +37,16 @@ export const formatWhatsAppSwitchConfig: adapterOptions = [
     handle: adaptRoute(makeAccountNotFound()),
   },
   {
-    handle: adaptRoute(makeSendMessageDefault()),
+    target: { step: 'stepId' },
+    expected: { stepId: 35 },
+    handle: (message: any, next: any) => {
+      console.log('Estou na rota default');
+      console.log(message);
+
+      return next();
+    },
+  },
+  {
+    handle: adaptListenerJob(makeSendMessageDefault()),
   },
 ];

@@ -1,10 +1,20 @@
-import { Channel, Connection, connect, Message } from 'amqplib';
+import {
+  formateCamelCaseKeysForSnakeCase,
+  formateSnakeCaseKeysForCamelCase,
+} from '../../../utils/object';
+
+import { Channel, connect, Connection, Message } from 'amqplib';
 
 type Credentials = {
   user: string;
   password: string;
   host: string;
   port: number;
+};
+
+type Payload = {
+  body: object;
+  headers: object;
 };
 
 export class RabbitMqServer {
@@ -14,7 +24,7 @@ export class RabbitMqServer {
 
   private static instance: RabbitMqServer;
 
-  constructor(private readonly credentials: Credentials | null = null) {
+  constructor(private credentials: Credentials | null = null) {
     if (this.credentials) this.setCredentials(this.credentials);
   }
 
@@ -26,33 +36,73 @@ export class RabbitMqServer {
     return RabbitMqServer.instance;
   }
 
-  public async start() {
-    this.connection = await connect(this.uri);
-    this.channel = await this.connection.createChannel();
-  }
-
   public startSync() {
-    (async () => this.start())();
-  }
-
-  public async close() {
-    if (!this.connection) return;
-    this.connection.close();
-  }
-
-  private messageToJson(message: Message): object {
-    return JSON.parse(message.content.toString());
+    (async () => await this.start())();
   }
 
   public setCredentials(credentials: Credentials) {
     this.uri = `amqp://${credentials.user}:${credentials.password}@${credentials.host}:${credentials.port}`;
   }
 
-  public async consume(queue: string, callback: (message: Message) => void) {
-    await this.channel.consume(queue, (message) => {
-      if (!message) return;
-      callback(message);
-      this.channel.ack(message);
-    });
+  public async start() {
+    if (this.connection) return;
+    if (!this.uri) throw new Error('RABBITMQ_CREDENTIALS_NOT_DEFINED');
+    this.connection = await connect(this.uri);
+    this.channel = await this.connection.createChannel();
+  }
+
+  public async close() {
+    if (!this.connection) return;
+    await this.connection.close();
+  }
+
+  public publishInQueue(queue: string, message: object, headers: object) {
+    const messageFromBuffer = this.messageFromBuffer(
+      formateCamelCaseKeysForSnakeCase(message),
+    );
+
+    return this.channel.sendToQueue(queue, messageFromBuffer, { headers });
+  }
+
+  public publishInExchange(
+    exchange: string,
+    routingKey: string,
+    message: object,
+  ) {
+    return this.channel.publish(
+      exchange,
+      routingKey,
+      this.messageFromBuffer(message),
+    );
+  }
+
+  private messageFromBuffer(message: any): Buffer {
+    const string = JSON.stringify(message);
+    return Buffer.from(string);
+  }
+
+  private messageToJson(message: Message): object {
+    return formateSnakeCaseKeysForCamelCase(
+      JSON.parse(message.content.toString()),
+    );
+  }
+
+  public async consume(queue: string, callback: (payload: Payload) => void) {
+    await this.channel.consume(
+      queue,
+      (message) => {
+        if (!message) return;
+
+        const payload: Payload = {
+          body: this.messageToJson(message),
+          headers: message.properties.headers,
+        };
+
+        callback(payload);
+
+        this.channel.ack(message);
+      },
+      {},
+    );
   }
 }

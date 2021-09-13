@@ -1,5 +1,4 @@
-import * as jobs from '../listeners';
-
+import * as jobs from '../listeners/index';
 import { ListenerConsume } from '../protocols/listener-consume';
 
 export default (listener: ListenerConsume) => {

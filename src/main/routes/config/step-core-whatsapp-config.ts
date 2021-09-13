@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { adaptMiddleware } from '../../adapters/adapt-middleware';
+import { adaptMiddlewareJob } from '../../adapters';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
   makeAddNumberCardWhats,
@@ -29,107 +29,107 @@ export const stepCoreWhatsAppSwitchConfig: adapterOptions = [
   {
     target: { step: 'stepId' },
     expected: { stepId: 1 },
-    handle: adaptMiddleware(makeAuthenticationWhats()),
+    handle: adaptMiddlewareJob(makeAuthenticationWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 2 },
-    handle: adaptMiddleware(makeMenuTokenWhats()),
+    handle: adaptMiddlewareJob(makeMenuTokenWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 4 },
-    handle: adaptMiddleware(makeMainMenuWhats()),
+    handle: adaptMiddlewareJob(makeMainMenuWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 8 },
-    handle: adaptMiddleware(makeMenuRechargeWhats()),
+    handle: adaptMiddlewareJob(makeMenuRechargeWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 9 },
-    handle: adaptMiddleware(makeInformationNumberWhats()),
+    handle: adaptMiddlewareJob(makeInformationNumberWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 10 },
-    handle: adaptMiddleware(makeResendInformationNumberWhats()),
+    handle: adaptMiddlewareJob(makeResendInformationNumberWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 11 },
-    handle: adaptMiddleware(makeConfirmInformationNumberWhats()),
+    handle: adaptMiddlewareJob(makeConfirmInformationNumberWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 12 },
-    handle: adaptMiddleware(makeListValuesWhats()),
+    handle: adaptMiddlewareJob(makeListValuesWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 13 },
-    handle: adaptMiddleware(makeConfirmListValuesWhats()),
+    handle: adaptMiddlewareJob(makeConfirmListValuesWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 14 },
-    handle: adaptMiddleware(makeMenuTypePaymentWhats()),
+    handle: adaptMiddlewareJob(makeMenuTypePaymentWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 16 },
-    handle: adaptMiddleware(makeViewsCardsWhats()),
+    handle: adaptMiddlewareJob(makeViewsCardsWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 17 },
-    handle: adaptMiddleware(makeAddNumberCardWhats()),
+    handle: adaptMiddlewareJob(makeAddNumberCardWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 19 },
-    handle: adaptMiddleware(makeAddValidityCardWhats()),
+    handle: adaptMiddlewareJob(makeAddValidityCardWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 21 },
-    handle: adaptMiddleware(makeConfirmPaymentWhats()),
+    handle: adaptMiddlewareJob(makeConfirmPaymentWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 22 },
-    handle: adaptMiddleware(makeAddSecurityCodeWhats()),
+    handle: adaptMiddlewareJob(makeAddSecurityCodeWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 24 },
-    handle: adaptMiddleware(makeErrorRechargeInformationWhats()),
+    handle: adaptMiddlewareJob(makeErrorRechargeInformationWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 25 },
-    handle: adaptMiddleware(makeCardsMenuWhats()),
+    handle: adaptMiddlewareJob(makeCardsMenuWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 26 },
-    handle: adaptMiddleware(makeConfirmAddCardWhats()),
+    handle: adaptMiddlewareJob(makeConfirmAddCardWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 28 },
-    handle: adaptMiddleware(makeDeleteCardStepWhats()),
+    handle: adaptMiddlewareJob(makeDeleteCardStepWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 29 },
-    handle: adaptMiddleware(makeDeleteCardSuccessWhats()),
+    handle: adaptMiddlewareJob(makeDeleteCardSuccessWhats()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 30 },
-    handle: adaptMiddleware(makeDeleteCardErrorWhats()),
+    handle: adaptMiddlewareJob(makeDeleteCardErrorWhats()),
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {

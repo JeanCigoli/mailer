@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { adaptMiddleware } from '../../adapters/adapt-middleware';
+import { adaptMiddlewareJob } from '../../adapters';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
   makeAuthenticationSms,
@@ -11,17 +11,17 @@ export const stepCoreSmsSwitchConfig: adapterOptions = [
   {
     target: { step: 'stepId' },
     expected: { stepId: 1 },
-    handle: adaptMiddleware(makeAuthenticationSms()),
+    handle: adaptMiddlewareJob(makeAuthenticationSms()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 2 },
-    handle: adaptMiddleware(makeMenuTokenSms()),
+    handle: adaptMiddlewareJob(makeMenuTokenSms()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 4 },
-    handle: adaptMiddleware(makeMainMenuSms()),
+    handle: adaptMiddlewareJob(makeMainMenuSms()),
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {
