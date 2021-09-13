@@ -8,8 +8,6 @@ export class IndexController implements Controller {
       messages: httpRequest.body.messages,
     };
 
-    // console.log('CHEGOU AQUI HEHEHE');
-
     try {
       return {
         statusCode: 200,

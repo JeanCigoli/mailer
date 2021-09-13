@@ -7,8 +7,6 @@ export class AuthenticationMiddleware implements Middleware {
 
   async handle(httpRequest: HttpRequest, next: Function): Middleware.Result {
     try {
-      console.log('ESTOU AQUI');
-
       const result = await this.authentication.auth({
         ...httpRequest.body,
         stepSource: httpRequest.step,
