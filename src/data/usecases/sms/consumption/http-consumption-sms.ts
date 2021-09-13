@@ -1,4 +1,5 @@
 import { ConsumptionSms } from '../../../../domain/usecases/sms/consumption/consumption-sms';
+import { replaceKeyToValue } from '../../../../utils/replace-key-to-value';
 import { SendSms } from '../../../protocols/core/http/send-sms';
 
 export class HttpConsumptionSms implements ConsumptionSms {
@@ -9,11 +10,20 @@ export class HttpConsumptionSms implements ConsumptionSms {
     const sms = body.data.consumption.sms;
     const voice = body.data.consumption.voice;
 
-    const message = `Consumo:\n Internet: usado: ${internet.used} GB, disponível: ${internet.available} GB \n SMS: usado: ${sms.used}, disponível: ${sms.available} \n ligação: usado: ${voice.used} min, disponível: ${voice.available} min, \n validade: ${body.data.dateGrace}`;
+    const message = replaceKeyToValue(body.messages, {
+      usedInternet: internet.used,
+      usedSms: sms.used,
+      usedVoice: voice.used,
+      availableInternet: internet.available,
+      availableSms: sms.available,
+      availableVoice: voice.available,
+      dateGrace: body.data.dateGrace,
+    });
 
     await this.sendSms.send({
       message,
-      msisdn: body.msisdn,
+      msisdn: body.data.msisdn,
+      clientToken: body.data.token,
     });
   }
 }

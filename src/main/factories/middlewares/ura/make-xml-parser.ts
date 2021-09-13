@@ -1,5 +1,5 @@
 import { DbXmlParser } from '../../../../data/usecases/ura/middleware/db-xml-parser';
-import { XmlParserMiddleware } from '../../../../presentation/middlewares/xml-parser-middleware';
+import { XmlParserMiddleware } from '../../../../presentation/middlewares/xml/xml-parser-middleware';
 import { convertXmlToJson } from '../../../../utils/convert-xml-to-json';
 
 export const makeXmlParser = () => {

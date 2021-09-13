@@ -12,8 +12,4 @@ export default (routes: Router) => {
     adaptSwitchMiddleware(sourceSwitchConfig),
     adaptSwitchMiddleware(formatSmsSwitchConfig),
   );
-
-  routes.get('/', (req, res) => {
-    res.json({ teste: 'on!' });
-  });
 };

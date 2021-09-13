@@ -12,11 +12,19 @@ export class GetUserConsumptionService implements GetUserConsumption {
   async get(params: GetUserConsumption.Params): GetUserConsumption.Result {
     const { token, ...props } = params;
 
+    // const result = await this.httpClient.request({
+    //   method: 'GET',
+    //   url: `v1/consumptions?${makeObjectToParamsRequest(
+    //     formateCamelCaseKeysForSnakeCase(props),
+    //   )}`,
+    //   headers: {
+    //     Authorization: token,
+    //   },
+    // });
+
     const result = await this.httpClient.request({
       method: 'GET',
-      url: `v1/consumptions?${makeObjectToParamsRequest(
-        formateCamelCaseKeysForSnakeCase(props),
-      )}`,
+      url: `v1/consumptions`,
       headers: {
         Authorization: token,
       },
