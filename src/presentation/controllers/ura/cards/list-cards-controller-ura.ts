@@ -1,5 +1,6 @@
 import { ListCardsXml } from '../../../../domain/usecases/ura/response/list-card-xml';
 import { contentTypeXml } from '../../../../utils/content-type-xml';
+import errorLogger from '../../../../utils/logger';
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
 export class ListCardsControllerUra implements Controller {
@@ -15,6 +16,7 @@ export class ListCardsControllerUra implements Controller {
         headers: contentTypeXml,
       };
     } catch (e) {
+      errorLogger(e);
       return {
         statusCode: 400,
         body: result,

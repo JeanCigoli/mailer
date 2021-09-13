@@ -8,7 +8,9 @@ import { makeTokenControllerSms } from '../../factories/controller/sms/token/mak
 
 export const formatSmsSwitchConfig: adapterOptions = [
   {
-    handle: adaptRoute(makeSuccessControllerSms()),
+    target: { step: 'stepId' },
+    expected: { stepId: 3 },
+    handle: adaptRoute(makeTokenControllerSms()),
   },
   {
     target: { step: 'stepId' },
@@ -26,8 +28,6 @@ export const formatSmsSwitchConfig: adapterOptions = [
     handle: adaptRoute(makeListCardsControllerSms()),
   },
   {
-    target: { step: 'stepId' },
-    expected: { stepId: 3 },
-    handle: adaptRoute(makeTokenControllerSms()),
+    handle: adaptRoute(makeSuccessControllerSms()),
   },
 ];

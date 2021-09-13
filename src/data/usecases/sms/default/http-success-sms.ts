@@ -8,20 +8,20 @@ export class HttpSuccessSms implements SuccessSms {
   async handle(body: any): SuccessSms.Result {
     // const { body, messages } = params;
 
-    // console.log({ body });
+    console.log({ body });
 
     const messages: Array<string> = body.messages;
 
     const data = body.data;
 
-    console.log({ data });
+    // console.log({ data });
 
     messages.map(async (message) => {
       const newMessage = replaceKeyToValue(message, data);
 
       await this.sendSms.send({
         message: newMessage,
-        msisdn: body.msisdn,
+        msisdn: data.msisdn,
         clientToken: data.token,
       });
     });

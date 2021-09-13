@@ -7,7 +7,7 @@ export class SuccessControllerSms implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      console.log('REQUEST BODY', httpRequest);
+      // console.log('REQUEST BODY', httpRequest);
       await this.successSms.handle(httpRequest.body);
       return {
         statusCode: 200,

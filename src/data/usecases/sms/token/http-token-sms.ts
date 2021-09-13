@@ -11,7 +11,8 @@ export class HttpTokenSms implements TokenSms {
     for await (const message of messages) {
       await this.sendSms.send({
         message: replaceKeyToValue(message, body.data),
-        msisdn: body.msisdn,
+        msisdn: body.data.msisdn,
+        clientToken: body.data.token,
       });
     }
   }

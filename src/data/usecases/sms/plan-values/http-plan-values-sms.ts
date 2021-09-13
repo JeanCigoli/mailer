@@ -22,7 +22,8 @@ export class HttpPlanValuesSms implements PlanValuesSms {
       if (text.length >= 160) {
         await this.sendSms.send({
           message: acumulatorValue,
-          msisdn: body.msisdn,
+          msisdn: body.data.msisdn,
+          clientToken: body.data.token,
         });
 
         acumulator = current;
@@ -39,7 +40,8 @@ export class HttpPlanValuesSms implements PlanValuesSms {
 
     await this.sendSms.send({
       message: finalMessage,
-      msisdn: body.msisdn,
+      msisdn: body.data.msisdn,
+      clientToken: body.data.token,
     });
   }
 }
