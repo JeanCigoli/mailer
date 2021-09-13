@@ -1,9 +1,8 @@
 import { RabbitMqServer } from '../infra/amqp/helper';
 import { MongoHelper } from '../infra/core/db/mongo/helpers';
-import { dbPhoenix } from '../infra/core/db/mssql/helpers';
-import { RABBIT, SERVER, MONGO } from '../utils/config/constants';
+import { MONGO, RABBIT } from '../utils/config/constants';
 import errorLogger from '../utils/logger';
-import { server } from './application';
+import setupWorker from './config/listener-worker';
 
 (async () => {
   try {
@@ -18,20 +17,19 @@ import { server } from './application';
 
     await MongoHelper.connect();
 
-    const rabbitMq = RabbitMqServer.getInstance();
-    rabbitMq.setCredentials({
-      host: RABBIT.HOST,
-      password: RABBIT.PASSWORD,
-      port: +RABBIT.PORT,
+    const rabbitMqServer = RabbitMqServer.getInstance();
+
+    rabbitMqServer.setCredentials({
       user: RABBIT.USER,
+      password: RABBIT.PASSWORD,
+      host: RABBIT.HOST,
+      port: +RABBIT.PORT,
     });
-    await rabbitMq.start();
 
-    await dbPhoenix.raw('SELECT 1');
+    await rabbitMqServer.start();
 
-    server.listen(SERVER.PORT, async () => {
-      console.log(`Server is running on port: ${SERVER.PORT}`);
-    });
+    console.log('Listener started!');
+    setupWorker(rabbitMqServer);
   } catch (error) {
     errorLogger(error);
   }

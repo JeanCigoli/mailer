@@ -1,24 +1,20 @@
 import { SendMessagesDefault } from '../../../../domain/usecases/whatsapp';
-import { ok, serverError } from '../../../../utils/response/response';
-import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
+import { Job } from '../../../../main/protocols/listener-job';
+import errorLogger from '../../../../utils/logger';
 
-export class SendMessagesDefaultController implements Controller {
+export class SendMessagesDefaultController implements Job {
   constructor(private readonly sendMessagesDefault: SendMessagesDefault) {}
 
-  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(message: Record<string, any>, next: Function): Promise<void> {
     try {
       await this.sendMessagesDefault.send({
-        ...httpRequest.body,
-        ...httpRequest.step,
+        ...message.body,
+        ...message.step,
       });
 
-      return ok('Envio de mensagem realizada', {});
+      next();
     } catch (error: any) {
-      console.log(error);
-      switch (error.message) {
-        default:
-          return serverError(error);
-      }
+      errorLogger(error);
     }
   }
 }

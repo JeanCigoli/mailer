@@ -26,7 +26,7 @@ export const DATABASE = {
   DB_PORT: process.env.DATABASE_PORT || '',
 };
 
-export const RABBITMQ = {
+export const RABBIT = {
   HOST: process.env.RABBIT_HOST || '',
   PORT: process.env.RABBIT_PORT || '',
   USER: process.env.RABBIT_USER || '',

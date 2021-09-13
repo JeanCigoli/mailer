@@ -1,1 +1,1 @@
-export * from './send-sms-listener';
+export * from './send-whatsapp-listener';
