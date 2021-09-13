@@ -49,6 +49,9 @@ export class DbAddValidityCard implements AddValidityCard {
         messages: [step.message, params.stepSource.message],
         step,
         status: false,
+        data: {
+          ...session,
+        },
       };
     }
 

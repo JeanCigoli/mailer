@@ -43,7 +43,7 @@ export class DbCheckExpected implements CheckExpected {
             params.stepSource.message,
           ],
           step: params.stepSource,
-          data: {},
+          data: { ...props.session },
         },
       };
     }
@@ -54,6 +54,7 @@ export class DbCheckExpected implements CheckExpected {
         status: false,
         messages: [params.stepSource.message],
         step: params.stepSource,
+        data: { ...props.session },
       },
     };
   }

@@ -11,4 +11,6 @@ export * from './step-source/list-step-source-by-step-repository';
 export * from './step/list-step-with-source-repository';
 
 export * from './customer/list-auth-code-repository';
+
+export * from './mvno/list-credential-by-service-and-mvno';
 export * from './mvno/list-source-mvno-repository';

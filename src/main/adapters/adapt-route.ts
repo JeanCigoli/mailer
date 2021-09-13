@@ -16,7 +16,6 @@ export function adaptRoute(controller: Controller) {
       dialogue: req.dialogue,
     };
 
-    console.log(req.step);
     const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.headers) {

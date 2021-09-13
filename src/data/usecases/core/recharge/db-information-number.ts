@@ -63,6 +63,7 @@ export class DbInformationNumber implements InformationNumber {
         messages: [step.message],
         step,
         status: false,
+        data: { ...props.session },
       };
     }
 
@@ -91,6 +92,9 @@ export class DbInformationNumber implements InformationNumber {
         messages: [step.message],
         step,
         status: false,
+        data: {
+          ...props.session,
+        },
       };
     }
 

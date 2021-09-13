@@ -63,7 +63,9 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
         messages: [step.message],
         status: true,
         step,
-        data: {},
+        data: {
+          ...session,
+        },
       };
     }
 
@@ -93,7 +95,9 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
         messages: [step.message],
         step,
         status: true,
-        data: {},
+        data: {
+          ...session,
+        },
       };
     }
 

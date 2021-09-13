@@ -1,26 +1,35 @@
 import { adaptRoute } from '../../adapters/adapt-route';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
-import { makeSendMessageDefault } from '../../factories/controller/whatsapp';
+import {
+  makeSendBilletRecharge,
+  makeSendConsumption,
+  makeSendListCardRecharge,
+  makeSendListValuesRecharge,
+  makeSendMessageDefault,
+} from '../../factories/controller/whatsapp';
 
 export const formatWhatsAppSwitchConfig: adapterOptions = [
   {
     target: { step: 'stepId' },
-    expected: { stepId: 2 },
-    handle: adaptRoute(makeSendMessageDefault([1, 2])),
+    expected: { stepId: 5 },
+    handle: adaptRoute(makeSendConsumption()),
   },
   {
     target: { step: 'stepId' },
-    expected: { stepId: 3 },
-    handle: adaptRoute(makeSendMessageDefault([])),
+    expected: { stepId: 13 },
+    handle: adaptRoute(makeSendListValuesRecharge()),
   },
   {
     target: { step: 'stepId' },
-    expected: { stepId: 4 },
-    handle: adaptRoute(makeSendMessageDefault([1, 2, 3])),
+    expected: { stepId: 15 },
+    handle: adaptRoute(makeSendBilletRecharge()),
   },
   {
     target: { step: 'stepId' },
-    expected: { stepId: 8 },
-    handle: adaptRoute(makeSendMessageDefault([1, 2, 0])),
+    expected: { stepId: 16 },
+    handle: adaptRoute(makeSendListCardRecharge()),
+  },
+  {
+    handle: adaptRoute(makeSendMessageDefault()),
   },
 ];
