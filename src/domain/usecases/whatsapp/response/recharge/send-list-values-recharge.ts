@@ -1,4 +1,4 @@
-import { DefaultParams, DefaultResult } from '../../../models';
+import { DefaultParams, DefaultResult } from '../../../../models';
 
 export interface SendListValuesRecharge {
   send(params: SendListValuesRecharge.Params): SendListValuesRecharge.Result;

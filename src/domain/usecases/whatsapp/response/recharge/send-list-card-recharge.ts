@@ -1,4 +1,4 @@
-import { DefaultParams, DefaultResult } from '../../../models';
+import { DefaultParams, DefaultResult } from '../../../../models';
 
 export interface SendListCardRecharge {
   send(params: SendListCardRecharge.Params): SendListCardRecharge.Result;

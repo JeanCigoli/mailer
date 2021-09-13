@@ -1,6 +1,7 @@
 import { adaptRoute } from '../../adapters/adapt-route';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
+  makeAccountNotFound,
   makeSendBilletRecharge,
   makeSendConsumption,
   makeSendListCardRecharge,
@@ -28,6 +29,11 @@ export const formatWhatsAppSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 16 },
     handle: adaptRoute(makeSendListCardRecharge()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 32 },
+    handle: adaptRoute(makeAccountNotFound()),
   },
   {
     handle: adaptRoute(makeSendMessageDefault()),
