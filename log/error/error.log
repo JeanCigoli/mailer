@@ -1,32 +1,77 @@
+
 ------------------------------------------------
-Date: 2021-09-08 08:41:03
-Error: MongoParseError: Incomplete key value pair for option at MongoParseError: Incomplete key value pair for option
-    at parseQueryString (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\core\uri_parser.js:431:13)
-    at parseConnectionString (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\core\uri_parser.js:589:21)
-    at connect (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\operations\connect.js:281:3)
-    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\mongo_client.js:259:5
-    at maybePromise (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\utils.js:692:3)
-    at MongoClient.connect (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\mongo_client.js:255:10)
-    at Function.MongoClient.connect (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\mongodb\lib\mongo_client.js:400:22)
-    at Object.connect (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\infra\core\db\mongo\helpers\config.ts:21:37)
-    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\server.ts:19:23
+Date: 2021-09-13 10:25:10
+Error: TypeError: Cannot read property 'map' of undefined at TypeError: Cannot read property 'map' of undefined
+    at HttpSuccessSms.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\data\usecases\sms\default\http-success-sms.ts:15:14)
+    at SuccessControllerSms.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\presentation\controllers\sms\default\success-controller-sms.ts:10:29)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-route.ts:20:43)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:44:43
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\routes\sms\index.ts:16:14
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\routes\config\step-core-sms-config.ts:30:14)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:44:43)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:94:41
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-middleware-step.ts:22:14
+    at VerifyStepMiddleware.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\presentation\middlewares\dialogue\verify-step-middleware.ts:15:14)
 ------------------------------------------------
-Date: 2021-09-08 12:09:12
-Error: TypeError: rabbitMqServer.getInstance is not a function at TypeError: rabbitMqServer.getInstance is not a function
-    at C:\Users\jean.almeida\Projects\api-comunication\src\main\server.ts:22:37
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Date: 2021-09-13 10:25:49
+Error: TypeError: Cannot read property 'map' of undefined at TypeError: Cannot read property 'map' of undefined
+    at HttpSuccessSms.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\data\usecases\sms\default\http-success-sms.ts:17:14)
+    at SuccessControllerSms.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\presentation\controllers\sms\default\success-controller-sms.ts:10:29)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-route.ts:20:43)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:44:43
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\routes\sms\index.ts:16:14
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\routes\config\step-core-sms-config.ts:30:14)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:44:43)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:94:41
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-middleware-step.ts:22:14
+    at VerifyStepMiddleware.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\presentation\middlewares\dialogue\verify-step-middleware.ts:15:14)
 ------------------------------------------------
-Date: 2021-09-08 12:10:03
-Error: TypeError: rabbitMqServer.getInstance is not a function at TypeError: rabbitMqServer.getInstance is not a function
-    at C:\Users\jean.almeida\Projects\api-comunication\src\main\server.ts:22:37
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Date: 2021-09-13 10:26:54
+Error: TypeError: Cannot read property 'map' of undefined at TypeError: Cannot read property 'map' of undefined
+    at HttpSuccessSms.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\data\usecases\sms\default\http-success-sms.ts:17:14)
+    at SuccessControllerSms.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\presentation\controllers\sms\default\success-controller-sms.ts:11:29)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-route.ts:20:43)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:44:43
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\routes\sms\index.ts:16:14
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\routes\config\step-core-sms-config.ts:30:14)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:44:43)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:94:41
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-middleware-step.ts:22:14
+    at VerifyStepMiddleware.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\presentation\middlewares\dialogue\verify-step-middleware.ts:15:14)
 ------------------------------------------------
-Date: 2021-09-08 12:10:57
-Error: TypeError: rabbitMqServer.getInstance is not a function at TypeError: rabbitMqServer.getInstance is not a function
-    at C:\Users\jean.almeida\Projects\api-comunication\src\main\server.ts:22:37
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)
-------------------------------------------------
-Date: 2021-09-08 12:11:18
-Error: TypeError: rabbitMqServer.getInstance is not a function at TypeError: rabbitMqServer.getInstance is not a function
-    at C:\Users\jean.almeida\Projects\api-comunication\src\main\server.ts:22:37
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Date: 2021-09-13 10:31:38
+Error: TypeError: Cannot read property 'map' of undefined at TypeError: Cannot read property 'map' of undefined
+    at HttpSuccessSms.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\data\usecases\sms\default\http-success-sms.ts:17:14)
+    at SuccessControllerSms.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\presentation\controllers\sms\default\success-controller-sms.ts:11:29)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-route.ts:20:43)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:44:43
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\routes\sms\index.ts:16:14
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\routes\config\step-core-sms-config.ts:30:14)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:44:43)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:94:41
+    at Layer.handle [as handle_request] (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-middleware-step.ts:22:14
+    at VerifyStepMiddleware.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\presentation\middlewares\dialogue\verify-step-middleware.ts:15:14)

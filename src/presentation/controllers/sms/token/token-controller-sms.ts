@@ -1,14 +1,14 @@
-import { SuccessSms } from '../../../../domain/usecases/sms/default/success-sms';
+import { TokenSms } from '../../../../domain/usecases/sms/token/token-sms';
 import errorLogger from '../../../../utils/logger';
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
-export class SuccessControllerSms implements Controller {
-  constructor(private readonly successSms: SuccessSms) {}
+export class TokenControllerSms implements Controller {
+  constructor(private readonly tokenSms: TokenSms) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      // console.log('REQUEST BODY', httpRequest);
-      await this.successSms.handle(httpRequest.body);
+      await this.tokenSms.handle(httpRequest.body);
+
       return {
         statusCode: 200,
       };
