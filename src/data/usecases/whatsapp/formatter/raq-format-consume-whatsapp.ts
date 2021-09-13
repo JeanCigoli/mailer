@@ -3,11 +3,25 @@ import { Source } from '../../../../utils/enum/source';
 
 export class RaqFormatConsumeWhatsApp implements FormatConsumeWhatsApp {
   format(params: any): FormatConsumeWhatsApp.Result {
-    console.log(params);
+    if (params.data[0].message.type === 'TEXT') {
+      return {
+        message: params.data[0].message.messageText,
+        msisdn: '5515976079352', //jsonMessage.data[0].source,
+        sourceId: Source.WHATSAPP,
+      };
+    }
+
+    if (params.data[0].message.interactive.type === 'LIST_REPLY') {
+      return {
+        message: params.data[0].message.listReply.rowIdentifier,
+        msisdn: '5515976079352', //jsonMessage.data[0].source,
+        sourceId: Source.WHATSAPP,
+      };
+    }
 
     return {
-      message: 'Olá',
-      msisdn: '5515976079352',
+      message: params.data[0].message.payload,
+      msisdn: '5515976079352', //jsonMessage.data[0].source,
       sourceId: Source.WHATSAPP,
     };
   }

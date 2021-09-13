@@ -4,7 +4,7 @@ import {
   listenerMiddlewareAdapter,
 } from '../adapters';
 import { adaptListenerJob } from '../adapters/adapt-listener-job';
-import { sendWhatsAppMiddleware } from '../factories/jobs';
+import { makeFormatterWhatsApp } from '../factories/jobs/whatsapp';
 import { makeVerifyStepWhatsApp } from '../factories/middlewares/dialogue';
 import { Listener } from '../protocols/listener';
 import {
@@ -13,7 +13,7 @@ import {
 } from '../routes/config';
 
 const middlewares = [
-  adaptListenerJob(sendWhatsAppMiddleware()),
+  adaptListenerJob(makeFormatterWhatsApp()),
   adaptMiddlewareStepJob(makeVerifyStepWhatsApp()),
   adaptSwitchMiddleware(sourceSwitchConfig),
   adaptSwitchMiddleware(formatWhatsAppSwitchConfig),
@@ -21,7 +21,7 @@ const middlewares = [
 
 const sendWhatsAppMessage: Listener = {
   enable: true,
-  queue: 'mailer',
+  queue: 'datora-communication-whatsapp',
   handle: listenerMiddlewareAdapter(...middlewares),
 };
 

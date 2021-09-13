@@ -2,6 +2,7 @@ import { adaptListenerJob } from '../../adapters/adapt-listener-job';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
   makeAccountNotFound,
+  makeListsCardsDelete,
   makeSendBilletRecharge,
   makeSendConsumption,
   makeSendListCardRecharge,
@@ -29,6 +30,11 @@ export const formatWhatsAppSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 16 },
     handle: adaptListenerJob(makeSendListCardRecharge()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 28 },
+    handle: adaptListenerJob(makeListsCardsDelete()),
   },
   {
     target: { step: 'stepId' },
