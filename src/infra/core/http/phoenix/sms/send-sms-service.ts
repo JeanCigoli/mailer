@@ -12,6 +12,9 @@ export class SendSmsService implements SendSms {
         message: params.message,
         msisdn: params.msisdn,
       },
+      headers: {
+        authorization: params.clientToken,
+      },
     });
 
     if (!result) {

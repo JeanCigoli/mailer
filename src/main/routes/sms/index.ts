@@ -10,11 +10,6 @@ export default (routes: Router) => {
     '/',
     adaptMiddlewareStep(makeVerifyStepSms()),
     adaptSwitchMiddleware(sourceSwitchConfig),
-    (req, res, next) => {
-      console.log('ESTOU AQUI!');
-
-      return next();
-    },
     adaptSwitchMiddleware(formatSmsSwitchConfig),
   );
 

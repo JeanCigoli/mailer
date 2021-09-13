@@ -86,7 +86,10 @@ export class DbAuthentication implements Authentication {
         status: true,
         messages: [params.stepSource.message, step.message],
         step,
-        data: account,
+        data: {
+          ...account,
+          token,
+        },
       };
     }
 
@@ -116,7 +119,10 @@ export class DbAuthentication implements Authentication {
       status: true,
       messages: [params.stepSource.message, step.message],
       step,
-      data: account,
+      data: {
+        ...account,
+        token,
+      },
     };
   }
 }
