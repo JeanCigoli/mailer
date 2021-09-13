@@ -1,14 +1,12 @@
-import { SuccessSms } from '../../../../domain/usecases/sms/default/success-sms';
+import { PlanValuesSms } from '../../../../domain/usecases/sms/plan-values/plan-values-sms';
 import errorLogger from '../../../../utils/logger';
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
-export class SuccessControllerSms implements Controller {
-  constructor(private readonly successSms: SuccessSms) {}
-
+export class PlanValuesControllerSms implements Controller {
+  constructor(private readonly planValuesSms: PlanValuesSms) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      console.log('REQUEST BODY', httpRequest);
-      await this.successSms.handle(httpRequest.body);
+      await this.planValuesSms.handle(httpRequest.body);
       return {
         statusCode: 200,
       };

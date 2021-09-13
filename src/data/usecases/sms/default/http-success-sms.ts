@@ -1,5 +1,6 @@
-import { SendSms } from '../../../../data/protocols/core/http/send-sms';
-import { SuccessSms } from '../../core/sms/success-sms';
+import { SendSms } from '../../../protocols/core/http/send-sms';
+import { replaceKeyToValue } from '../../../../utils/replace-key-to-value';
+import { SuccessSms } from '../../../../domain/usecases/sms/default/success-sms';
 
 export class HttpSuccessSms implements SuccessSms {
   constructor(private readonly sendSms: SendSms) {}
@@ -7,16 +8,21 @@ export class HttpSuccessSms implements SuccessSms {
   async handle(body: any): SuccessSms.Result {
     // const { body, messages } = params;
 
+    // console.log({ body });
+
     const messages: Array<string> = body.messages;
 
     const data = body.data;
 
+    console.log({ data });
+
     messages.map(async (message) => {
       const newMessage = replaceKeyToValue(message, data);
 
-      const result = await this.sendSms.send({
+      await this.sendSms.send({
         message: newMessage,
         msisdn: body.msisdn,
+        clientToken: data.token,
       });
     });
     return { status: true };

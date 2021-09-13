@@ -1,14 +1,13 @@
-import { SuccessSms } from '../../../../domain/usecases/sms/default/success-sms';
+import { ConsumptionSms } from '../../../../domain/usecases/sms/consumption/consumption-sms';
 import errorLogger from '../../../../utils/logger';
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
-export class SuccessControllerSms implements Controller {
-  constructor(private readonly successSms: SuccessSms) {}
+export class ConsumptionControllerSms implements Controller {
+  constructor(private readonly consumptionSms: ConsumptionSms) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      console.log('REQUEST BODY', httpRequest);
-      await this.successSms.handle(httpRequest.body);
+      await this.consumptionSms.handle(httpRequest.body);
       return {
         statusCode: 200,
       };

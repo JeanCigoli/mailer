@@ -7,10 +7,13 @@ export class SendSmsService implements SendSms {
   async send(params: SendSms.Params): SendSms.Result {
     const result = await this.httpClient.request({
       method: 'POST',
-      url: '/sms',
+      url: 'v1/sms',
       body: {
         message: params.message,
         msisdn: params.msisdn,
+      },
+      headers: {
+        authorization: params.clientToken,
       },
     });
 

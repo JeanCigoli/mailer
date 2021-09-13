@@ -6,6 +6,7 @@ export namespace SendSms {
   export type Params = {
     msisdn: string;
     message: string;
+    clientToken: string;
   };
 
   export type Result = Promise<{
