@@ -1,5 +1,4 @@
 import { adaptListenerJob } from '../../adapters/adapt-listener-job';
-import { adaptRoute } from '../../adapters/adapt-route';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
   makeAccountNotFound,
@@ -8,43 +7,33 @@ import {
   makeSendListCardRecharge,
   makeSendListValuesRecharge,
   makeSendMessageDefault,
-} from '../../factories/controller/whatsapp';
+} from '../../factories/jobs/whatsapp';
 
 export const formatWhatsAppSwitchConfig: adapterOptions = [
   {
     target: { step: 'stepId' },
     expected: { stepId: 5 },
-    handle: adaptRoute(makeSendConsumption()),
+    handle: adaptListenerJob(makeSendConsumption()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 13 },
-    handle: adaptRoute(makeSendListValuesRecharge()),
+    handle: adaptListenerJob(makeSendListValuesRecharge()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 15 },
-    handle: adaptRoute(makeSendBilletRecharge()),
+    handle: adaptListenerJob(makeSendBilletRecharge()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 16 },
-    handle: adaptRoute(makeSendListCardRecharge()),
+    handle: adaptListenerJob(makeSendListCardRecharge()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 32 },
-    handle: adaptRoute(makeAccountNotFound()),
-  },
-  {
-    target: { step: 'stepId' },
-    expected: { stepId: 35 },
-    handle: (message: any, next: any) => {
-      console.log('Estou na rota default');
-      console.log(message);
-
-      return next();
-    },
+    handle: adaptListenerJob(makeAccountNotFound()),
   },
   {
     handle: adaptListenerJob(makeSendMessageDefault()),
