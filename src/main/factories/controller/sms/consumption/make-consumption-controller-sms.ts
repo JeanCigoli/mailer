@@ -5,8 +5,6 @@ import { RequestAdapter } from '../../../../../infra/core/http/web-service-rest-
 import { ConsumptionControllerSms } from '../../../../../presentation/controllers/sms/consumption/consumption-controller-sms';
 
 export const makeConsumptionControllerSms = () => {
-  // console.log({ phoenixSms });
-
   const httpClient = new RequestAdapter(phoenixSms);
   const sendSmsService = new SendSmsService(httpClient);
   const httpConsumptionSms = new HttpConsumptionSms(sendSmsService);
