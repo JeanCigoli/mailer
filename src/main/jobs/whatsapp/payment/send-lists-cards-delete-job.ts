@@ -1,9 +1,9 @@
-import { ListsCardsDelete } from '../../../../domain/usecases/whatsapp';
-import { Job } from '../../../../main/protocols/listener-job';
+import { SendListsCardsDelete } from '../../../../domain/usecases/whatsapp';
+import { Job } from '../../../protocols/listener-job';
 import errorLogger from '../../../../utils/logger';
 
-export class ListsCardsDeleteJob implements Job {
-  constructor(private readonly listsCardsDelete: ListsCardsDelete) {}
+export class SendListsCardsDeleteJob implements Job {
+  constructor(private readonly listsCardsDelete: SendListsCardsDelete) {}
 
   async handle(message: Record<string, any>, next: Function): Promise<void> {
     try {

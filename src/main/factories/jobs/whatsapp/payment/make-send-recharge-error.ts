@@ -1,23 +1,25 @@
-import { HttpListsCardsDelete } from '../../../../../data/usecases/whatsapp';
+import { HttpSendRechargeError } from '../../../../../data/usecases/whatsapp';
 import { SourceMvnoRepository } from '../../../../../infra/core/db/mssql';
 import { wavyMessage } from '../../../../../infra/core/http/helpers/wavy-message';
 import { SendMessageHttp } from '../../../../../infra/core/http/phoenix/whatsapp/send-message-http';
 import { RequestAdapter } from '../../../../../infra/core/http/web-service-rest-adapter';
-import { ListsCardsDeleteJob } from '../../../../jobs/whatsapp';
+import { SendRechargeErrorJob } from '../../../../jobs/whatsapp';
 import { transformCredentials } from '../../../../../utils/base64';
+import { verifyMessages } from '../../../../../utils/verify-message-whatsapp';
 
-export const makeListsCardsDelete = () => {
+export const makeSendRechargeError = () => {
   const requestAdapter = new RequestAdapter(wavyMessage);
 
   const sendMessageHttp = new SendMessageHttp(requestAdapter);
 
   const sourceMvnoRepository = new SourceMvnoRepository();
 
-  const httpListCardsDeletesDefault = new HttpListsCardsDelete(
+  const httpListCardsDeletesDefault = new HttpSendRechargeError(
     sendMessageHttp,
     sourceMvnoRepository,
     transformCredentials,
+    verifyMessages,
   );
 
-  return new ListsCardsDeleteJob(httpListCardsDeletesDefault);
+  return new SendRechargeErrorJob(httpListCardsDeletesDefault);
 };

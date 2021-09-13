@@ -4,6 +4,10 @@ export const replaceKeyToValue = (message: string, values: any) => {
   }
 
   Object.entries(values).map(([key, value]: [string, any]) => {
+    if (!value) {
+      return;
+    }
+
     if (Array.isArray(value)) {
       value.map((data) => {
         message = replaceKeyToValue(message, data);

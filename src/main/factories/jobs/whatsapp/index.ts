@@ -5,6 +5,9 @@ export * from './recharge/make-send-billet-recharge';
 export * from './recharge/make-list-card-recharge';
 
 export * from './account/make-account-not-found';
-export * from './payment/make-list-cards-delete';
+export * from './payment/make-send-list-cards-delete';
+export * from './payment/make-send-delete-card-success';
+export * from './payment/make-send-confirm-add-card';
+export * from './payment/make-send-recharge-error';
 
 export * from './make-formatter-whatsapp-job';

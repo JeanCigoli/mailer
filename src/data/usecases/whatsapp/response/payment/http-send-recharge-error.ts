@@ -1,12 +1,12 @@
 import { ButtonWhats } from '../../../../../domain/models';
-import { SendMessagesDefault } from '../../../../../domain/usecases/whatsapp';
+import { SendRechargeError } from '../../../../../domain/usecases/whatsapp';
 import { replaceKeyToValue } from '../../../../../utils/replace-key-to-value';
 import { ListCredentialByServiceAndMvno } from '../../../../protocols/core/db';
 import { TransformCredentials } from '../../../../protocols/core/utils';
 import { SendMessageWhatsApp } from '../../../../protocols/whatsapp/http';
 import { VerifyMessages } from '../../../../protocols/whatsapp/utils';
 
-export class HttpSendMessagesDefault implements SendMessagesDefault {
+export class HttpSendRechargeError implements SendRechargeError {
   constructor(
     private readonly sendMessageWhatsApp: SendMessageWhatsApp,
     private readonly listCredentialByServiceAndMvno: ListCredentialByServiceAndMvno,
@@ -14,7 +14,7 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
     private readonly verifyMessages: VerifyMessages,
   ) {}
 
-  async send(params: SendMessagesDefault.Params): SendMessagesDefault.Result {
+  async send(params: SendRechargeError.Params): SendRechargeError.Result {
     const destinations = [
       {
         correlationId: new Date().getTime(),
@@ -29,30 +29,16 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
 
     const credentials = this.transformCredentials(base64.credentials);
 
-    const [firstMessage, secondMessage] = params.messages;
+    const [firstMessage] = params.messages;
 
-    const verify = this.verifyMessages(firstMessage, secondMessage);
+    const verify = this.verifyMessages('Operação não realizada', firstMessage);
 
-    if (!verify.buttons.length) {
-      for await (const message of params.messages) {
-        const body = {
-          destinations: destinations,
-          message: {
-            messageText: replaceKeyToValue(message, params.data),
-          },
-        };
+    const variables = {
+      reason: params.data.message,
+    };
 
-        await this.sendMessageWhatsApp.send({
-          body,
-          credentials,
-        });
-      }
-
-      return;
-    }
-
-    const headerMessage = replaceKeyToValue(verify.headerMessage, params.data);
-    const bodyMessage = replaceKeyToValue(verify.bodyMessage, params.data);
+    const headerMessage = replaceKeyToValue(verify.headerMessage, variables);
+    const bodyMessage = replaceKeyToValue(verify.bodyMessage, variables);
 
     const body: ButtonWhats = {
       destinations: destinations,

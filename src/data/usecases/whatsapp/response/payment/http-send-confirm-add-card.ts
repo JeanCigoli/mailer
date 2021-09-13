@@ -1,12 +1,12 @@
 import { ButtonWhats } from '../../../../../domain/models';
-import { SendMessagesDefault } from '../../../../../domain/usecases/whatsapp';
+import { SendConfirmAddCard } from '../../../../../domain/usecases/whatsapp';
 import { replaceKeyToValue } from '../../../../../utils/replace-key-to-value';
 import { ListCredentialByServiceAndMvno } from '../../../../protocols/core/db';
 import { TransformCredentials } from '../../../../protocols/core/utils';
 import { SendMessageWhatsApp } from '../../../../protocols/whatsapp/http';
 import { VerifyMessages } from '../../../../protocols/whatsapp/utils';
 
-export class HttpSendMessagesDefault implements SendMessagesDefault {
+export class HttpSendConfirmAddCard implements SendConfirmAddCard {
   constructor(
     private readonly sendMessageWhatsApp: SendMessageWhatsApp,
     private readonly listCredentialByServiceAndMvno: ListCredentialByServiceAndMvno,
@@ -14,7 +14,7 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
     private readonly verifyMessages: VerifyMessages,
   ) {}
 
-  async send(params: SendMessagesDefault.Params): SendMessagesDefault.Result {
+  async send(params: SendConfirmAddCard.Params): SendConfirmAddCard.Result {
     const destinations = [
       {
         correlationId: new Date().getTime(),
@@ -29,30 +29,27 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
 
     const credentials = this.transformCredentials(base64.credentials);
 
-    const [firstMessage, secondMessage] = params.messages;
+    const [firstMessage] = params.messages;
 
-    const verify = this.verifyMessages(firstMessage, secondMessage);
+    const verify = this.verifyMessages(
+      'Confirmação de cadastro!',
+      firstMessage,
+    );
 
-    if (!verify.buttons.length) {
-      for await (const message of params.messages) {
-        const body = {
-          destinations: destinations,
-          message: {
-            messageText: replaceKeyToValue(message, params.data),
-          },
-        };
+    const cardLength = params.data.newCard.cardNumber.length;
 
-        await this.sendMessageWhatsApp.send({
-          body,
-          credentials,
-        });
-      }
+    const paramsVariables = {
+      lastDigits: params.data.newCard.cardNumber.substr(
+        cardLength - 4,
+        cardLength - 1,
+      ),
+    };
 
-      return;
-    }
-
-    const headerMessage = replaceKeyToValue(verify.headerMessage, params.data);
-    const bodyMessage = replaceKeyToValue(verify.bodyMessage, params.data);
+    const headerMessage = replaceKeyToValue(
+      verify.headerMessage,
+      paramsVariables,
+    );
+    const bodyMessage = replaceKeyToValue(verify.bodyMessage, paramsVariables);
 
     const body: ButtonWhats = {
       destinations: destinations,

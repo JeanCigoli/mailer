@@ -2,13 +2,17 @@ import { adaptListenerJob } from '../../adapters/adapt-listener-job';
 import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
   makeAccountNotFound,
-  makeListsCardsDelete,
+  makeSendDeleteCardSuccess,
+  makeSendListsCardsDelete,
   makeSendBilletRecharge,
   makeSendConsumption,
   makeSendListCardRecharge,
   makeSendListValuesRecharge,
   makeSendMessageDefault,
+  makeSendConfirmAddCard,
+  makeSendRechargeError,
 } from '../../factories/jobs/whatsapp';
+import { makeSendConfirmRecharge } from '../../factories/jobs/whatsapp/payment/make-send-confirm-recharge';
 
 export const formatWhatsAppSwitchConfig: adapterOptions = [
   {
@@ -34,7 +38,27 @@ export const formatWhatsAppSwitchConfig: adapterOptions = [
   {
     target: { step: 'stepId' },
     expected: { stepId: 28 },
-    handle: adaptListenerJob(makeListsCardsDelete()),
+    handle: adaptListenerJob(makeSendListsCardsDelete()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 21 },
+    handle: adaptListenerJob(makeSendConfirmRecharge()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 24 },
+    handle: adaptListenerJob(makeSendRechargeError()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 29 },
+    handle: adaptListenerJob(makeSendDeleteCardSuccess()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 26 },
+    handle: adaptListenerJob(makeSendConfirmAddCard()),
   },
   {
     target: { step: 'stepId' },

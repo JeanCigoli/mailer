@@ -86,7 +86,7 @@ export class DbDeleteCardStep implements DeleteCardStep {
         step,
         data: {
           ...session,
-          card: card.message,
+          reason: card.message,
         },
       };
     }

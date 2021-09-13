@@ -1,21 +1,21 @@
 import { Card, ListWhats } from '../../../../../domain/models';
-import { ListsCardsDelete } from '../../../../../domain/usecases/whatsapp';
+import { SendListsCardsDelete } from '../../../../../domain/usecases/whatsapp';
 import { ListCredentialByServiceAndMvno } from '../../../../protocols/core/db';
 import { TransformCredentials } from '../../../../protocols/core/utils';
 import { SendMessageWhatsApp } from '../../../../protocols/whatsapp/http';
 
-export class HttpListsCardsDelete implements ListsCardsDelete {
+export class HttpListsCardsDelete implements SendListsCardsDelete {
   constructor(
     private readonly sendMessageWhatsApp: SendMessageWhatsApp,
     private readonly listCredentialByServiceAndMvno: ListCredentialByServiceAndMvno,
     private readonly transformCredentials: TransformCredentials,
   ) {}
 
-  async list(params: ListsCardsDelete.Params): ListsCardsDelete.Result {
+  async list(params: SendListsCardsDelete.Params): SendListsCardsDelete.Result {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: '5511996059255',
+        destination: params.msisdn,
       },
     ];
 

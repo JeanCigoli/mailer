@@ -36,3 +36,22 @@ Error: TypeError: Cannot convert undefined or null to object at TypeError: Canno
     at Object.handle (C:\Users\jean.almeida\Projects\api-comunication\src\main\adapters\adapt-listener-job.ts:5:5)
     at Object.handle (C:\Users\jean.almeida\Projects\api-comunication\src\main\adapters\adapt-middleware-job.ts:12:5)
     at C:\Users\jean.almeida\Projects\api-comunication\src\main\adapters\adapt-middleware-step-job.ts:12:5
+------------------------------------------------
+Date: 2021-09-13 18:33:48
+Error: TypeError: Cannot convert undefined or null to object at TypeError: Cannot convert undefined or null to object
+    at Function.entries (<anonymous>)
+    at replaceKeyToValue (C:\Users\jean.almeida\Projects\api-comunication\src\utils\replace-key-to-value.ts:6:10)
+    at C:\Users\jean.almeida\Projects\api-comunication\src\utils\replace-key-to-value.ts:25:34
+    at Array.map (<anonymous>)
+    at replaceKeyToValue (C:\Users\jean.almeida\Projects\api-comunication\src\utils\replace-key-to-value.ts:6:26)
+    at C:\Users\jean.almeida\Projects\api-comunication\src\utils\replace-key-to-value.ts:9:36
+    at Array.map (<anonymous>)
+    at C:\Users\jean.almeida\Projects\api-comunication\src\utils\replace-key-to-value.ts:8:13
+    at Array.map (<anonymous>)
+    at replaceKeyToValue (C:\Users\jean.almeida\Projects\api-comunication\src\utils\replace-key-to-value.ts:6:26)
+    at HttpSendMessagesDefault.send (C:\Users\jean.almeida\Projects\api-comunication\src\data\usecases\whatsapp\response\default\http-send-messages-default.ts:54:44)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at SendMessagesDefaultJob.handle (C:\Users\jean.almeida\Projects\api-comunication\src\main\jobs\whatsapp\default\send-messages-default-job.ts:10:7)
+    at Object.handle (C:\Users\jean.almeida\Projects\api-comunication\src\main\adapters\adapt-listener-job.ts:5:5)
+    at Object.handle (C:\Users\jean.almeida\Projects\api-comunication\src\main\adapters\adapt-middleware-job.ts:12:5)
+    at C:\Users\jean.almeida\Projects\api-comunication\src\main\adapters\adapt-middleware-step-job.ts:12:5
