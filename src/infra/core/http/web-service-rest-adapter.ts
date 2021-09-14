@@ -11,15 +11,12 @@ export class RequestAdapter implements HttpClient {
   async request(data: HttpRequest): Promise<HttpResponse> {
     let axiosResponse: AxiosResponse;
 
-    // console.log({ axios: this.axios });
-
     try {
       axiosResponse = await this.axios({
         data: data?.body,
         ...data,
       });
     } catch (error: any) {
-      console.log(error);
       axiosResponse = error.response;
     }
 

@@ -133,8 +133,6 @@ export const stepCoreSmsSwitchConfig: adapterOptions = [
   },
   {
     handle: (req: Request, res: Response, next: NextFunction) => {
-      console.log('Estou na rota default');
-
       return next();
     },
   },

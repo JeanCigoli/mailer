@@ -15,7 +15,7 @@ export class HttpListsCardsDelete implements SendListsCardsDelete {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: params.msisdn,
+        destination: '5511996059255',
       },
     ];
 
@@ -26,7 +26,7 @@ export class HttpListsCardsDelete implements SendListsCardsDelete {
 
     const credentials = this.transformCredentials(base64.credentials);
 
-    const [firstMessage] = params.messages;
+    const [firstMessage, secondMessage] = params.messages;
     const values = params.data.cards
       .map(
         (value: Card, index: number) =>
@@ -40,10 +40,10 @@ export class HttpListsCardsDelete implements SendListsCardsDelete {
         interactive: {
           messageInteractiveType: 'LIST',
           header: {
-            text: 'Visualização dos cartões',
+            text: secondMessage ? firstMessage : 'Visualização dos cartões',
           },
           body: {
-            text: firstMessage,
+            text: secondMessage ? secondMessage : firstMessage,
           },
           listAction: {
             button: 'Cartões',

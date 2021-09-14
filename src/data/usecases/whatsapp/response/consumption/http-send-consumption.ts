@@ -14,7 +14,7 @@ export class HttpSendConsumption implements SendConsumption {
 
   async send(params: SendConsumption.Params): SendConsumption.Result {
     const variablesMessages = {
-      internet: params.data.consumption.data.available,
+      internet: (params.data.consumption.data.available / 1024).toFixed(1),
       minutes: params.data.consumption.voice.available,
       sms: params.data.consumption.sms.available,
       mvno: params.data.mvno,
@@ -24,7 +24,7 @@ export class HttpSendConsumption implements SendConsumption {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: params.msisdn,
+        destination: '5511996059255',
       },
     ];
 

@@ -6,15 +6,9 @@ export class HttpSuccessSms implements SuccessSms {
   constructor(private readonly sendSms: SendSms) {}
 
   async handle(body: any): SuccessSms.Result {
-    // const { body, messages } = params;
-
-    console.log({ body });
-
     const messages: Array<string> = body.messages;
 
     const data = body.data;
-
-    // console.log({ data });
 
     messages.map(async (message) => {
       const newMessage = replaceKeyToValue(message, data);

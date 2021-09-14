@@ -18,7 +18,7 @@ export class HttpSendConfirmAddCard implements SendConfirmAddCard {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: params.msisdn,
+        destination: '5511996059255',
       },
     ];
 
