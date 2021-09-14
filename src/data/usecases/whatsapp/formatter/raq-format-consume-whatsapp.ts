@@ -6,7 +6,7 @@ export class RaqFormatConsumeWhatsApp implements FormatConsumeWhatsApp {
     if (params.data[0].message.type === 'TEXT') {
       return {
         message: params.data[0].message.messageText,
-        msisdn: '5515976079352', // params.data[0].source,
+        msisdn: params.data[0].source, // '5515976079352',
         sourceId: Source.WHATSAPP,
       };
     }
@@ -14,14 +14,14 @@ export class RaqFormatConsumeWhatsApp implements FormatConsumeWhatsApp {
     if (params.data[0].message.interactive.type === 'LIST_REPLY') {
       return {
         message: params.data[0].message.listReply.rowIdentifier,
-        msisdn: '5515976079352', // params.data[0].source,
+        msisdn: params.data[0].source, // '5515976079352',
         sourceId: Source.WHATSAPP,
       };
     }
 
     return {
       message: params.data[0].message.payload,
-      msisdn: '5515976079352', // params.data[0].source,
+      msisdn: params.data[0].source, // '5515976079352',
       sourceId: Source.WHATSAPP,
     };
   }
