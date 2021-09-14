@@ -9,6 +9,7 @@ export class SendSmsJob implements Job {
       await this.sendSmsCallback.handle({
         message: json.message,
         msisdn: json.msisdn,
+        clientToken: json.token,
       });
     } catch (e) {
       console.log({ e });
