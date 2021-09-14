@@ -4,6 +4,7 @@ export * from './consumption/send-consumption-job';
 export * from './recharge/send-list-values-recharge-job';
 export * from './recharge/send-billet-recharge-job';
 export * from './recharge/send-list-card-recharge-job';
+export * from './recharge/send-type-recharge-job';
 
 export * from './payment/send-lists-cards-delete-job';
 export * from './payment/send-delete-card-success-job';

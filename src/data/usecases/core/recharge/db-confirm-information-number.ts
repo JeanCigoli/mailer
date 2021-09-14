@@ -2,6 +2,7 @@ import { DefaultBody } from '../../../../domain/models';
 import {
   CheckExpected,
   ConfirmInformationNumber,
+  ValidateAccount,
 } from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
 import {
@@ -14,6 +15,7 @@ export class DbConfirmInformationNumber implements ConfirmInformationNumber {
     private readonly checkExpected: CheckExpected.Facade,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
+    private readonly validateAccount: ValidateAccount.Facade,
   ) {}
 
   async check(params: DefaultBody): ConfirmInformationNumber.Result {
@@ -33,13 +35,42 @@ export class DbConfirmInformationNumber implements ConfirmInformationNumber {
         1: 'TYPE_RECHARGE_MENU',
         2: 'ENTER_ANOTHER_NUMBER',
       }),
-      TYPE_RECHARGE_MENU: JSON.stringify({
-        0: 'RECHARGE_MENU',
-        1: 'RECHARGE_PLAN',
-        2: 'ADDON_PLAN',
-      }),
       ENTER_ANOTHER_NUMBER: null,
     };
+
+    if (nameStep === 'TYPE_RECHARGE_MENU') {
+      const valid = await this.validateAccount({
+        msisdn: session.msisdn,
+        authentication: session.authentication,
+      });
+
+      const step = await this.listStepWithSourceRepository.findStepAndSource({
+        sourceId: params.sourceId,
+        step: selectStep,
+      });
+
+      await this.createDialogueRepository.create({
+        accountId: params.dialogue.session.accountId,
+        stepSourceId: step.stepSourceId,
+        requestDate: new Date(),
+        requestText: step.message,
+        expected: valid.expected,
+        session: JSON.stringify({
+          ...session,
+          canRechargeSingle: valid.canRechargeSingle,
+        }),
+      });
+
+      return {
+        messages: [step.message],
+        status: true,
+        step,
+        data: {
+          ...session,
+          canRechargeSingle: valid.canRechargeSingle,
+        },
+      };
+    }
 
     const step = await this.listStepWithSourceRepository.findStepAndSource({
       sourceId: params.sourceId,

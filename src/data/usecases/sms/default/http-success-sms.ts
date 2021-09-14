@@ -10,7 +10,7 @@ export class HttpSuccessSms implements SuccessSms {
 
     const data = body.data;
 
-    messages.map(async (message) => {
+    for await (const message of messages) {
       const newMessage = replaceKeyToValue(message, data);
 
       await this.sendSms.send({
@@ -18,7 +18,8 @@ export class HttpSuccessSms implements SuccessSms {
         msisdn: data.msisdn,
         clientToken: data.token,
       });
-    });
+    }
+
     return { status: true };
   }
 }

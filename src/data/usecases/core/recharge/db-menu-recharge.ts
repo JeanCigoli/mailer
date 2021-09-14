@@ -1,5 +1,9 @@
 import { DefaultBody } from '../../../../domain/models';
-import { CheckExpected, MenuRecharge } from '../../../../domain/usecases/core';
+import {
+  CheckExpected,
+  MenuRecharge,
+  ValidateAccount,
+} from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
 import {
   CreateDialogueRepository,
@@ -11,6 +15,7 @@ export class DbRechargeMenu implements MenuRecharge {
     private readonly checkExpected: CheckExpected.Facade,
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
+    private readonly validateAccount: ValidateAccount.Facade,
   ) {}
 
   async check(params: DefaultBody): MenuRecharge.Result {
@@ -31,13 +36,44 @@ export class DbRechargeMenu implements MenuRecharge {
         3: 'CARDS_MENU',
         9: 'TRANSFER_OPERATOR',
       }),
-      TYPE_RECHARGE_MENU: JSON.stringify({
-        0: 'RECHARGE_MENU',
-        1: 'RECHARGE_PLAN',
-        2: 'ADDON_PLAN',
-      }),
+
       ENTER_ANOTHER_NUMBER: null,
     };
+
+    if (nameStep === 'TYPE_RECHARGE_MENU') {
+      const valid = await this.validateAccount({
+        token: session.token,
+        msisdn: session.msisdn,
+        authentication: session.authentication,
+      });
+
+      const step = await this.listStepWithSourceRepository.findStepAndSource({
+        sourceId: params.sourceId,
+        step: selectStep,
+      });
+
+      await this.createDialogueRepository.create({
+        accountId: params.dialogue.session.accountId,
+        stepSourceId: step.stepSourceId,
+        requestDate: new Date(),
+        requestText: step.message,
+        expected: valid.expected,
+        session: JSON.stringify({
+          ...session,
+          canRechargeSingle: valid.canRechargeSingle,
+        }),
+      });
+
+      return {
+        messages: [step.message],
+        status: true,
+        step,
+        data: {
+          ...session,
+          canRechargeSingle: valid.canRechargeSingle,
+        },
+      };
+    }
 
     const step = await this.listStepWithSourceRepository.findStepAndSource({
       sourceId: params.sourceId,
@@ -52,7 +88,6 @@ export class DbRechargeMenu implements MenuRecharge {
       expected: expecteis[nameStep],
       session: JSON.stringify({
         ...session,
-        msisdn: params.msisdn,
       }),
     });
 
@@ -62,7 +97,6 @@ export class DbRechargeMenu implements MenuRecharge {
       step,
       data: {
         ...session,
-        msisdn: params.msisdn,
       },
     };
   }

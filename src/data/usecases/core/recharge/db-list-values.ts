@@ -1,6 +1,7 @@
 import { DefaultBody } from '../../../../domain/models';
 import { CheckExpected, ListValues } from '../../../../domain/usecases/core';
 import { ListPlanValues } from '../../../../domain/usecases/core/plan-values/list-plan-values';
+import { RechargeType } from '../../../../utils/enum/recharge-type';
 import { Step } from '../../../../utils/enum/step';
 import {
   CreateDialogueRepository,
@@ -54,7 +55,7 @@ export class DbListValues implements ListValues {
     }
 
     const typePlan =
-      nameStep === 'RECHARGE_PLAN' ? 'RECARGA' : 'PACOTE ADICIONAL';
+      nameStep === 'RECHARGE_PLAN' ? RechargeType.SINGLE : RechargeType.ADDON;
 
     const { planValues: values } = await this.listPlanValues({
       clientToken: session.token,

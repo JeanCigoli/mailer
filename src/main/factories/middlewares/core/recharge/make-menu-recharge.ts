@@ -10,6 +10,7 @@ import {
   makeCheckExpectedFacadeSms,
   makeCheckExpectedFacadeUra,
   makeCheckExpectedFacadeWhats,
+  makeValidateAccountFacade,
 } from '../../../../facades/core';
 
 export const makeMenuRechargeWhats = () => {
@@ -20,6 +21,7 @@ export const makeMenuRechargeWhats = () => {
     makeCheckExpectedFacadeWhats,
     dialogueWhatsAppRepository,
     stepRepository,
+    makeValidateAccountFacade,
   );
 
   return new MenuRechargeMiddleware(dbRechargeMenu);
@@ -33,6 +35,7 @@ export const makeMenuRechargeSms = () => {
     makeCheckExpectedFacadeSms,
     dialogueSmsRepository,
     stepRepository,
+    makeValidateAccountFacade,
   );
 
   return new MenuRechargeMiddleware(dbRechargeMenu);
@@ -46,6 +49,7 @@ export const makeMenuRechargeUra = () => {
     makeCheckExpectedFacadeUra,
     dialogueUraRepository,
     stepRepository,
+    makeValidateAccountFacade,
   );
 
   return new MenuRechargeMiddleware(dbRechargeMenu);

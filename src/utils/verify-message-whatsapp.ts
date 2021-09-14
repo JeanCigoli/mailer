@@ -12,7 +12,7 @@ export const verifyMessages = (
     const [text, values] = first.split('|||');
 
     return {
-      headerMessage: 'Selecione uma opção abaixo',
+      headerMessage: 'Selecione uma opção abaixo:',
       bodyMessage: text,
       buttons: values ? JSON.parse(values) : [],
     };

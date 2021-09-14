@@ -28,8 +28,26 @@ export class DbAddCardStep implements AddCardStep {
     });
 
     if (!card.status) {
+      const finishStep =
+        await this.listStepWithSourceRepository.findStepAndSource({
+          sourceId: params.sourceId,
+          step: Step.END,
+        });
+
+      await this.createDialogueRepository.create({
+        accountId: params.dialogue.session.accountId,
+        stepSourceId: finishStep.stepSourceId,
+        requestDate: new Date(),
+        requestText: finishStep.message,
+        expected: null,
+        session: JSON.stringify({
+          ...session,
+          ...card,
+        }),
+      });
+
       return {
-        messages: [params.stepSource.message],
+        messages: [card.message as string, finishStep.message],
         status: false,
         step: params.stepSource,
         data: {

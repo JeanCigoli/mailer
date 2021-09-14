@@ -10,6 +10,7 @@ import {
   makeCheckExpectedFacadeSms,
   makeCheckExpectedFacadeUra,
   makeCheckExpectedFacadeWhats,
+  makeValidateAccountFacade,
 } from '../../../../facades/core';
 
 export const makeConfirmInformationNumberWhats = () => {
@@ -20,6 +21,7 @@ export const makeConfirmInformationNumberWhats = () => {
     makeCheckExpectedFacadeWhats,
     dialogueWhatsAppRepository,
     stepRepository,
+    makeValidateAccountFacade,
   );
 
   return new ConfirmInformationNumberMiddleware(dbConfirmInformationNumber);
@@ -33,6 +35,7 @@ export const makeConfirmInformationNumberSms = () => {
     makeCheckExpectedFacadeSms,
     dialogueSmsRepository,
     stepRepository,
+    makeValidateAccountFacade,
   );
 
   return new ConfirmInformationNumberMiddleware(dbConfirmInformationNumber);
@@ -46,6 +49,7 @@ export const makeConfirmInformationNumberUra = () => {
     makeCheckExpectedFacadeUra,
     dialogueUraRepository,
     stepRepository,
+    makeValidateAccountFacade,
   );
 
   return new ConfirmInformationNumberMiddleware(dbConfirmInformationNumber);

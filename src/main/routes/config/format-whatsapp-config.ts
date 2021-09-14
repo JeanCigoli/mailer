@@ -11,6 +11,7 @@ import {
   makeSendMessageDefault,
   makeSendConfirmAddCard,
   makeSendRechargeError,
+  makeSendTypeRecharge,
 } from '../../factories/jobs/whatsapp';
 import { makeSendConfirmRecharge } from '../../factories/jobs/whatsapp/payment/make-send-confirm-recharge';
 
@@ -19,6 +20,11 @@ export const formatWhatsAppSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 5 },
     handle: adaptListenerJob(makeSendConsumption()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 12 },
+    handle: adaptListenerJob(makeSendTypeRecharge()),
   },
   {
     target: { step: 'stepId' },

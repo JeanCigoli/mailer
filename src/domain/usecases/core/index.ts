@@ -1,5 +1,7 @@
 export * from './auth/authentication';
 
+export * from './account/validate-account';
+
 export * from './token/menu-token';
 
 export * from './main-menu/main-menu';

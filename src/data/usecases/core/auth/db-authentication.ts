@@ -79,6 +79,7 @@ export class DbAuthentication implements Authentication {
         session: JSON.stringify({
           ...account,
           token,
+          authentication: mvno.authentication,
         }),
       });
 
@@ -89,6 +90,7 @@ export class DbAuthentication implements Authentication {
         data: {
           ...account,
           token,
+          authentication: mvno.authentication,
         },
       };
     }
@@ -112,6 +114,7 @@ export class DbAuthentication implements Authentication {
       session: JSON.stringify({
         ...account,
         token,
+        authentication: mvno.authentication,
       }),
     });
 
@@ -122,6 +125,7 @@ export class DbAuthentication implements Authentication {
       data: {
         ...account,
         token,
+        authentication: mvno.authentication,
       },
     };
   }
