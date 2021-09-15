@@ -35,7 +35,7 @@ export class DbAddValidityCard implements AddValidityCard {
     const validValidity = this.validCardValidity(params.message);
 
     if (!validValidity.status) {
-      if (session.count >= 4) {
+      if (session.count >= 3) {
         const result = await this.sendMaximumAttempts(params);
         return result;
       }

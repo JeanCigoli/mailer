@@ -33,7 +33,7 @@ export class DbAddNumberCard implements AddNumberCard {
     );
 
     if (!this.validCardNumber(params.message)) {
-      if (session.count >= 4) {
+      if (session.count >= 3) {
         const result = await this.sendMaximumAttempts(params);
         return result;
       }
