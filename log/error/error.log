@@ -115,3 +115,19 @@ Error: TypeError: Cannot read property 'map' of undefined at TypeError: Cannot r
     at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-listener-job.ts:5:5
     at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-middleware-system.ts:34:5
     at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-listener-middleware.ts:5:12
+------------------------------------------------
+Date: 2021-09-15 17:39:32
+Error: TypeError: Cannot read property 'map' of undefined at TypeError: Cannot read property 'map' of undefined
+    at HttpPlanValuesSms.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\data\usecases\sms\plan-values\http-plan-values-sms.ts:12:28)
+    at PlanValuesJobSms.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\jobs\sms\plan-values\plan-values-job-sms.ts:9:32)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-listener-job.ts:5:15)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-switch-middleware.ts:94:41
+    at pastFunction (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-middleware-system.ts:18:17)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-middleware-job.ts:16:14
+    at ConfirmListValuesMiddleware.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\presentation\middlewares\recharge\confirm-list-values-middleware.ts:24:14)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at Object.handle (C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-middleware-job.ts:12:5)
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-middleware-step-job.ts:12:5
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-listener-job.ts:5:5
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-middleware-system.ts:34:5
+    at C:\Users\emanoel.amorim\Desktop\projects\gateway-ura\src\main\adapters\adapt-listener-middleware.ts:5:12
