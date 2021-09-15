@@ -2,7 +2,7 @@ import { HttpListCardsSms } from '../../../../../data/usecases/sms/list-cards/ht
 import { phoenixSms } from '../../../../../infra/core/http/helpers/phoenix-sms';
 import { SendSmsService } from '../../../../../infra/core/http/phoenix/sms/send-sms-service';
 import { RequestAdapter } from '../../../../../infra/core/http/web-service-rest-adapter';
-import { ListCardsJobSms } from '../../../../../presentation/controllers/sms/list-cards/list-cards-job-sms';
+import { ListCardsJobSms } from '../../../../jobs/sms/list-cards/list-cards-job-sms';
 
 export const makeListCardsJobSms = () => {
   const httpClient = new RequestAdapter(phoenixSms);

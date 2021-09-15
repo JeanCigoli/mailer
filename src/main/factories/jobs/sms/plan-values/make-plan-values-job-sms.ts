@@ -2,7 +2,7 @@ import { HttpPlanValuesSms } from '../../../../../data/usecases/sms/plan-values/
 import { phoenixSms } from '../../../../../infra/core/http/helpers/phoenix-sms';
 import { SendSmsService } from '../../../../../infra/core/http/phoenix/sms/send-sms-service';
 import { RequestAdapter } from '../../../../../infra/core/http/web-service-rest-adapter';
-import { PlanValuesJobSms } from '../../../../../presentation/controllers/sms/plan-values/plan-values-job-sms';
+import { PlanValuesJobSms } from '../../../../jobs/sms/plan-values/plan-values-job-sms';
 
 export const makePlanValuesJobSms = () => {
   const httpClient = new RequestAdapter(phoenixSms);

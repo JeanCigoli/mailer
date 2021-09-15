@@ -1,5 +1,5 @@
 import { SuccessSms } from '../../../../domain/usecases/sms/default/success-sms';
-import { Job } from '../../../../main/protocols/listener-job';
+import { Job } from '../../../protocols/listener-job';
 import errorLogger from '../../../../utils/logger';
 
 export class SuccessJobSms implements Job {

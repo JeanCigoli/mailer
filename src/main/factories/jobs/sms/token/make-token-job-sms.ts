@@ -2,7 +2,7 @@ import { HttpTokenSms } from '../../../../../data/usecases/sms/token/http-token-
 import { phoenixSms } from '../../../../../infra/core/http/helpers/phoenix-sms';
 import { SendSmsService } from '../../../../../infra/core/http/phoenix/sms/send-sms-service';
 import { RequestAdapter } from '../../../../../infra/core/http/web-service-rest-adapter';
-import { TokenJobSms } from '../../../../../presentation/controllers/sms/token/token-job-sms';
+import { TokenJobSms } from '../../../../jobs/sms/token/token-job-sms';
 
 export const makeTokenJobSms = () => {
   const httpClient = new RequestAdapter(phoenixSms);

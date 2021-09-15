@@ -2,7 +2,7 @@ import { HttpSuccessSms } from '../../../../../data/usecases/sms/default/http-su
 import { phoenixSms } from '../../../../../infra/core/http/helpers/phoenix-sms';
 import { SendSmsService } from '../../../../../infra/core/http/phoenix/sms/send-sms-service';
 import { RequestAdapter } from '../../../../../infra/core/http/web-service-rest-adapter';
-import { SuccessJobSms } from '../../../../../presentation/controllers/sms/default/success-job-sms';
+import { SuccessJobSms } from '../../../../jobs/sms/default/success-job-sms';
 
 export const makeSuccessJobSms = () => {
   const httpClient = new RequestAdapter(phoenixSms);
