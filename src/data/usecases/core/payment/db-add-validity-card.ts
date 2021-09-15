@@ -1,5 +1,8 @@
 import { DefaultBody } from '../../../../domain/models';
-import { AddValidityCard } from '../../../../domain/usecases/core';
+import {
+  AddValidityCard,
+  SendMaximumAttempts,
+} from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
 import {
   CreateDialogueRepository,
@@ -14,6 +17,7 @@ export class DbAddValidityCard implements AddValidityCard {
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
     private readonly validCardValidity: ValidCardValidity,
+    private readonly sendMaximumAttempts: SendMaximumAttempts.Facade,
   ) {}
 
   async add(params: DefaultBody): AddValidityCard.Result {
@@ -31,6 +35,11 @@ export class DbAddValidityCard implements AddValidityCard {
     const validValidity = this.validCardValidity(params.message);
 
     if (!validValidity.status) {
+      if (session.count >= 4) {
+        const result = await this.sendMaximumAttempts(params);
+        return result;
+      }
+
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
         step: Step.VALIDITY_CARD_ERROR,
@@ -44,7 +53,7 @@ export class DbAddValidityCard implements AddValidityCard {
         expected: null,
         session: JSON.stringify({
           ...session,
-          count: 0,
+          count: session.count + 1,
         }),
       });
 

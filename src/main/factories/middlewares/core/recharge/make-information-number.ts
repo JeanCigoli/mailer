@@ -8,6 +8,11 @@ import {
 } from '../../../../../infra/core/db/mssql';
 import { InformationNumberMiddleware } from '../../../../../presentation/middlewares';
 import { validAndFormatterMsisdn } from '../../../../../utils/validation';
+import {
+  makeSendMaximumAttemptsFacadeSms,
+  makeSendMaximumAttemptsFacadeUra,
+  makeSendMaximumAttemptsFacadeWhats,
+} from '../../../../facades/core';
 
 export const makeInformationNumberWhats = () => {
   const dialogueWhatsAppRepository = new DialogueWhatsAppRepository();
@@ -20,6 +25,7 @@ export const makeInformationNumberWhats = () => {
     stepRepository,
     accountRepository,
     validAndFormatterMsisdn,
+    makeSendMaximumAttemptsFacadeWhats,
   );
 
   return new InformationNumberMiddleware(dbInformationNumber);
@@ -36,6 +42,7 @@ export const makeInformationNumberSms = () => {
     stepRepository,
     accountRepository,
     validAndFormatterMsisdn,
+    makeSendMaximumAttemptsFacadeSms,
   );
 
   return new InformationNumberMiddleware(dbInformationNumber);
@@ -52,6 +59,7 @@ export const makeInformationNumberUra = () => {
     stepRepository,
     accountRepository,
     validAndFormatterMsisdn,
+    makeSendMaximumAttemptsFacadeUra,
   );
 
   return new InformationNumberMiddleware(dbInformationNumber);

@@ -3,6 +3,7 @@ import {
   ValidCardNumber,
   ValidAndFormatMsisdn,
   ValidCardValidity,
+  ValidSecurityCode,
 } from '../data/protocols/core/utils';
 
 export const validAndFormatterMsisdn: ValidAndFormatMsisdn = (
@@ -69,5 +70,19 @@ export const validValidityCard: ValidCardValidity = (validity: string) => {
   return {
     status: isAfter(date, now),
     validity: `${month}${year}`,
+  };
+};
+
+export const validateSecurityCode: ValidSecurityCode = (code: string) => {
+  if (!/^([0-9]{3})$|^([0-9]{4})$/.test(code)) {
+    return {
+      status: false,
+      code: code,
+    };
+  }
+
+  return {
+    status: true,
+    code: code,
   };
 };

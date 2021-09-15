@@ -33,3 +33,4 @@ export * from './step/db-add-card-step';
 export * from './step/db-send-recharge-step';
 
 export * from './expect/db-check-expect';
+export * from './expect/db-send-maximum-attempts';
