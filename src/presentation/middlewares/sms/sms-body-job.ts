@@ -8,7 +8,7 @@ export class SmsBodyJob implements Job {
 
       const body = {
         msisdn: json.ani,
-        message: json.text,
+        message: json.message,
         sourceId: json.sourceId,
       };
 

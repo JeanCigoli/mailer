@@ -31,4 +31,5 @@ export enum Step {
   DELETE_CARD_ERROR = 30,
   END = 31,
   START_ERROR = 32,
+  MAX_ERROR = 33,
 }

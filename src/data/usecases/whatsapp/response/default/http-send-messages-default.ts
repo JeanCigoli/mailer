@@ -1,5 +1,6 @@
 import { ButtonWhats } from '../../../../../domain/models';
 import { SendMessagesDefault } from '../../../../../domain/usecases/whatsapp';
+import { makeMsisdnMask } from '../../../../../utils/mask';
 import { replaceKeyToValue } from '../../../../../utils/replace-key-to-value';
 import { ListCredentialByServiceAndMvno } from '../../../../protocols/core/db';
 import { TransformCredentials } from '../../../../protocols/core/utils';
@@ -28,6 +29,7 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
     });
 
     const credentials = this.transformCredentials(base64.credentials);
+    params.data.msisdn = makeMsisdnMask(params.data.msisdn, '(##) #####-####');
 
     const [firstMessage, secondMessage] = params.messages;
 

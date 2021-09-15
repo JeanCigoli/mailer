@@ -1,4 +1,5 @@
 import { AccountNotFound } from '../../../../../domain/usecases/whatsapp';
+import { makeMsisdnMask } from '../../../../../utils/mask';
 import { replaceKeyToValue } from '../../../../../utils/replace-key-to-value';
 import { ListCredentialByServiceAndMvno } from '../../../../protocols/core/db';
 import { TransformCredentials } from '../../../../protocols/core/utils';
@@ -25,6 +26,7 @@ export class HttpAccountNotFound implements AccountNotFound {
     });
 
     const { messages, ...props } = params;
+    props.msisdn = makeMsisdnMask(props.msisdn, '(##) #####-####');
 
     const credentials = this.transformCredentials(base64.credentials);
 
