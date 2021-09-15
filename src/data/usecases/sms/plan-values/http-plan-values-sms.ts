@@ -21,6 +21,8 @@ export class HttpPlanValuesSms implements PlanValuesSms {
       const text = acumulatorValue + currentValue;
 
       if (text.length >= 160) {
+        console.log({ text });
+
         await this.sendSms.send({
           message: acumulatorValue,
           msisdn: body.data.msisdn,
@@ -38,6 +40,8 @@ export class HttpPlanValuesSms implements PlanValuesSms {
     });
 
     const finalMessage = await reduceMessage;
+
+    console.log({ finalMessage });
 
     await this.sendSms.send({
       message: removedAccent(finalMessage),

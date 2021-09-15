@@ -8,7 +8,7 @@ export class HttpValidatePlanValuesOptionSms
   constructor(private readonly sendSms: SendSms) {}
 
   async handle(body: any): Promise<void> {
-    console.log({ body });
+    // console.log({ body });
 
     const messages: Array<string> = body.messages;
     const canRechargeSingle: Boolean = body.canRechargeSingle;
