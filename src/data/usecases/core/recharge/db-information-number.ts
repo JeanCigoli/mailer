@@ -1,5 +1,8 @@
 import { DefaultBody } from '../../../../domain/models';
-import { InformationNumber } from '../../../../domain/usecases/core';
+import {
+  InformationNumber,
+  SendMaximumAttempts,
+} from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
 import {
   CreateDialogueRepository,
@@ -16,6 +19,7 @@ export class DbInformationNumber implements InformationNumber {
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
     private readonly listAccountByMsisdnAndMvnoRepository: ListAccountByMsisdnAndMvnoRepository,
     private readonly validAndFormatMsisdn: ValidAndFormatMsisdn,
+    private readonly sendMaximumAttempts: SendMaximumAttempts.Facade,
   ) {}
 
   async check(params: DefaultBody): InformationNumber.Result {
@@ -45,6 +49,12 @@ export class DbInformationNumber implements InformationNumber {
     };
 
     if (!validMsisdn.status) {
+      if (props.session.count >= 4) {
+        const result = await this.sendMaximumAttempts(params);
+
+        return result;
+      }
+
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
         step: Step.ERROR_ANOTHER_NUMBER,
@@ -58,7 +68,7 @@ export class DbInformationNumber implements InformationNumber {
         expected: expected['error'],
         session: JSON.stringify({
           ...props.session,
-          count: 0,
+          count: props.session.count + 1,
         }),
       });
 
@@ -77,6 +87,12 @@ export class DbInformationNumber implements InformationNumber {
       });
 
     if (!account) {
+      if (props.session.count >= 4) {
+        const result = await this.sendMaximumAttempts(params);
+
+        return result;
+      }
+
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
         step: Step.ERROR_ANOTHER_NUMBER,
@@ -90,7 +106,7 @@ export class DbInformationNumber implements InformationNumber {
         expected: expected['error'],
         session: JSON.stringify({
           ...props.session,
-          count: 0,
+          count: props.session.count + 1,
         }),
       });
 

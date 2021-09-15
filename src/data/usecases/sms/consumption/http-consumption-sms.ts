@@ -22,8 +22,6 @@ export class HttpConsumptionSms implements ConsumptionSms {
       dateGrace: format(new Date(body.data.dateGrace), 'dd/MM/yyyy'),
     });
 
-    // console.log(message);
-
     await this.sendSms.send({
       message: removedAccent(message),
       msisdn: body.data.msisdn,

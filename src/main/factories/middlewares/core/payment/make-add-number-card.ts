@@ -7,6 +7,11 @@ import {
 } from '../../../../../infra/core/db/mssql';
 import { AddNumberCardMiddleware } from '../../../../../presentation/middlewares';
 import { validCardNumber } from '../../../../../utils/validation';
+import {
+  makeSendMaximumAttemptsFacadeSms,
+  makeSendMaximumAttemptsFacadeUra,
+  makeSendMaximumAttemptsFacadeWhats,
+} from '../../../../facades/core';
 
 export const makeAddNumberCardWhats = () => {
   const dialogueWhatsAppRepository = new DialogueWhatsAppRepository();
@@ -17,6 +22,7 @@ export const makeAddNumberCardWhats = () => {
     dialogueWhatsAppRepository,
     stepRepository,
     validCardNumber,
+    makeSendMaximumAttemptsFacadeWhats,
   );
 
   return new AddNumberCardMiddleware(dbAddNumberCard);
@@ -31,6 +37,7 @@ export const makeAddNumberCardSms = () => {
     dialogueSmsRepository,
     stepRepository,
     validCardNumber,
+    makeSendMaximumAttemptsFacadeSms,
   );
 
   return new AddNumberCardMiddleware(dbAddNumberCard);
@@ -45,6 +52,7 @@ export const makeAddNumberCardUra = () => {
     dialogueUraRepository,
     stepRepository,
     validCardNumber,
+    makeSendMaximumAttemptsFacadeUra,
   );
 
   return new AddNumberCardMiddleware(dbAddNumberCard);

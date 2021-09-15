@@ -1,5 +1,8 @@
 import { DefaultBody } from '../../../../domain/models';
-import { AddNumberCard } from '../../../../domain/usecases/core';
+import {
+  AddNumberCard,
+  SendMaximumAttempts,
+} from '../../../../domain/usecases/core';
 import { Step } from '../../../../utils/enum/step';
 import {
   CreateDialogueRepository,
@@ -14,10 +17,11 @@ export class DbAddNumberCard implements AddNumberCard {
     private readonly createDialogueRepository: CreateDialogueRepository,
     private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
     private readonly validCardNumber: ValidCardNumber,
+    private readonly sendMaximumAttempts: SendMaximumAttempts.Facade,
   ) {}
 
   async add(params: DefaultBody): AddNumberCard.Result {
-    const { dialogueId, session, ...props } = params.dialogue;
+    const { dialogueId, session } = params.dialogue;
 
     await this.updateDialogueRepository.update(
       {
@@ -29,6 +33,11 @@ export class DbAddNumberCard implements AddNumberCard {
     );
 
     if (!this.validCardNumber(params.message)) {
+      if (session.count >= 4) {
+        const result = await this.sendMaximumAttempts(params);
+        return result;
+      }
+
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
         step: Step.ADD_CARD_ERROR,
@@ -42,7 +51,7 @@ export class DbAddNumberCard implements AddNumberCard {
         expected: null,
         session: JSON.stringify({
           ...session,
-          count: 0,
+          count: session.count + 1,
         }),
       });
 

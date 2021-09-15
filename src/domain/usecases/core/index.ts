@@ -36,3 +36,4 @@ export * from './card/delete-card-error';
 export * from './card/confirm-add-card';
 
 export * from './expect/check-expected';
+export * from './expect/send-maximum-attempts';

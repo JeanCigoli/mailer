@@ -32,4 +32,5 @@ export enum Step {
   END = 31,
   START_ERROR = 32,
   MAX_ERROR = 33,
+  CVV_ERROR = 34,
 }

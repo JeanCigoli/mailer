@@ -1,10 +1,11 @@
 import { DefaultBody } from '../../../../domain/models';
-import { CheckExpected } from '../../../../domain/usecases/core';
-import { Step } from '../../../../utils/enum/step';
+import {
+  CheckExpected,
+  SendMaximumAttempts,
+} from '../../../../domain/usecases/core';
 import { notFoundMessage } from '../../../../utils/message/default';
 import {
   CreateDialogueRepository,
-  ListStepWithSourceRepository,
   UpdateDialogueRepository,
 } from '../../../protocols/core/db';
 
@@ -12,7 +13,7 @@ export class DbCheckExpected implements CheckExpected {
   constructor(
     private readonly updateDialogueRepository: UpdateDialogueRepository,
     private readonly createDialogueRepository: CreateDialogueRepository,
-    private readonly listStepWithSourceRepository: ListStepWithSourceRepository,
+    private readonly sendMaximumAttempts: SendMaximumAttempts.Facade,
   ) {}
 
   async check(params: DefaultBody): CheckExpected.Result {
@@ -47,36 +48,18 @@ export class DbCheckExpected implements CheckExpected {
       count: !session.count && session.count !== 0 ? 0 : session.count + 1,
     };
 
-    console.log(sessionStep);
-
     if (sessionStep.count >= 4) {
-      const step = await this.listStepWithSourceRepository.findStepAndSource({
-        sourceId: params.sourceId,
-        step: Step.MAX_ERROR,
-      });
-
-      const finishStep =
-        await this.listStepWithSourceRepository.findStepAndSource({
-          sourceId: params.sourceId,
-          step: Step.END,
-        });
-
-      await this.createDialogueRepository.create({
-        ...rest,
-        stepSourceId: finishStep.stepSourceId,
-        requestText: step.message,
-        expected: JSON.stringify(props.expected),
-        session: JSON.stringify(sessionStep),
+      const data = await this.sendMaximumAttempts({
+        ...params,
+        dialogue: {
+          ...params.dialogue,
+          session: sessionStep,
+        },
       });
 
       return {
         isError: true,
-        data: {
-          status: false,
-          messages: [step.message, finishStep.message],
-          step: params.stepSource,
-          data: sessionStep,
-        },
+        data,
       };
     }
 

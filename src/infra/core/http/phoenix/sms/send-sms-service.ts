@@ -17,7 +17,7 @@ export class SendSmsService implements SendSms {
       },
     });
 
-    console.log(result.body.error);
+    console.log(result);
     if (!result) {
       return { status: false };
     }

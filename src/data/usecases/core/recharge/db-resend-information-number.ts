@@ -49,7 +49,7 @@ export class DbResendInformationNumber implements ResendInformationNumber {
       expected: expecteis[nameStep],
       session: JSON.stringify({
         ...session,
-        count: 0,
+        count: nameStep === 'RECHARGE_MENU' ? 0 : session.count,
       }),
     });
 
