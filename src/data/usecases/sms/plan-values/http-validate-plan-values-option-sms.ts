@@ -1,4 +1,5 @@
 import { ValidatePlanValuesOptionSms } from '../../../../domain/usecases/sms/plan-values/validate-plan-values-option-sms';
+import { removedAccent } from '../../../../utils';
 import { SendSms } from '../../../protocols/core/http/send-sms';
 
 export class HttpValidatePlanValuesOptionSms
@@ -22,7 +23,7 @@ export class HttpValidatePlanValuesOptionSms
 
     await this.sendSms.send({
       clientToken: body.token,
-      message: finalText,
+      message: removedAccent(finalText),
       msisdn: body.msisdn,
     });
   }

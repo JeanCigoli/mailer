@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { ConsumptionSms } from '../../../../domain/usecases/sms/consumption/consumption-sms';
+import { removedAccent } from '../../../../utils';
 import { replaceKeyToValue } from '../../../../utils/replace-key-to-value';
 import { SendSms } from '../../../protocols/core/http/send-sms';
 
@@ -21,10 +22,10 @@ export class HttpConsumptionSms implements ConsumptionSms {
       dateGrace: format(new Date(body.data.dateGrace), 'dd/MM/yyyy'),
     });
 
-    console.log(message);
+    // console.log(message);
 
     await this.sendSms.send({
-      message,
+      message: removedAccent(message),
       msisdn: body.data.msisdn,
       clientToken: body.data.token,
     });

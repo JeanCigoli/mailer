@@ -1,4 +1,5 @@
 import { TokenSms } from '../../../../domain/usecases/sms/token/token-sms';
+import { removedAccent } from '../../../../utils';
 import { replaceKeyToValue } from '../../../../utils/replace-key-to-value';
 import { SendSms } from '../../../protocols/core/http/send-sms';
 
@@ -10,7 +11,7 @@ export class HttpTokenSms implements TokenSms {
 
     for await (const message of messages) {
       await this.sendSms.send({
-        message: replaceKeyToValue(message, body.data),
+        message: removedAccent(replaceKeyToValue(message, body.data)),
         msisdn: body.data.msisdn,
         clientToken: body.data.token,
       });

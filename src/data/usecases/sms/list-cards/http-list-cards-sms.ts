@@ -1,5 +1,6 @@
 import { Card } from '../../../../domain/models';
 import { ListCardsSms } from '../../../../domain/usecases/sms/list-cards/list-cards-sms';
+import { removedAccent } from '../../../../utils';
 import { SendSms } from '../../../protocols/core/http/send-sms';
 
 export class HttpListCardsSms implements ListCardsSms {
@@ -37,7 +38,7 @@ export class HttpListCardsSms implements ListCardsSms {
     const finalMessage = await reducedMessages;
 
     await this.sendSms.send({
-      message: finalMessage,
+      message: removedAccent(finalMessage),
       msisdn: body.data.msisdn,
       clientToken: body.data.token,
     });

@@ -1,5 +1,6 @@
 import { Plan } from '../../../../domain/models';
 import { PlanValuesSms } from '../../../../domain/usecases/sms/plan-values/plan-values-sms';
+import { removedAccent } from '../../../../utils';
 import { SendSms } from '../../../protocols/core/http/send-sms';
 
 export class HttpPlanValuesSms implements PlanValuesSms {
@@ -39,7 +40,7 @@ export class HttpPlanValuesSms implements PlanValuesSms {
     const finalMessage = await reduceMessage;
 
     await this.sendSms.send({
-      message: finalMessage,
+      message: removedAccent(finalMessage),
       msisdn: body.data.msisdn,
       clientToken: body.data.token,
     });
