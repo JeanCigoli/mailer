@@ -41,7 +41,7 @@ export class DbAddSecurityCode implements AddSecurityCode {
     const validCode = this.validSecurityCode(params.message);
 
     if (!validCode.status) {
-      if (session.count >= 4) {
+      if (session.count >= 3) {
         const result = await this.sendMaximumAttempts(params);
         return result;
       }

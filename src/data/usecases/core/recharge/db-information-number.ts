@@ -49,7 +49,7 @@ export class DbInformationNumber implements InformationNumber {
     };
 
     if (!validMsisdn.status) {
-      if (props.session.count >= 4) {
+      if (props.session.count >= 3) {
         const result = await this.sendMaximumAttempts(params);
 
         return result;
@@ -87,7 +87,7 @@ export class DbInformationNumber implements InformationNumber {
       });
 
     if (!account) {
-      if (props.session.count >= 4) {
+      if (props.session.count >= 3) {
         const result = await this.sendMaximumAttempts(params);
 
         return result;
