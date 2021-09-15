@@ -43,6 +43,7 @@ export class DbListConsumptionStep implements ListConsumptionStep {
       session: JSON.stringify({
         ...props.session,
         ...consumption,
+        count: 0,
       }),
     });
 

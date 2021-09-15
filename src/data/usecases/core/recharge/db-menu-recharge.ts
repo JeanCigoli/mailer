@@ -60,6 +60,7 @@ export class DbRechargeMenu implements MenuRecharge {
         expected: valid.expected,
         session: JSON.stringify({
           ...session,
+          count: 0,
           canRechargeSingle: valid.canRechargeSingle,
         }),
       });
@@ -88,6 +89,7 @@ export class DbRechargeMenu implements MenuRecharge {
       expected: expecteis[nameStep],
       session: JSON.stringify({
         ...session,
+        count: 0,
       }),
     });
 

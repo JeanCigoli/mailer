@@ -47,7 +47,10 @@ export class DbResendInformationNumber implements ResendInformationNumber {
       requestDate: new Date(),
       requestText: step.message,
       expected: expecteis[nameStep],
-      session: JSON.stringify(session),
+      session: JSON.stringify({
+        ...session,
+        count: 0,
+      }),
     });
 
     return {

@@ -46,6 +46,7 @@ export class DbConfirmListValues implements ConfirmListValues {
         }),
         session: JSON.stringify({
           ...session,
+          count: 0,
           values: null,
         }),
       });
@@ -80,6 +81,7 @@ export class DbConfirmListValues implements ConfirmListValues {
       }),
       session: JSON.stringify({
         ...session,
+        count: 0,
         planId: nameStep,
         values: plan,
       }),

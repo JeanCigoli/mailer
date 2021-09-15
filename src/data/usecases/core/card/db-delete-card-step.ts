@@ -45,7 +45,10 @@ export class DbDeleteCardStep implements DeleteCardStep {
           1: 'ADD_CARD',
           2: 'VIEW_CARDS_DELETE',
         }),
-        session: JSON.stringify(session),
+        session: JSON.stringify({
+          ...session,
+          count: 0,
+        }),
       });
 
       return {
@@ -77,7 +80,10 @@ export class DbDeleteCardStep implements DeleteCardStep {
         expected: JSON.stringify({
           0: 'CARDS_MENU',
         }),
-        session: JSON.stringify(session),
+        session: JSON.stringify({
+          ...session,
+          count: 0,
+        }),
       });
 
       return {
@@ -105,7 +111,10 @@ export class DbDeleteCardStep implements DeleteCardStep {
         0: 'MAIN_MENU',
         1: 'RECHARGE_MENU',
       }),
-      session: JSON.stringify(session),
+      session: JSON.stringify({
+        ...session,
+        count: 0,
+      }),
     });
 
     return {

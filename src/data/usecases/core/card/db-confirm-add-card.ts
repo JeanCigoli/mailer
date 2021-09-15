@@ -53,6 +53,7 @@ export class DbConfirmAddCard implements ConfirmAddCard {
       expected: expecteis[nameStep],
       session: JSON.stringify({
         ...session,
+        count: 0,
       }),
     });
 

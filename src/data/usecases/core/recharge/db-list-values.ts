@@ -43,7 +43,10 @@ export class DbListValues implements ListValues {
           1: 'TYPE_RECHARGE_MENU',
           2: 'ENTER_ANOTHER_NUMBER',
         }),
-        session: JSON.stringify(session),
+        session: JSON.stringify({
+          ...session,
+          count: 0,
+        }),
       });
 
       return {
@@ -87,6 +90,7 @@ export class DbListValues implements ListValues {
       session: JSON.stringify({
         ...session,
         type: nameStep,
+        count: 0,
         values,
       }),
     });

@@ -49,3 +49,7 @@ export const makeObjectToParamsRequest = (props: any) => {
     .map(([key, value]) => `${key}=${value}`)
     .join('&');
 };
+
+export const removedAccent = (text: string) => {
+  return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+};

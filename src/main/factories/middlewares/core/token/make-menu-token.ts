@@ -20,7 +20,7 @@ export const makeMenuTokenUra = () => {
 
   const dbMenuToken = new DbMenuToken(
     customerAuthCodeRepository,
-    makeCheckExpectedFacadeWhats,
+    makeCheckExpectedFacadeUra,
     dialogueUraRepository,
     stepRepository,
   );
@@ -50,7 +50,7 @@ export const makeMenuTokenWhats = () => {
 
   const dbMenuToken = new DbMenuToken(
     customerAuthCodeRepository,
-    makeCheckExpectedFacadeUra,
+    makeCheckExpectedFacadeWhats,
     dialogueWhatsAppRepository,
     stepRepository,
   );

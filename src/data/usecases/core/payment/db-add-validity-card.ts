@@ -42,7 +42,10 @@ export class DbAddValidityCard implements AddValidityCard {
         requestDate: new Date(),
         requestText: step.message,
         expected: null,
-        session: JSON.stringify(session),
+        session: JSON.stringify({
+          ...session,
+          count: 0,
+        }),
       });
 
       return {
@@ -79,6 +82,7 @@ export class DbAddValidityCard implements AddValidityCard {
       expected: expecteis[step.stepId],
       session: JSON.stringify({
         ...session,
+        count: 0,
         newCard: {
           ...session.newCard,
           type: 'C',

@@ -48,7 +48,10 @@ export class DbMenuCards implements MenuCards {
         requestDate: new Date(),
         requestText: step.message,
         expected: expecteis[nameStep],
-        session: JSON.stringify(session),
+        session: JSON.stringify({
+          ...session,
+          count: 0,
+        }),
       });
 
       return {
@@ -86,6 +89,7 @@ export class DbMenuCards implements MenuCards {
       session: JSON.stringify({
         ...session,
         cards,
+        count: 0,
       }),
     });
 

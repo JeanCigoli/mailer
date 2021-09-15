@@ -45,7 +45,10 @@ export class DbViewsCards implements ViewsCards {
         requestDate: new Date(),
         requestText: step.message,
         expected: expecteis[nameStep],
-        session: JSON.stringify(session),
+        session: JSON.stringify({
+          ...session,
+          count: 0,
+        }),
       });
 
       return {
@@ -76,6 +79,7 @@ export class DbViewsCards implements ViewsCards {
       }),
       session: JSON.stringify({
         ...session,
+        count: 0,
         paymentId: nameStep,
         cards: card,
       }),

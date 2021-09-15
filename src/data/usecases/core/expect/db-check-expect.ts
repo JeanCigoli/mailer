@@ -47,6 +47,8 @@ export class DbCheckExpected implements CheckExpected {
       count: !session.count && session.count !== 0 ? 0 : session.count + 1,
     };
 
+    console.log(sessionStep);
+
     if (sessionStep.count >= 4) {
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
@@ -81,7 +83,7 @@ export class DbCheckExpected implements CheckExpected {
     await this.createDialogueRepository.create({
       ...rest,
       expected: JSON.stringify(props.expected),
-      session: JSON.stringify(props.session),
+      session: JSON.stringify(sessionStep),
     });
 
     return {
@@ -90,7 +92,7 @@ export class DbCheckExpected implements CheckExpected {
         status: false,
         messages: [notFoundMessage(params.sourceId), params.stepSource.message],
         step: params.stepSource,
-        data: { ...props.session, count: 0 },
+        data: sessionStep,
       },
     };
   }

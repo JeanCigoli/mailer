@@ -45,7 +45,10 @@ export class DbDeleteCardError implements DeleteCardError {
         1: 'ADD_CARD',
         2: 'VIEW_CARDS_DELETE',
       }),
-      session: JSON.stringify(session),
+      session: JSON.stringify({
+        ...session,
+        count: 0,
+      }),
     });
 
     return {

@@ -43,6 +43,7 @@ export class DbAddCardStep implements AddCardStep {
         session: JSON.stringify({
           ...session,
           ...card,
+          count: 0,
         }),
       });
 
@@ -76,6 +77,7 @@ export class DbAddCardStep implements AddCardStep {
       session: JSON.stringify({
         ...session,
         ...card,
+        count: 0,
       }),
     });
 

@@ -17,7 +17,7 @@ export class DbAddNumberCard implements AddNumberCard {
   ) {}
 
   async add(params: DefaultBody): AddNumberCard.Result {
-    const { dialogueId, ...props } = params.dialogue;
+    const { dialogueId, session, ...props } = params.dialogue;
 
     await this.updateDialogueRepository.update(
       {
@@ -40,7 +40,10 @@ export class DbAddNumberCard implements AddNumberCard {
         requestDate: new Date(),
         requestText: step.message,
         expected: null,
-        session: JSON.stringify(props.session),
+        session: JSON.stringify({
+          ...session,
+          count: 0,
+        }),
       });
 
       return {
@@ -48,7 +51,7 @@ export class DbAddNumberCard implements AddNumberCard {
         step,
         status: false,
         data: {
-          ...props.session,
+          ...session,
         },
       };
     }
@@ -65,7 +68,8 @@ export class DbAddNumberCard implements AddNumberCard {
       requestText: step.message,
       expected: null,
       session: JSON.stringify({
-        ...props.session,
+        ...session,
+        count: 0,
         newCard: {
           cardNumber: params.message,
           type: 'C',
@@ -78,7 +82,7 @@ export class DbAddNumberCard implements AddNumberCard {
       step,
       status: false,
       data: {
-        ...props.session,
+        ...session,
       },
     };
   }

@@ -43,6 +43,7 @@ export class DbSendRechargeStep implements SendRechargeStep {
         session: JSON.stringify({
           ...session,
           ...recharge,
+          count: 0,
         }),
       });
 
@@ -77,6 +78,7 @@ export class DbSendRechargeStep implements SendRechargeStep {
       session: JSON.stringify({
         ...session,
         ...recharge,
+        count: 0,
       }),
     });
 

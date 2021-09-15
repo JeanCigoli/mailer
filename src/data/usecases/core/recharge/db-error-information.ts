@@ -58,6 +58,7 @@ export class DbErrorRechargeInformation implements ErrorRechargeInformation {
       expected: expecteis[nameStep],
       session: JSON.stringify({
         ...session,
+        count: 0,
         msisdn: params.msisdn,
       }),
     });

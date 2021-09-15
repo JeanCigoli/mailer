@@ -57,6 +57,7 @@ export class DbConfirmInformationNumber implements ConfirmInformationNumber {
         expected: valid.expected,
         session: JSON.stringify({
           ...session,
+          count: 0,
           canRechargeSingle: valid.canRechargeSingle,
         }),
       });
@@ -83,7 +84,10 @@ export class DbConfirmInformationNumber implements ConfirmInformationNumber {
       requestDate: new Date(),
       requestText: step.message,
       expected: menu[nameStep],
-      session: JSON.stringify(session),
+      session: JSON.stringify({
+        ...session,
+        count: 0,
+      }),
     });
 
     return {

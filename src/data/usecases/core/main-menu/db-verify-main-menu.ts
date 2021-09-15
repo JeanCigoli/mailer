@@ -56,7 +56,10 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
         requestDate: new Date(),
         requestText: step.message,
         expected: expected[nameStep],
-        session: JSON.stringify(session),
+        session: JSON.stringify({
+          ...session,
+          count: 0,
+        }),
       });
 
       return {
@@ -88,6 +91,7 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
         requestText: finishStep.message,
         session: JSON.stringify({
           ...session,
+          count: 0,
         }),
       });
 

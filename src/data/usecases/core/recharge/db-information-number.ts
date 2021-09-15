@@ -56,7 +56,10 @@ export class DbInformationNumber implements InformationNumber {
         requestDate: new Date(),
         requestText: step.message,
         expected: expected['error'],
-        session: JSON.stringify(props.session),
+        session: JSON.stringify({
+          ...props.session,
+          count: 0,
+        }),
       });
 
       return {
@@ -85,7 +88,10 @@ export class DbInformationNumber implements InformationNumber {
         requestDate: new Date(),
         requestText: step.message,
         expected: expected['error'],
-        session: JSON.stringify(props.session),
+        session: JSON.stringify({
+          ...props.session,
+          count: 0,
+        }),
       });
 
       return {
@@ -111,6 +117,7 @@ export class DbInformationNumber implements InformationNumber {
       expected: expected['success'],
       session: JSON.stringify({
         ...props.session,
+        count: 0,
         msisdn: account.msisdn,
       }),
     });

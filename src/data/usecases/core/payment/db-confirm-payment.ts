@@ -60,6 +60,7 @@ export class DbConfirmPayment implements ConfirmPayment {
         }),
         session: JSON.stringify({
           ...session,
+          count: 0,
           paymentId: null,
           cards,
         }),
@@ -84,6 +85,7 @@ export class DbConfirmPayment implements ConfirmPayment {
       expected: null,
       session: JSON.stringify({
         ...session,
+        count: 0,
       }),
     });
 

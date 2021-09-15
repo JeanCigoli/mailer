@@ -42,7 +42,10 @@ export class DbMenuToken implements MenuToken {
           3: 'CARDS_MENU',
           9: 'TRANSFER_OPERATOR',
         }),
-        session: JSON.stringify(session),
+        session: JSON.stringify({
+          ...session,
+          count: 0,
+        }),
       });
 
       return {
@@ -71,6 +74,7 @@ export class DbMenuToken implements MenuToken {
       responseText: authCode.authCode,
       session: JSON.stringify({
         ...session,
+        count: 0,
         authCode: authCode.authCode,
       }),
     });
@@ -88,6 +92,7 @@ export class DbMenuToken implements MenuToken {
       requestText: finishStep.message,
       session: JSON.stringify({
         ...session,
+        count: 0,
         authCode: authCode.authCode,
       }),
     });

@@ -58,6 +58,7 @@ export class DbMenuTypePayment implements MenuTypePayment {
         session: JSON.stringify({
           ...session,
           ...recharge,
+          count: 0,
         }),
       });
 
@@ -109,6 +110,7 @@ export class DbMenuTypePayment implements MenuTypePayment {
       session: JSON.stringify({
         ...session,
         cards,
+        count: 0,
       }),
     });
 

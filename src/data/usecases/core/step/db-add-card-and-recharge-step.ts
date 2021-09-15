@@ -47,6 +47,7 @@ export class DbAddCardAndRechargeStep implements AddCardAndRechargeStep {
         session: JSON.stringify({
           ...session,
           ...card,
+          count: 0,
         }),
       });
 
@@ -87,6 +88,7 @@ export class DbAddCardAndRechargeStep implements AddCardAndRechargeStep {
         session: JSON.stringify({
           ...session,
           ...card,
+          count: 0,
         }),
       });
 
@@ -122,6 +124,7 @@ export class DbAddCardAndRechargeStep implements AddCardAndRechargeStep {
         ...session,
         ...card,
         ...recharge,
+        count: 0,
       }),
     });
 
