@@ -8,12 +8,20 @@ export class HttpValidatePlanValuesOptionSms
   constructor(private readonly sendSms: SendSms) {}
 
   async handle(body: any): Promise<void> {
+    console.log({ body });
+
     const messages: Array<string> = body.messages;
     const canRechargeSingle: Boolean = body.canRechargeSingle;
 
-    const [text] = messages;
+    const [firstText, secondText] = messages;
 
-    const [firstMessage, options] = text.split('|||');
+    // console.log({ text, messages });
+
+    const [firstMessage, options] = secondText
+      ? secondText.split('|||')
+      : firstText.split('|||');
+
+    // console.log({ options });
 
     const arrayOptions = JSON.parse(options);
 
@@ -21,10 +29,12 @@ export class HttpValidatePlanValuesOptionSms
       canRechargeSingle ? arrayOptions[0] : arrayOptions[1]
     }`;
 
+    // console.log({ finalText });
+
     await this.sendSms.send({
-      clientToken: body.token,
+      clientToken: body.data.token,
       message: removedAccent(finalText),
-      msisdn: body.msisdn,
+      msisdn: body.data.msisdn,
     });
   }
 }
