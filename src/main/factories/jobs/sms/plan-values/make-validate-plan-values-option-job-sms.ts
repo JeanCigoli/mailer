@@ -1,4 +1,4 @@
-import { HttpValidatePlanValuesOption } from '../../../../../data/usecases/sms/plan-values/http-validate-plan-values-option';
+import { HttpValidatePlanValuesOptionSms } from '../../../../../data/usecases/sms/plan-values/http-validate-plan-values-option-sms';
 import { phoenixSms } from '../../../../../infra/core/http/helpers/phoenix-sms';
 import { SendSmsService } from '../../../../../infra/core/http/phoenix/sms/send-sms-service';
 import { RequestAdapter } from '../../../../../infra/core/http/web-service-rest-adapter';
@@ -9,7 +9,7 @@ export const makeValidatePlanValuesOptionJobSms = () => {
 
   const sendSmsService = new SendSmsService(httpClient);
 
-  const httpValidatePlanValuesOption = new HttpValidatePlanValuesOption(
+  const httpValidatePlanValuesOption = new HttpValidatePlanValuesOptionSms(
     sendSmsService,
   );
 

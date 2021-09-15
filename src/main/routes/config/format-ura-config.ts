@@ -9,6 +9,7 @@ import {
   makeRechargePlanValuesControllerUra,
   makeTokenControllerUra,
 } from '../../factories/controller/ura';
+import { makeValidatePlanValuesOptionControllerUra } from '../../factories/controller/ura/plan-values/make-validate-plan-values-option-controller-ura';
 
 export const formatUraSwitchConfig: adapterOptions = [
   {
@@ -30,6 +31,11 @@ export const formatUraSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 10 },
     handle: adaptRouteXml(makeErrorControllerUra()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 12 },
+    handle: adaptRouteXml(makeValidatePlanValuesOptionControllerUra()),
   },
   {
     target: { step: 'stepId' },

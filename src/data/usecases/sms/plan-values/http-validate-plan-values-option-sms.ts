@@ -1,7 +1,9 @@
-import { ValidatePlanValuesOption } from '../../../../domain/usecases/sms/plan-values/validate-plan-values-option';
+import { ValidatePlanValuesOptionSms } from '../../../../domain/usecases/sms/plan-values/validate-plan-values-option-sms';
 import { SendSms } from '../../../protocols/core/http/send-sms';
 
-export class HttpValidatePlanValuesOption implements ValidatePlanValuesOption {
+export class HttpValidatePlanValuesOptionSms
+  implements ValidatePlanValuesOptionSms
+{
   constructor(private readonly sendSms: SendSms) {}
 
   async handle(body: any): Promise<void> {
