@@ -1,5 +1,5 @@
 import { TokenSms } from '../../../../domain/usecases/sms/token/token-sms';
-import { Job } from '../../../../main/protocols/listener-job';
+import { Job } from '../../../protocols/listener-job';
 import errorLogger from '../../../../utils/logger';
 
 export class TokenJobSms implements Job {

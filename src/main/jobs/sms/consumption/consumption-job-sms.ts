@@ -1,5 +1,5 @@
 import { ConsumptionSms } from '../../../../domain/usecases/sms/consumption/consumption-sms';
-import { Job } from '../../../../main/protocols/listener-job';
+import { Job } from '../../../protocols/listener-job';
 import errorLogger from '../../../../utils/logger';
 
 export class ConsumptionJobSms implements Job {

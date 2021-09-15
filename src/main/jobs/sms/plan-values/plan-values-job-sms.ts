@@ -1,5 +1,5 @@
 import { PlanValuesSms } from '../../../../domain/usecases/sms/plan-values/plan-values-sms';
-import { Job } from '../../../../main/protocols/listener-job';
+import { Job } from '../../../protocols/listener-job';
 import errorLogger from '../../../../utils/logger';
 
 export class PlanValuesJobSms implements Job {
