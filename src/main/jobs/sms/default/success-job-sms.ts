@@ -8,6 +8,7 @@ export class SuccessJobSms implements Job {
     try {
       await this.successSms.handle(message.body);
     } catch (e) {
+      console.log({ message });
       errorLogger(e);
     }
   }

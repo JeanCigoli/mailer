@@ -10,7 +10,7 @@ export class HttpListCardsSms implements ListCardsSms {
     const cards: Array<Card> = body.data.cards;
 
     const messages = cards.map(
-      async (card) => `${card.flag} - ${card.lastDigits} \n `,
+      async (card, index) => `${index + 1}:${card.flag} - ${card.lastDigits}  `,
     );
 
     const reducedMessages = messages.reduce(async (acumulator, current) => {

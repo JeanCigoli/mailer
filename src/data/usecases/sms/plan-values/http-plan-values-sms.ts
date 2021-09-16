@@ -7,10 +7,11 @@ export class HttpPlanValuesSms implements PlanValuesSms {
   constructor(private readonly sendSms: SendSms) {}
 
   async handle(body: any): PlanValuesSms.Result {
-    const plans: Array<Plan> = body.data.plans;
+    // console.log({ values: body.data.value });
+    const plans: Array<Plan> = body.data.values;
 
     const messages = plans.map(async (plan, index) => {
-      const text = `${index + 1} - ${plan.name}: R$${plan.value} \n `;
+      const text = `${index + 1} - ${plan.name}: R$${plan.value}  `;
       return text;
     });
 
@@ -41,7 +42,7 @@ export class HttpPlanValuesSms implements PlanValuesSms {
 
     const finalMessage = await reduceMessage;
 
-    console.log({ finalMessage });
+    // console.log({ finalMessage });
 
     await this.sendSms.send({
       message: removedAccent(finalMessage),

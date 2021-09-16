@@ -1,4 +1,12 @@
-export const replaceKeyToValue = (message: string, values: any) => {
+import * as _ from 'lodash';
+
+export const replaceKeyToValue = (message: string | any, values: any) => {
+  // console.log({ message, values });
+
+  if (_.isEmpty(values)) {
+    return message;
+  }
+
   if (!message) {
     return message;
   }
