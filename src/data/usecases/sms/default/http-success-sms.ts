@@ -7,11 +7,23 @@ export class HttpSuccessSms implements SuccessSms {
   constructor(private readonly sendSms: SendSms) {}
 
   async handle(body: any): SuccessSms.Result {
-    console.log({ body });
-
     const messages: Array<string> = body.messages;
 
     const data = body.data;
+
+    if ([2, 4].includes(body.step.stepId)) {
+      const finalMessage = messages
+        .map((value) => replaceKeyToValue(value, data))
+        .join(' ');
+
+      await this.sendSms.send({
+        message: removedAccent(finalMessage),
+        msisdn: data.msisdn,
+        clientToken: data.token,
+      });
+
+      return { status: true };
+    }
 
     for await (const message of messages) {
       const newMessage = replaceKeyToValue(message, data);
