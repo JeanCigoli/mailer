@@ -15,7 +15,7 @@ export class HttpSendListCardRecharge implements SendListCardRecharge {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: '5511996059255',
+        destination: params.msisdn,
       },
     ];
 

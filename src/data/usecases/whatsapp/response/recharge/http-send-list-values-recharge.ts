@@ -17,7 +17,7 @@ export class HttpSendListValuesRecharge implements SendListValuesRecharge {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: '5511996059255',
+        destination: params.msisdn,
       },
     ];
 
