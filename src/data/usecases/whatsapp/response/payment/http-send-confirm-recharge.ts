@@ -18,7 +18,7 @@ export class HttpSendConfirmRecharge implements SendConfirmRecharge {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: params.msisdn,
+        destination: '5511996059255',
       },
     ];
 
@@ -29,9 +29,12 @@ export class HttpSendConfirmRecharge implements SendConfirmRecharge {
 
     const credentials = this.transformCredentials(base64.credentials);
 
-    const [firstMessage] = params.messages;
+    const [firstMessage, secondMessage] = params.messages;
 
-    const verify = this.verifyMessages('Confirmação de recarga!', firstMessage);
+    const verify = this.verifyMessages(
+      secondMessage ? firstMessage : 'Confirmação de recarga!',
+      secondMessage ? secondMessage : firstMessage,
+    );
 
     if (params.data.newCard) {
       const cardLength = params.data.newCard.cardNumber.length;
@@ -65,7 +68,11 @@ export class HttpSendConfirmRecharge implements SendConfirmRecharge {
             })),
           },
           alternativeText: params.messages
-            .map((message) => replaceKeyToValue(message, params.data))
+            .map((message) => {
+              const [first] = message.split('|||');
+
+              return replaceKeyToValue(first, params.data);
+            })
             .join('\n'),
         },
       },

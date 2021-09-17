@@ -20,7 +20,7 @@ export class HttpSendDeleteCardSuccess implements SendDeleteCardSuccess {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: params.msisdn,
+        destination: '5511996059255',
       },
     ];
 
@@ -61,7 +61,11 @@ export class HttpSendDeleteCardSuccess implements SendDeleteCardSuccess {
             })),
           },
           alternativeText: params.messages
-            .map((message) => replaceKeyToValue(message, params.data))
+            .map((message) => {
+              const [first] = message.split('|||');
+
+              return replaceKeyToValue(first, params.data);
+            })
             .join('\n'),
         },
       },
