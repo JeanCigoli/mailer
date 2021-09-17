@@ -10,7 +10,7 @@ export class HttpPlanValuesSms implements PlanValuesSms {
     const plans: Array<Plan> = body.data.values;
 
     const messages = plans.map(async (plan, index) => {
-      const text = `${index + 1} - ${plan.name}: R$${plan.value}  `;
+      const text = `${index + 1} - ${plan.name}: ${plan.label}`;
       return text;
     });
 
