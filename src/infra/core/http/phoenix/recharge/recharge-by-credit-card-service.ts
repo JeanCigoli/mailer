@@ -26,6 +26,8 @@ export class RechargeByCreditCardService implements RechargeByCreditCard {
       },
     });
 
+    console.log('RESULT', JSON.stringify(result.body));
+
     if (result.statusCode > 299) {
       return {
         status: false,
