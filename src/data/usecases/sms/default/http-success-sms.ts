@@ -7,6 +7,8 @@ export class HttpSuccessSms implements SuccessSms {
   constructor(private readonly sendSms: SendSms) {}
 
   async handle(body: any): SuccessSms.Result {
+    console.log({ body });
+
     const messages: Array<string> = body.messages;
 
     const data = body.data;
