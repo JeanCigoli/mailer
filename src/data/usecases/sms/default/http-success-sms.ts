@@ -9,16 +9,12 @@ export class HttpSuccessSms implements SuccessSms {
   async handle(body: any): SuccessSms.Result {
     const messages: Array<string> = body.messages;
 
-    // console.log({ body });
-
     const data = body.data;
 
     if ([2, 4].includes(body.step.stepId)) {
       const finalMessage = messages
         .map((value) => replaceKeyToValue(value, data))
         .join(' ');
-
-      // console.log({ finalMessage });
 
       await this.sendSms.send({
         message: removedAccent(finalMessage),
