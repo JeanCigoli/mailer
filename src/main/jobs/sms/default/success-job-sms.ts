@@ -6,9 +6,8 @@ export class SuccessJobSms implements Job {
   constructor(private readonly successSms: SuccessSms) {}
   async handle(message: Record<string, any>, next?: Function): Promise<void> {
     try {
-      await this.successSms.handle(message.body);
+      await this.successSms.handle({ ...message.body, step: message.step });
     } catch (e) {
-      console.log({ message });
       errorLogger(e);
     }
   }
