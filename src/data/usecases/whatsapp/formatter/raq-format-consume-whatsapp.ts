@@ -8,7 +8,7 @@ export class RaqFormatConsumeWhatsApp implements FormatConsumeWhatsApp {
     if (object.message.type === 'TEXT') {
       return {
         message: object.message.messageText,
-        msisdn: '5515976079352', // object.source,
+        msisdn: object.source,
         sourceId: Source.WHATSAPP,
       };
     }
@@ -16,14 +16,14 @@ export class RaqFormatConsumeWhatsApp implements FormatConsumeWhatsApp {
     if (object.message.interactive.type === 'LIST_REPLY') {
       return {
         message: object.message.listReply.rowIdentifier,
-        msisdn: '5515976079352', // object.source,
+        msisdn: object.source,
         sourceId: Source.WHATSAPP,
       };
     }
 
     return {
       message: object.message.payload,
-      msisdn: '5515976079352', // object.source,
+      msisdn: object.source,
       sourceId: Source.WHATSAPP,
     };
   }

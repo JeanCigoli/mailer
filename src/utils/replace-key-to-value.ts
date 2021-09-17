@@ -1,9 +1,7 @@
-import * as _ from 'lodash';
+import load from 'lodash';
 
 export const replaceKeyToValue = (message: string | any, values: any) => {
-  // console.log({ message, values });
-
-  if (_.isEmpty(values)) {
+  if (load.isEmpty(values)) {
     return message;
   }
 

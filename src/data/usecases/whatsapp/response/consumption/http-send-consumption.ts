@@ -18,13 +18,15 @@ export class HttpSendConsumption implements SendConsumption {
       minutes: params.data.consumption.voice.available,
       sms: params.data.consumption.sms.available,
       mvno: params.data.mvno,
-      validity: format(new Date(params.data.dateGrace), 'dd/MM/yyyy'),
+      validity: params.data.dateGrace
+        ? format(new Date(params.data.dateGrace), 'dd/MM/yyyy')
+        : '-',
     };
 
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: '5511971314531',
+        destination: params.msisdn,
       },
     ];
 

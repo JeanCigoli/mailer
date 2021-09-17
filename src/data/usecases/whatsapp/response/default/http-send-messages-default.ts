@@ -19,7 +19,7 @@ export class HttpSendMessagesDefault implements SendMessagesDefault {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: '5511971314531',
+        destination: params.msisdn,
       },
     ];
 

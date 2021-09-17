@@ -20,7 +20,7 @@ export class HttpSendDeleteCardSuccess implements SendDeleteCardSuccess {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: '5511971314531',
+        destination: params.msisdn,
       },
     ];
 

@@ -18,7 +18,7 @@ export class HttpSendConfirmRecharge implements SendConfirmRecharge {
     const destinations = [
       {
         correlationId: new Date().getTime(),
-        destination: '5511971314531',
+        destination: params.msisdn,
       },
     ];
 
