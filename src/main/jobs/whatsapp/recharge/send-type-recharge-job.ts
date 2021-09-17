@@ -13,7 +13,6 @@ export class SendTypeRechargeJob implements Job {
 
       next();
     } catch (error: any) {
-      console.log(error);
       errorLogger(error);
     }
   }

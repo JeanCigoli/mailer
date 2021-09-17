@@ -1,4 +1,5 @@
 import { SendSmsCallback } from '../../domain/usecases/core/sms/send-sms-callback';
+import errorLogger from '../../utils/logger';
 import { Job } from '../protocols/listener-job';
 
 export class SendSmsJob implements Job {
@@ -12,7 +13,7 @@ export class SendSmsJob implements Job {
         clientToken: json.token,
       });
     } catch (e) {
-      console.log({ e });
+      errorLogger(e);
     }
   }
 }

@@ -7,7 +7,6 @@ export class HttpPlanValuesSms implements PlanValuesSms {
   constructor(private readonly sendSms: SendSms) {}
 
   async handle(body: any): PlanValuesSms.Result {
-    // console.log({ values: body.data.value });
     const plans: Array<Plan> = body.data.values;
 
     const messages = plans.map(async (plan, index) => {
@@ -15,34 +14,30 @@ export class HttpPlanValuesSms implements PlanValuesSms {
       return text;
     });
 
-    const reduceMessage = messages.reduce(async (acumulator, current) => {
-      const acumulatorValue = await acumulator;
+    const reduceMessage = messages.reduce(async (accumulator, current) => {
+      const accumulatorValue = await accumulator;
       const currentValue = await current;
 
-      const text = acumulatorValue + currentValue;
+      const text = accumulatorValue + currentValue;
 
       if (text.length >= 160) {
-        console.log({ text });
-
         await this.sendSms.send({
-          message: acumulatorValue,
+          message: accumulatorValue,
           msisdn: body.data.msisdn,
           clientToken: body.data.token,
         });
 
-        acumulator = current;
+        accumulator = current;
 
-        return acumulator;
+        return accumulator;
       }
 
-      acumulator = Promise.resolve(text);
+      accumulator = Promise.resolve(text);
 
-      return acumulator;
+      return accumulator;
     });
 
     const finalMessage = await reduceMessage;
-
-    // console.log({ finalMessage });
 
     await this.sendSms.send({
       message: removedAccent(finalMessage),
