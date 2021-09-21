@@ -4,9 +4,9 @@ import { Card } from '../../../../../domain/models';
 
 export class DbListCardsXmlResponse implements ListCardsXml {
   format(body: any): string {
-    const cards: Array<Card> = body.data;
+    const cards: Array<Card> = body.data.cards;
 
-    const reducedCards = `${cards.length} - ${cards
+    const reducedCards = `${cards.length}-${cards
       .map((card) => `${card.audio}*${card.binCode}*${card.lastDigits}`)
       .join(';')}`;
 

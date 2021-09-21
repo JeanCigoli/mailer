@@ -7,13 +7,27 @@ export class DbValidatePlanValuesOptionXmlResponse
   handle(body: any): string {
     const messages: Array<string> = body.messages;
     const status: boolean = body.status;
-    const canRechargeSingle: boolean = body.canRechargeSingle;
+    const canRechargeSingle: boolean = body.data.canRechargeSingle;
 
-    const [fullPlanValues, addonPlanValue] = messages;
+    const [jsonMessage, twoMessage] = messages;
+
+    const message = twoMessage
+      ? JSON.parse(twoMessage)
+      : JSON.parse(jsonMessage);
+
+    const [fullPlanValues, addonPlanValue] = message;
+
+    const fullPlan = twoMessage
+      ? [jsonMessage, fullPlanValues]
+      : [fullPlanValues];
+
+    const addonPlan = twoMessage
+      ? [jsonMessage, addonPlanValue]
+      : [addonPlanValue];
 
     return makeResponseXml({
       status: status ? 'P00' : 'P01',
-      values: canRechargeSingle ? fullPlanValues : addonPlanValue,
+      values: canRechargeSingle ? fullPlan : addonPlan,
     });
   }
 }

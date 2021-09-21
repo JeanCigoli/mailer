@@ -52,7 +52,7 @@ export class DbListValues implements ListValues {
       return {
         messages: [step.message],
         step,
-        status: false,
+        status: true,
         data: session,
       };
     }
@@ -98,7 +98,7 @@ export class DbListValues implements ListValues {
     return {
       messages: [step.message],
       step,
-      status: false,
+      status: true,
       data: {
         ...session,
         type: nameStep,
