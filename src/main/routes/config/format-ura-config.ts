@@ -68,6 +68,21 @@ export const formatUraSwitchConfig: adapterOptions = [
     handle: adaptRouteXml(makeErrorControllerUra()),
   },
   {
+    target: { step: 'stepId' },
+    expected: { stepId: 32 },
+    handle: adaptRouteXml(makeErrorControllerUra()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 33 },
+    handle: adaptRouteXml(makeErrorControllerUra()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 34 },
+    handle: adaptRouteXml(makeErrorControllerUra()),
+  },
+  {
     handle: adaptRouteXml(makeSuccessControllerUra()),
   },
 ];
