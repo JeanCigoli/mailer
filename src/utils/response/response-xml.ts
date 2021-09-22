@@ -13,12 +13,8 @@ export const transformArray = (value: string[]) => {
 };
 
 export const transformJsonInXml = (object: object | any): Array<any> => {
-  const types = ['string', 'object', 'bigint', 'boolean', 'number'];
   const arrayXmlObjects = Object.entries(object).map(([key, value]) => {
     if (!key) key = 'value';
-
-    // if (!types.includes(typeof value))
-    //   return `<${key}>${reduceArray(value)}</${key}>`;
 
     if (Array.isArray(value)) {
       return `<${key}>${transformArray(value)}</${key}>`;

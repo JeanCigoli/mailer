@@ -26,8 +26,8 @@ export class DbValidatePlanValuesOptionXmlResponse
       : [addonPlanValue];
 
     return makeResponseXml({
-      status: status ? 'P00' : 'P01',
-      values: canRechargeSingle ? fullPlan : addonPlan,
+      status: 'P00',
+      messages: canRechargeSingle ? fullPlan : addonPlan,
     });
   }
 }

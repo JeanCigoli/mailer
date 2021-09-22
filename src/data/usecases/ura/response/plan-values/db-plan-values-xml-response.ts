@@ -18,7 +18,7 @@ export class DbPlanValuesXmlResponse implements PlanValuesXmlResponse {
         .join(`;`)};${second}`;
 
       return makeResponseXml({
-        status: body.status ? 'P00' : 'P01',
+        status: 'P00',
         messages: messages,
       });
     }
@@ -28,7 +28,7 @@ export class DbPlanValuesXmlResponse implements PlanValuesXmlResponse {
       .join(`;`)};${single}`;
 
     return makeResponseXml({
-      status: body.status ? 'P00' : 'P01',
+      status: 'P00',
       messages: messages,
     });
   }
