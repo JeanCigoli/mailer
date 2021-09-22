@@ -86,6 +86,7 @@ export class DbListValues implements ListValues {
       expected: JSON.stringify({
         ...expecteis,
         0: 'TYPE_RECHARGE_MENU',
+        9: 'VIEW_PLAN',
       }),
       session: JSON.stringify({
         ...session,

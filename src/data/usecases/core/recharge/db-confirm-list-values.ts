@@ -28,6 +28,30 @@ export class DbConfirmListValues implements ConfirmListValues {
     const nameStep = expected[params.message];
     const selectStep = +Step[nameStep];
 
+    if (nameStep === 'VIEW_PLAN') {
+      await this.createDialogueRepository.create({
+        accountId: params.dialogue.session.accountId,
+        stepSourceId: params.stepSource.stepSourceId,
+        requestDate: new Date(),
+        requestText: params.stepSource.message,
+        expected: JSON.stringify({
+          ...expected,
+        }),
+        session: JSON.stringify({
+          ...session,
+        }),
+      });
+
+      return {
+        messages: [params.stepSource.message],
+        step: params.stepSource,
+        status: true,
+        data: {
+          ...session,
+        },
+      };
+    }
+
     if (nameStep === 'TYPE_RECHARGE_MENU') {
       const step = await this.listStepWithSourceRepository.findStepAndSource({
         sourceId: params.sourceId,
@@ -54,7 +78,7 @@ export class DbConfirmListValues implements ConfirmListValues {
       return {
         messages: [step.message],
         step,
-        status: false,
+        status: true,
         data: {
           ...session,
         },

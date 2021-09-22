@@ -6,3 +6,4 @@ export * from './recharge/make-plan-values-controller-ura';
 export * from './token/make-token-controller-ura';
 export * from './menu/make-menu-controller-ura';
 export * from './recharge/make-confirm-add-msisdn-ura';
+export * from './recharge/make-confirm-recharge-ura';

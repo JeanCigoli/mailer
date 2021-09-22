@@ -9,6 +9,7 @@ import {
   makeTokenControllerUra,
   makeMenuController,
   makeConfirmAddMsisdnUra,
+  makeConfirmRechargeUra,
 } from '../../factories/controller/ura';
 import { makeValidatePlanValuesOptionControllerUra } from '../../factories/controller/ura/recharge/make-validate-plan-values-option-controller-ura';
 
@@ -52,6 +53,11 @@ export const formatUraSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 16 },
     handle: adaptRouteXml(makeListCardsControllerUra()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 21 },
+    handle: adaptRouteXml(makeConfirmRechargeUra()),
   },
   {
     target: { step: 'stepId' },
