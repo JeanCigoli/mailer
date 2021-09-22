@@ -8,14 +8,11 @@ export class DbPlanValuesXmlResponse implements PlanValuesXmlResponse {
 
     const [single, second] = body.messages;
 
-    const length = body.messages.length + plans.length * 3;
+    const length = body.messages.length + plans.length * 2;
 
     if (second) {
       const messages = `${length}-${single};${plans
-        ?.map(
-          (value, index) =>
-            `digite${index + 1}.wav;pararecarregar.wav;${value.audio}`,
-        )
+        ?.map((value, index) => `${index + 1}recarregar.wav;${value.audio}`)
         .join(`;`)};${second}`;
 
       return makeResponseXml({
@@ -25,10 +22,7 @@ export class DbPlanValuesXmlResponse implements PlanValuesXmlResponse {
     }
 
     const messages = `${length}-${plans
-      ?.map(
-        (value, index) =>
-          `digite${index + 1}.wav;pararecarregar.wav;${value.audio}`,
-      )
+      ?.map((value, index) => `${index + 1}recarregar.wav;${value.audio}`)
       .join(`;`)};${single}`;
 
     return makeResponseXml({
