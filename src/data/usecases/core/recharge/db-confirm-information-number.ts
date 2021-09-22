@@ -93,7 +93,7 @@ export class DbConfirmInformationNumber implements ConfirmInformationNumber {
     return {
       messages: [step.message],
       step,
-      status: false,
+      status: true,
       data: session,
     };
   }

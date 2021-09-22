@@ -18,7 +18,10 @@ export class PlanValuesControllerUra implements Controller {
     } catch (e) {
       return {
         statusCode: 400,
-        body: makeResponseXml({ status: 'P01', values: 'erro.wap' }),
+        body: makeResponseXml({
+          status: 'P01',
+          messages: 'error.wav',
+        }),
         headers: contentTypeXml,
       };
     }

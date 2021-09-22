@@ -5,7 +5,7 @@ import { formatNumberToUra } from '../../../../../utils/formatter/format-numbers
 
 export class DbListCardsXmlResponse implements ListCardsXml {
   format(body: any): string {
-    const cards: Array<Card> = body.data.cards;
+    const cards: Array<Card> = body.data.cards.slice(0, 9);
 
     const [single, second] = body.messages;
 

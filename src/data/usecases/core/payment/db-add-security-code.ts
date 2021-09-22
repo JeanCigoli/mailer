@@ -66,7 +66,7 @@ export class DbAddSecurityCode implements AddSecurityCode {
       return {
         messages: [step.message, params.stepSource.message],
         step: params.stepSource,
-        status: false,
+        status: true,
         data: {
           ...session,
         },

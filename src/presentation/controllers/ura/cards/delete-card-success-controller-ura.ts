@@ -1,15 +1,15 @@
-import { MenuXml } from '../../../../domain/usecases/ura';
+import { DeleteCardSuccessXml } from '../../../../domain/usecases/ura';
 import { contentTypeXml } from '../../../../utils/content-type-xml';
 import errorLogger from '../../../../utils/logger';
 import { makeResponseXml } from '../../../../utils/response/response-xml';
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
-export class MenuControllerUra implements Controller {
-  constructor(private readonly menuXml: MenuXml) {}
+export class DeleteCardSuccessControllerUra implements Controller {
+  constructor(private readonly deleteCardSuccessXml: DeleteCardSuccessXml) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const result = this.menuXml.format(httpRequest.body);
+      const result = this.deleteCardSuccessXml.format(httpRequest.body);
 
       return {
         statusCode: 200,

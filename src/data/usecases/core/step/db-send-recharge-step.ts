@@ -49,7 +49,7 @@ export class DbSendRechargeStep implements SendRechargeStep {
 
       return {
         messages: [step.message],
-        status: false,
+        status: true,
         step,
         data: {
           ...session,

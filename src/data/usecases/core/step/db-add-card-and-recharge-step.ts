@@ -53,7 +53,7 @@ export class DbAddCardAndRechargeStep implements AddCardAndRechargeStep {
 
       return {
         messages: [step.message],
-        status: false,
+        status: true,
         step,
         data: {
           ...session,
@@ -94,7 +94,7 @@ export class DbAddCardAndRechargeStep implements AddCardAndRechargeStep {
 
       return {
         messages: [step.message],
-        status: false,
+        status: true,
         step,
         data: {
           ...session,

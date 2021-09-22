@@ -83,7 +83,7 @@ export class DbAddCardStep implements AddCardStep {
 
     return {
       messages: [step.message, finishStep.message],
-      status: true,
+      status: false,
       step,
       data: {
         ...session,

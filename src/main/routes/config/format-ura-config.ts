@@ -3,15 +3,17 @@ import { adapterOptions } from '../../adapters/adapt-switch-middleware';
 import {
   makeListCardsControllerUra,
   makeConsumptionControllerUra,
-  makeErrorControllerUra,
-  makeSuccessControllerUra,
+  makeDefaultControllerUra,
   makeRechargePlanValuesControllerUra,
   makeTokenControllerUra,
   makeMenuController,
   makeConfirmAddMsisdnUra,
   makeConfirmRechargeUra,
+  makeDeleteCardSuccessUra,
+  makeConfirmAddCardUra,
+  makeValidatePlanValuesOptionControllerUra,
+  makeTransferControllerUra,
 } from '../../factories/controller/ura';
-import { makeValidatePlanValuesOptionControllerUra } from '../../factories/controller/ura/recharge/make-validate-plan-values-option-controller-ura';
 
 export const formatUraSwitchConfig: adapterOptions = [
   {
@@ -33,6 +35,11 @@ export const formatUraSwitchConfig: adapterOptions = [
     target: { step: 'stepId' },
     expected: { stepId: 5 },
     handle: adaptRouteXml(makeConsumptionControllerUra()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 7 },
+    handle: adaptRouteXml(makeTransferControllerUra()),
   },
   {
     target: { step: 'stepId' },
@@ -61,41 +68,20 @@ export const formatUraSwitchConfig: adapterOptions = [
   },
   {
     target: { step: 'stepId' },
-    expected: { stepId: 33 },
-    handle: adaptRouteXml(makeErrorControllerUra()),
+    expected: { stepId: 26 },
+    handle: adaptRouteXml(makeConfirmAddCardUra()),
   },
   {
-    handle: adaptRouteXml(makeSuccessControllerUra()),
+    target: { step: 'stepId' },
+    expected: { stepId: 28 },
+    handle: adaptRouteXml(makeListCardsControllerUra()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 29 },
+    handle: adaptRouteXml(makeDeleteCardSuccessUra()),
+  },
+  {
+    handle: adaptRouteXml(makeDefaultControllerUra()),
   },
 ];
-
-// {
-//   target: { step: 'stepId' },
-//   expected: { stepId: 18 },
-//   handle: adaptRouteXml(makeErrorControllerUra()),
-// },
-// {
-//   target: { step: 'stepId' },
-//   expected: { stepId: 24 },
-//   handle: adaptRouteXml(makeErrorControllerUra()),
-// },
-// {
-//   target: { step: 'stepId' },
-//   expected: { stepId: 28 },
-//   handle: adaptRouteXml(makeErrorControllerUra()),
-// },
-// {
-//   target: { step: 'stepId' },
-//   expected: { stepId: 30 },
-//   handle: adaptRouteXml(makeErrorControllerUra()),
-// },
-// {
-//   target: { step: 'stepId' },
-//   expected: { stepId: 32 },
-//   handle: adaptRouteXml(makeErrorControllerUra()),
-// },
-// {
-//  target: { step: 'stepId' },
-//  expected: { stepId: 10 },
-//  handle: adaptRouteXml(makeErrorControllerUra()),
-// },

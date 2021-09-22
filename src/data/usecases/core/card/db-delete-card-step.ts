@@ -113,6 +113,7 @@ export class DbDeleteCardStep implements DeleteCardStep {
       }),
       session: JSON.stringify({
         ...session,
+        cardId: nameStep,
         count: 0,
       }),
     });
@@ -123,6 +124,7 @@ export class DbDeleteCardStep implements DeleteCardStep {
       step,
       data: {
         ...session,
+        cardId: nameStep,
         card: card.message,
       },
     };

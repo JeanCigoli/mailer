@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { ConsumptionXml } from '../../../../../domain/usecases/ura/response/consumption/consumption-xml';
-import { removedAccent } from '../../../../../utils';
+import { removedAccent, removedSymbols } from '../../../../../utils';
 import { replaceKeyToValue } from '../../../../../utils/replace-key-to-value';
 import { makeResponseXml } from '../../../../../utils/response/response-xml';
 import { SendSms } from '../../../../protocols/core/http/send-sms';
@@ -31,9 +31,18 @@ export class DbConsumptionXmlResponse implements ConsumptionXml {
       msisdn: body.data.msisdn,
       clientToken: body.data.token,
     });
+
+    const [first, second] = body.messages;
+
+    const [begin, end] = JSON.parse(second);
+
+    const mvno = replaceKeyToValue(begin, {
+      mvno: removedSymbols(body.data.mvno),
+    });
+
     return makeResponseXml({
       status: 'P01',
-      messages: body.messages,
+      messages: [first, mvno, end],
     });
   }
 }

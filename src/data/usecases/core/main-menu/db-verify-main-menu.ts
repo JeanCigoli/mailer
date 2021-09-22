@@ -96,9 +96,9 @@ export class DbVerifyMainMenu implements VerifyMainMenu {
       });
 
       return {
-        messages: [step.message],
+        messages: [step.message, finishStep.message],
         step,
-        status: true,
+        status: false,
         data: {
           ...session,
         },

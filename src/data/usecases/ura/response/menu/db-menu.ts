@@ -7,9 +7,16 @@ export class DbMenuXml implements MenuXml {
     const [first, second] = params.messages;
     const mvno = params.data.mvno;
 
+    if (second) {
+      return makeResponseXml({
+        status: 'P00',
+        messages: [first, `${removedSymbols(mvno)}.wav`, second],
+      });
+    }
+
     return makeResponseXml({
       status: 'P00',
-      messages: [first, `${removedSymbols(mvno)}.wav`, second],
+      messages: [first],
     });
   }
 }

@@ -60,7 +60,7 @@ export class DbConfirmAddCard implements ConfirmAddCard {
     return {
       messages: [step.message],
       step,
-      status: false,
+      status: true,
       data: {
         ...session,
       },

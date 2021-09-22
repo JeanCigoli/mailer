@@ -49,7 +49,7 @@ export class DbListConsumptionStep implements ListConsumptionStep {
 
     return {
       messages: [params.stepSource.message, finishStep.message],
-      status: true,
+      status: false,
       step,
       data: {
         ...props.session,

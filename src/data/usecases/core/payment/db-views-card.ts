@@ -86,7 +86,7 @@ export class DbViewsCards implements ViewsCards {
     });
 
     return {
-      status: false,
+      status: true,
       messages: [step.message],
       step,
       data: {

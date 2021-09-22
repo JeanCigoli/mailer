@@ -58,7 +58,7 @@ export class DbAddNumberCard implements AddNumberCard {
       return {
         messages: [step.message, params.stepSource.message],
         step,
-        status: false,
+        status: true,
         data: {
           ...session,
         },
@@ -89,7 +89,7 @@ export class DbAddNumberCard implements AddNumberCard {
     return {
       messages: [step.message],
       step,
-      status: false,
+      status: true,
       data: {
         ...session,
       },

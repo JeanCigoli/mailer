@@ -1,5 +1,7 @@
 import { TokenXml } from '../../../../../domain/usecases/ura/response/token/token-xml';
+import { removedSymbols } from '../../../../../utils';
 import { formatNumberToUra } from '../../../../../utils/formatter/format-numbers-ura';
+import { replaceKeyToValue } from '../../../../../utils/replace-key-to-value';
 import { makeResponseXml } from '../../../../../utils/response/response-xml';
 
 export class DbTokenXml implements TokenXml {
@@ -8,13 +10,15 @@ export class DbTokenXml implements TokenXml {
 
     const [first, second] = body.messages;
 
-    const message = `${token.length + body.messages.length}-${first};${
-      token.data
-    };${second}`;
+    const [begin, end] = JSON.parse(second);
+
+    const mvno = replaceKeyToValue(begin, {
+      mvno: removedSymbols(body.data.mvno),
+    });
 
     return makeResponseXml({
       status: 'P01',
-      messages: message,
+      messages: [first, ...token.data.split(';'), mvno, end],
     });
   }
 }

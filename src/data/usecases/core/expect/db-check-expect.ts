@@ -33,7 +33,7 @@ export class DbCheckExpected implements CheckExpected {
       return {
         isError: false,
         data: {
-          status: false,
+          status: true,
           messages: [params.stepSource.message],
           step: params.stepSource,
           data: { ...props.session, count: 0 },
@@ -72,7 +72,7 @@ export class DbCheckExpected implements CheckExpected {
     return {
       isError: true,
       data: {
-        status: false,
+        status: true,
         messages: [notFoundMessage(params.sourceId), params.stepSource.message],
         step: params.stepSource,
         data: sessionStep,

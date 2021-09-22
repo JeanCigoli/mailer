@@ -112,7 +112,7 @@ export class DbConfirmListValues implements ConfirmListValues {
     });
 
     return {
-      status: false,
+      status: true,
       messages: [step.message],
       step,
       data: {

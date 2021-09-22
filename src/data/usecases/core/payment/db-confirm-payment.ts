@@ -69,7 +69,7 @@ export class DbConfirmPayment implements ConfirmPayment {
       return {
         messages: [step.message],
         step,
-        status: false,
+        status: true,
         data: {
           ...session,
           cards,
@@ -92,7 +92,7 @@ export class DbConfirmPayment implements ConfirmPayment {
     return {
       messages: [step.message],
       step,
-      status: false,
+      status: true,
       data: {
         ...session,
       },

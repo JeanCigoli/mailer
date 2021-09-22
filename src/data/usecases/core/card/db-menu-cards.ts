@@ -96,7 +96,7 @@ export class DbMenuCards implements MenuCards {
     return {
       messages: [step.message],
       step,
-      status: false,
+      status: true,
       data: {
         ...session,
         cards,

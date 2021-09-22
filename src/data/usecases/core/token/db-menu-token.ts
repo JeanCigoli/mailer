@@ -99,7 +99,7 @@ export class DbMenuToken implements MenuToken {
 
     return {
       messages: [step.message, finishStep.message],
-      status: true,
+      status: false,
       step,
       data: {
         ...session,

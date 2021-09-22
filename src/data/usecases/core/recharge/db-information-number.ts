@@ -75,7 +75,7 @@ export class DbInformationNumber implements InformationNumber {
       return {
         messages: [step.message],
         step,
-        status: false,
+        status: true,
         data: { ...props.session },
       };
     }
@@ -113,7 +113,7 @@ export class DbInformationNumber implements InformationNumber {
       return {
         messages: [step.message],
         step,
-        status: false,
+        status: true,
         data: {
           ...props.session,
         },
@@ -141,7 +141,7 @@ export class DbInformationNumber implements InformationNumber {
     return {
       messages: [step.message],
       step,
-      status: false,
+      status: true,
       data: {
         ...props.session,
         msisdn: account.msisdn,

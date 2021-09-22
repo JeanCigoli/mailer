@@ -60,7 +60,7 @@ export class DbAddValidityCard implements AddValidityCard {
       return {
         messages: [step.message, params.stepSource.message],
         step,
-        status: false,
+        status: true,
         data: {
           ...session,
         },
@@ -103,7 +103,7 @@ export class DbAddValidityCard implements AddValidityCard {
     return {
       messages: [step.message],
       step,
-      status: false,
+      status: true,
       data: {
         ...session,
       },

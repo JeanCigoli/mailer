@@ -22,7 +22,7 @@ export class ListCardsControllerUra implements Controller {
         statusCode: 400,
         body: makeResponseXml({
           status: 'P01',
-          messages: httpRequest.body.messages,
+          messages: 'error.wav',
         }),
         headers: contentTypeXml,
       };

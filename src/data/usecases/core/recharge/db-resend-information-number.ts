@@ -56,7 +56,7 @@ export class DbResendInformationNumber implements ResendInformationNumber {
     return {
       messages: [step.message],
       step,
-      status: false,
+      status: true,
       data: session,
     };
   }
