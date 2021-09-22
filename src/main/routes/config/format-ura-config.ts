@@ -5,22 +5,27 @@ import {
   makeConsumptionControllerUra,
   makeErrorControllerUra,
   makeSuccessControllerUra,
-  makeIndexController,
   makeRechargePlanValuesControllerUra,
   makeTokenControllerUra,
+  makeMenuController,
 } from '../../factories/controller/ura';
 import { makeValidatePlanValuesOptionControllerUra } from '../../factories/controller/ura/plan-values/make-validate-plan-values-option-controller-ura';
 
 export const formatUraSwitchConfig: adapterOptions = [
   {
     target: { step: 'stepId' },
-    expected: { stepId: 1 },
-    handle: adaptRouteXml(makeIndexController()),
+    expected: { stepId: 2 },
+    handle: adaptRouteXml(makeMenuController()),
   },
   {
     target: { step: 'stepId' },
     expected: { stepId: 3 },
     handle: adaptRouteXml(makeTokenControllerUra()),
+  },
+  {
+    target: { step: 'stepId' },
+    expected: { stepId: 4 },
+    handle: adaptRouteXml(makeMenuController()),
   },
   {
     target: { step: 'stepId' },

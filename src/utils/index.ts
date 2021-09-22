@@ -50,6 +50,10 @@ export const makeObjectToParamsRequest = (props: any) => {
     .join('&');
 };
 
+export const removedSymbols = (text: string) => {
+  return text.replace(/[^a-zA-Z]/g, '').toLowerCase();
+};
+
 export const removedAccent = (text: string) => {
   return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 };

@@ -5,3 +5,4 @@ export * from './default/make-success-controller-ura';
 export * from './index/make-index-controller';
 export * from './plan-values/make-plan-values-controller-ura';
 export * from './token/make-token-controller-ura';
+export * from './menu/make-menu-controller-ura';

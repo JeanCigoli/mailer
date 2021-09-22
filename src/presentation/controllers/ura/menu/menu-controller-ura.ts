@@ -1,15 +1,15 @@
-import { ListCardsXml } from '../../../../domain/usecases/ura/response/list-card-xml';
+import { MenuXml } from '../../../../domain/usecases/ura';
 import { contentTypeXml } from '../../../../utils/content-type-xml';
 import errorLogger from '../../../../utils/logger';
 import { makeResponseXml } from '../../../../utils/response/response-xml';
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
-export class ListCardsControllerUra implements Controller {
-  constructor(private readonly listCardXml: ListCardsXml) {}
+export class MenuControllerUra implements Controller {
+  constructor(private readonly menuXml: MenuXml) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const result = this.listCardXml.format(httpRequest.body);
+      const result = this.menuXml.format(httpRequest.body);
 
       return {
         statusCode: 200,
