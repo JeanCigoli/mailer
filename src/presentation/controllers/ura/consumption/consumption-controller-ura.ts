@@ -1,4 +1,4 @@
-import { ConsumptionXml } from '../../../../domain/usecases/ura/response/consumption-xml';
+import { ConsumptionXml } from '../../../../domain/usecases/ura/response/consumption/consumption-xml';
 import { contentTypeXml } from '../../../../utils/content-type-xml';
 import errorLogger from '../../../../utils/logger';
 import { makeResponseXml } from '../../../../utils/response/response-xml';

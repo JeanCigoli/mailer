@@ -1,4 +1,4 @@
-import { PlanValuesXmlResponse } from '../../../../../domain/usecases/ura/response/plan-values-xml';
+import { PlanValuesXmlResponse } from '../../../../../domain/usecases/ura/response/recharge/plan-values-xml';
 import { makeResponseXml } from '../../../../../utils/response/response-xml';
 import { Plan } from '../../../../../domain/models';
 

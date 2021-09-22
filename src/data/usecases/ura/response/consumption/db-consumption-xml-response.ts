@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { ConsumptionXml } from '../../../../../domain/usecases/ura/response/consumption-xml';
+import { ConsumptionXml } from '../../../../../domain/usecases/ura/response/consumption/consumption-xml';
 import { removedAccent } from '../../../../../utils';
 import { replaceKeyToValue } from '../../../../../utils/replace-key-to-value';
 import { makeResponseXml } from '../../../../../utils/response/response-xml';

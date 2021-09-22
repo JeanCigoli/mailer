@@ -1,4 +1,4 @@
-import { ListCardsXml } from '../../../../domain/usecases/ura/response/list-card-xml';
+import { ListCardsXml } from '../../../../domain/usecases/ura/response/cards/list-card-xml';
 import { contentTypeXml } from '../../../../utils/content-type-xml';
 import errorLogger from '../../../../utils/logger';
 import { makeResponseXml } from '../../../../utils/response/response-xml';

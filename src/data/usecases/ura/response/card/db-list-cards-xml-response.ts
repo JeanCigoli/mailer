@@ -1,4 +1,4 @@
-import { ListCardsXml } from '../../../../../domain/usecases/ura/response/list-card-xml';
+import { ListCardsXml } from '../../../../../domain/usecases/ura/response/cards/list-card-xml';
 import { makeResponseXml } from '../../../../../utils/response/response-xml';
 import { Card } from '../../../../../domain/models';
 import { formatNumberToUra } from '../../../../../utils/formatter/format-numbers-ura';
@@ -10,15 +10,13 @@ export class DbListCardsXmlResponse implements ListCardsXml {
     const [single, second] = body.messages;
 
     if (second) {
-      const [listCard, create] = JSON.parse(second);
-
-      const messages = `${cards.length * 7 + 3}-${single};${listCard};${cards
+      const messages = `${cards.length * 7 + 2}-${single};${cards
         .map((card, index) => {
           const digit = formatNumberToUra(card.lastDigits);
 
-          return `digite${index + 1}.wav;${card.audio};final.wav;${digit.data}`;
+          return `cartao${index + 1}.wav;${card.audio};final.wav;${digit.data}`;
         })
-        .join(';')};${create}`;
+        .join(';')};${second}`;
 
       return makeResponseXml({
         status: 'P00',
@@ -26,15 +24,13 @@ export class DbListCardsXmlResponse implements ListCardsXml {
       });
     }
 
-    const [listCard, create] = JSON.parse(single);
-
-    const messages = `${cards.length * 7 + 2}-${listCard};${cards
+    const messages = `${cards.length * 7 + 1}-${cards
       .map((card, index) => {
         const digit = formatNumberToUra(card.lastDigits);
 
-        return `digite${index + 1}.wav;${card.audio};final.wav;${digit.data}`;
+        return `cartao${index + 1}.wav;${card.audio};final.wav;${digit.data}`;
       })
-      .join(';')};${create}`;
+      .join(';')};${single}`;
 
     return makeResponseXml({
       status: 'P00',

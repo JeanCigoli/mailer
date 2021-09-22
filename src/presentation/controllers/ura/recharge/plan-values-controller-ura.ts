@@ -1,14 +1,14 @@
-import { TokenXml } from '../../../../domain/usecases/ura/response/token/token-xml';
+import { PlanValuesXmlResponse } from '../../../../domain/usecases/ura/response/recharge/plan-values-xml';
 import { contentTypeXml } from '../../../../utils/content-type-xml';
 import { makeResponseXml } from '../../../../utils/response/response-xml';
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
-export class TokenControllerUra implements Controller {
-  constructor(private readonly tokenXml: TokenXml) {}
+export class PlanValuesControllerUra implements Controller {
+  constructor(private readonly plansValuesXmlResponse: PlanValuesXmlResponse) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const result = this.tokenXml.handle(httpRequest.body);
+      const result = this.plansValuesXmlResponse.format(httpRequest.body);
 
       return {
         statusCode: 200,

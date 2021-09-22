@@ -1,4 +1,4 @@
-import { ValidatePlanValuesOptionUra } from '../../../../../domain/usecases/ura/response/validate-plan-values-option-xml';
+import { ValidatePlanValuesOptionUra } from '../../../../../domain/usecases/ura/response/recharge/validate-plan-values-option-xml';
 import { makeResponseXml } from '../../../../../utils/response/response-xml';
 
 export class DbValidatePlanValuesOptionXmlResponse
@@ -6,7 +6,6 @@ export class DbValidatePlanValuesOptionXmlResponse
 {
   handle(body: any): string {
     const messages: Array<string> = body.messages;
-    const status: boolean = body.status;
     const canRechargeSingle: boolean = body.data.canRechargeSingle;
 
     const [jsonMessage, twoMessage] = messages;

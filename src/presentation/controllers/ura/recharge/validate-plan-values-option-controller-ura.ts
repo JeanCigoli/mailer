@@ -1,4 +1,4 @@
-import { ValidatePlanValuesOptionUra } from '../../../../domain/usecases/ura/response/validate-plan-values-option-xml';
+import { ValidatePlanValuesOptionUra } from '../../../../domain/usecases/ura/response/recharge/validate-plan-values-option-xml';
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols';
 
 export class ValidatePlanValuesOptionControllerUra implements Controller {

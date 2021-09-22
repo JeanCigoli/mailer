@@ -1,4 +1,4 @@
-import { TokenXml } from '../../../../../domain/usecases/ura/response/token-xml';
+import { TokenXml } from '../../../../../domain/usecases/ura/response/token/token-xml';
 import { formatNumberToUra } from '../../../../../utils/formatter/format-numbers-ura';
 import { makeResponseXml } from '../../../../../utils/response/response-xml';
 
