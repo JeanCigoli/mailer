@@ -16,7 +16,7 @@ export class DbDefaultStepXml implements DefaultStepXml {
 
     if (!params.data) {
       return makeResponseXml({
-        status: 'P00',
+        status: 'P01',
         messages: params.messages,
       });
     }
