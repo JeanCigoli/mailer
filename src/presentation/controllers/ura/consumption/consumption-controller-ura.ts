@@ -21,8 +21,8 @@ export class ConsumptionControllerUra implements Controller {
       return {
         statusCode: 200,
         body: makeResponseXml({
-          status: 'P01',
-          messages: httpRequest.body.messages,
+          status: 'P03',
+          messages: 'error.wav',
         }),
         headers: contentTypeXml,
       };

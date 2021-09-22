@@ -14,6 +14,13 @@ export class DbDefaultStepXml implements DefaultStepXml {
       });
     }
 
+    if (!params.data) {
+      return makeResponseXml({
+        status: 'P00',
+        messages: params.messages,
+      });
+    }
+
     if (second) {
       const [begin, end] = JSON.parse(second);
 

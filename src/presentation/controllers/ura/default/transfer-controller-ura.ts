@@ -19,9 +19,9 @@ export class TransferControllerUra implements Controller {
     } catch (e) {
       errorLogger(e);
       return {
-        statusCode: 400,
+        statusCode: 200,
         body: makeResponseXml({
-          status: 'P01',
+          status: 'P03',
           messages: 'error.wav',
         }),
         headers: contentTypeXml,
