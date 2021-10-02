@@ -1,19 +1,8 @@
 import 'dotenv/config';
 
 export const SERVER = {
-  BASE_URI_URA: process.env.BASE_URI_URA || '',
-  BASE_URI_SMS: process.env.BASE_URI_SMS || '',
-  BASE_URI_WHATS: process.env.BASE_URI_WHATS || '',
   BASE_URI: process.env.BASE_URI || '',
   PORT: process.env.PORT || 3333,
-};
-
-export const URLS = {
-  PHOENIX_RECHARGE: process.env.PHOENIX_RECHARGE || '',
-  PHOENIX_ACCOUNT_MANAGER: process.env.PHOENIX_ACCOUNT_MANAGER || '',
-  PHOENIX_AUTHENTICATOR: process.env.PHOENIX_AUTHENTICATOR || '',
-  PHOENIX_SMS: process.env.PHOENIX_SMS || '',
-  WAVY_API: process.env.WAVY_API || '',
 };
 
 export const DATABASE = {
@@ -24,6 +13,11 @@ export const DATABASE = {
   DB_PASSWORD: process.env.DATABASE_PASSWORD || '',
   DB_INSTANCE_NAME: process.env.DATABASE_INSTANCE_NAME || '',
   DB_PORT: process.env.DATABASE_PORT || '',
+};
+
+export const ENCRYPTION = {
+  KEY: process.env.ENCRYPTION_KEY || '',
+  IV: process.env.ENCRYPTION_IV || '',
 };
 
 export const RABBIT = {

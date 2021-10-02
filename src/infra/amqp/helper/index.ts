@@ -1,1 +1,1 @@
-export * from './RabbitMqServer';
+export * from './rabbitmq-server';

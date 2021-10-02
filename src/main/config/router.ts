@@ -3,24 +3,12 @@ import { readdirSync } from 'fs';
 import path from 'path';
 import { SERVER } from '../../utils/config/constants';
 
-export default (app: Express, channel: 'ura' | 'sms' | 'whats'): void => {
+export default (app: Express): void => {
   const router = Router();
 
-  switch (channel) {
-    case 'ura':
-      app.use(SERVER.BASE_URI_URA, router);
-      break;
-    case 'sms':
-      app.use(SERVER.BASE_URI_SMS, router);
-      break;
-    case 'whats':
-      app.use(SERVER.BASE_URI_WHATS, router);
-      break;
-    default:
-      app.use(SERVER.BASE_URI, router);
-  }
+  app.use(SERVER.BASE_URI, router);
 
-  const routesFolderPath = path.resolve(__dirname, '..', 'routes', channel);
+  const routesFolderPath = path.resolve(__dirname, '..', 'routes');
 
   readdirSync(routesFolderPath).map(async (file) => {
     if (!file.includes('.spec.') && !file.endsWith('.map')) {

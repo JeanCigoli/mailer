@@ -1,12 +1,10 @@
-import { Dialogue, StepSource } from '../../domain/models';
-
 export interface HttpRequest {
   headers?: any;
   body?: any;
   query?: any;
   params?: any;
-  step?: StepSource;
-  dialogue?: Dialogue;
+  authData: AuthData;
+  token: TokenData;
 }
 
 export interface HttpResponse {

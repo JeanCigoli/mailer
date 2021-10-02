@@ -1,34 +1,20 @@
-import { RabbitMqServer } from '../infra/amqp/helper';
-import { MongoHelper } from '../infra/core/db/mongo/helpers';
-import { dbPhoenix } from '../infra/core/db/mssql/helpers';
-import { RABBIT, SERVER, MONGO } from '../utils/config/constants';
+import { knexConnection } from '../infra/db/mssql/helpers';
+import { SERVER } from '../utils/config/constants';
 import errorLogger from '../utils/logger';
 import { server } from './application';
+import {
+  makeCreateTransportOnInit,
+  makeCreateMongoOnInit,
+  makeCreateRabbitMqOnInit,
+} from './facades';
 
 (async () => {
   try {
-    await MongoHelper.setCredentials({
-      authSource: MONGO.AUTH_SOURCE,
-      host: MONGO.HOST,
-      name: MONGO.NAME,
-      password: MONGO.PASSWORD,
-      port: +MONGO.PORT,
-      user: MONGO.USER,
-    });
+    await makeCreateMongoOnInit().start();
+    await makeCreateRabbitMqOnInit().start();
+    await makeCreateTransportOnInit().start();
 
-    await MongoHelper.connect();
-
-    const rabbitMq = RabbitMqServer.getInstance();
-    rabbitMq.setCredentials({
-      host: RABBIT.HOST,
-      password: RABBIT.PASSWORD,
-      port: +RABBIT.PORT,
-      user: RABBIT.USER,
-    });
-    await rabbitMq.start();
-
-    await dbPhoenix.raw('SELECT 1');
-
+    await knexConnection.raw('SELECT 1');
     server.listen(SERVER.PORT, async () => {
       console.log(`Server is running on port: ${SERVER.PORT}`);
     });

@@ -1,28 +1,23 @@
-type Dialogue = {
-  dialogueId: number;
-  accountId: number;
-  stepSourceId: number;
-  requestText?: string;
-  requestDate?: Date;
-  responseText?: string;
-  responseDate?: Date;
-  expected?: any;
-  session?: any;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-type StepSource = {
-  stepSourceId: number;
-  stepId: number;
+interface AuthData {
+  authentication: string;
+  sourceMvnoId: number;
+  mobileOperatorId: number;
   sourceId: number;
-  message: string;
-  ordering: number;
-};
+  mvnoId: number;
+  userId: number;
+}
+
+interface TokenData {
+  id: string;
+  type: number;
+  issuedAt: string;
+  expiration: string;
+  encryptedToken: string;
+}
 
 declare module Express {
   export interface Request {
-    step?: StepSource;
-    dialogue?: Dialogue;
+    authData: AuthData;
+    token: TokenData;
   }
 }

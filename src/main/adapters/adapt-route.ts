@@ -3,7 +3,7 @@ import { Controller, HttpRequest } from '../../presentation/protocols';
 import {
   formateCamelCaseKeysForSnakeCase,
   formateSnakeCaseKeysForCamelCase,
-} from '../../utils/object';
+} from '@badass-team-code/formatted-cases-words';
 
 export function adaptRoute(controller: Controller) {
   return async (req: Request, res: Response) => {
@@ -12,8 +12,8 @@ export function adaptRoute(controller: Controller) {
       params: formateSnakeCaseKeysForCamelCase(req.params),
       query: formateSnakeCaseKeysForCamelCase(req.query),
       headers: req.headers,
-      step: req.step,
-      dialogue: req.dialogue,
+      authData: req.authData,
+      token: req.token,
     };
 
     const httpResponse = await controller.handle(httpRequest);

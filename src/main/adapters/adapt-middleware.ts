@@ -4,7 +4,7 @@ import { Middleware } from '../../presentation/protocols/middleware';
 import {
   formateCamelCaseKeysForSnakeCase,
   formateSnakeCaseKeysForCamelCase,
-} from '../../utils/object';
+} from '@badass-team-code/formatted-cases-words';
 
 export function adaptMiddleware(middleware: Middleware) {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -13,13 +13,13 @@ export function adaptMiddleware(middleware: Middleware) {
       params: formateSnakeCaseKeysForCamelCase(req.params),
       query: formateSnakeCaseKeysForCamelCase(req.query),
       headers: req.headers,
-      step: req.step,
-      dialogue: req.dialogue,
+      authData: req.authData,
+      token: req.token,
     };
 
     const httpResponse = await middleware.handle(httpRequest, () => {
-      req.body = httpRequest.body;
-      req.step = httpRequest.step;
+      req.authData = httpRequest.authData;
+      req.token = httpRequest.token;
 
       return next();
     });
