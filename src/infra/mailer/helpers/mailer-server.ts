@@ -74,8 +74,8 @@ export class MailerServer {
   }
 
   getByAlias(alias: string) {
-    const [object] = this.transports.filter((value) => value.alias === alias);
+    const object = this.transports.find((value) => value.alias === alias);
 
-    return object.transport;
+    return object?.transport;
   }
 }
