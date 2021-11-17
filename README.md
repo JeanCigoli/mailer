@@ -8,6 +8,8 @@ Os templates são criados para se ajustar a cores, imagens e conteúdo.
 
 ## Como funciona?
 
+Quando a API inicia ela abre junto de suas conexões todas as credenciar de SMTP, assim mantendo as instâncias abertas para evitar muito consumo de recursos.
+
 Existe uma end-point (padrão RESTFUL) onde é consumido passando o token de acesso no header, assim sendo possível pegar de qual empresa o template será moldado, e no body as informações do template.
 
 Ao enviar os dados é adicionado em uma fila de envio (utilizando o RabbitMq) e respondido para o usuário que o envio logo será efetuado.
