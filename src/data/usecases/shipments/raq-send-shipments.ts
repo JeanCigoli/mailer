@@ -28,33 +28,17 @@ export class RaqSendShipments implements SendShipments {
 
     const credential = this.base64Decode(serviceCredential.credentials);
 
-    // const mvno = {
-    //   rgb1: 'rgb(109, 43, 245)',
-    //   rgb2: 'rgb(179, 22, 151)',
-    //   buttonColor: '#9c1f85',
-    //   mvnoImage: 'https://pagtel.com.br/img/arquia.png',
-    // };
-
-    const mvno = {
-      rgb1: 'rgb(53, 115, 174)',
-      rgb2: 'rgb(69, 98, 125)',
-      buttonColor: '#3573ae',
-      mvnoImage: 'https://pagtel.com.br/img/datora/umtelecom/logo-white.png',
-    };
-
     params.mail.to.map((mail) => {
       this.rabbitMqServer.publishInQueue(
         'mailer',
         {
           alias: credential.alias,
           from: credential.from,
+          mvnoId: params.mvnoId,
           to: mail.email,
           subject: params.mail.subject,
           template: params.mail.template,
-          context: {
-            ...mail.variables,
-            ...mvno,
-          },
+          context: mail.variables,
         },
         { authorization: params.token },
       );

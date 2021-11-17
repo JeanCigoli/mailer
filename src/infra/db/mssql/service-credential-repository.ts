@@ -1,5 +1,5 @@
 import { formateSnakeCaseKeysForCamelCase } from '@badass-team-code/formatted-cases-words';
-import { credentials } from 'amqplib';
+
 import {
   ListAllCredentialsRepository,
   ListCredentialByServiceAndMvnoRepository,

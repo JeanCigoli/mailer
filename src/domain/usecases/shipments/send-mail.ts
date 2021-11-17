@@ -4,6 +4,7 @@ export interface SendMail {
 
 export namespace SendMail {
   export type Params = {
+    mvnoId: number;
     alias: string;
     from: string;
     to: string;
