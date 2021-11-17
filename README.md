@@ -53,6 +53,8 @@ Authorization = {{token}}
 - RabbitMq
 - Sql Server
 - Eslint
+- NodeMailer
+- Handlebars
 
 ## Metodologias e Designs
 

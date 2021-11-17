@@ -1,10 +1,10 @@
 {
-  "name": "gateway-communication",
+  "name": "gateway-mailer",
   "version": "1.0.0",
-  "description": "Gateway de comunicação",
+  "description": "Gateway de envio de e-mail",
   "main": "index.js",
-  "repository": "https://gitlab.com/phoenix-pagtel/gateway-communication.git",
-  "author": "Emanoel e Jean",
+  "repository": "https://github.com/JeanCigoli/mailer.git",
+  "author": "Jean",
   "license": "MIT",
   "dependencies": {
     "@badass-team-code/formatted-cases-words": "^0.0.2",
