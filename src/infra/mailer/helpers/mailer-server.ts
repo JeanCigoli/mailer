@@ -76,6 +76,10 @@ export class MailerServer {
   getByAlias(alias: string) {
     const object = this.transports.find((value) => value.alias === alias);
 
+    if (!object) {
+      throw new Error('ALIAS_NOT_FOUND');
+    }
+
     return object?.transport;
   }
 }

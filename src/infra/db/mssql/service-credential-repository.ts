@@ -14,9 +14,7 @@ export class ServiceCredentialRepository
   async findAll(
     params: ListAllCredentialsRepository.Params,
   ): ListAllCredentialsRepository.Result {
-    const credentials = await knexConnection(
-      '[Phoenix].[config].[tb_service_mvno_credentials]',
-    )
+    const credentials = await knexConnection('')
       .select('*')
       .whereNull('[deleted_at]')
       .andWhere('[service_id]', params.serviceId);
@@ -27,9 +25,7 @@ export class ServiceCredentialRepository
   async findByServiceAndMvno(
     params: ListCredentialByServiceAndMvnoRepository.Params,
   ): ListCredentialByServiceAndMvnoRepository.Result {
-    const credentials = await knexConnection(
-      '[Phoenix].[config].[tb_service_mvno_credentials]',
-    )
+    const credentials = await knexConnection('')
       .select('*')
       .whereNull('[deleted_at]')
       .andWhere('[service_id]', params.serviceId)

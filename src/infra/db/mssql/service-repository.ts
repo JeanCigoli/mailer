@@ -4,7 +4,7 @@ import { knexConnection } from './helpers';
 
 export class ServiceRepository implements ListServiceByNameRepository {
   async findName(name: string): ListServiceByNameRepository.Result {
-    const service = await knexConnection('[Phoenix].[config].[tb_service]')
+    const service = await knexConnection('')
       .select('*')
       .where('[name]', name)
       .first();

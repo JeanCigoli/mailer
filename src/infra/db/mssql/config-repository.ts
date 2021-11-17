@@ -6,7 +6,7 @@ export class ConfigRepository implements ListDefaultParamsRepository {
   async findDefaultParams(
     params: ListDefaultParamsRepository.Params,
   ): ListDefaultParamsRepository.Result {
-    const mvno = await knexConnection('[Phoenix].[config].[tb_config]')
+    const mvno = await knexConnection('')
       .select('*')
       .where('[mvno_id]', params.mvnoId)
       .first();
